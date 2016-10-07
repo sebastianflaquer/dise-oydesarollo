@@ -9,13 +9,12 @@ package Modelo;
  *
  * @author Laura
  */
-public class Admin extends Usuario {
+public class TipoMov {
+    
     //ATRIBUTOS
     
     
-    //CONSTRUCTOR
-    public Admin(String nombre, Tipo tipo, String password, String nomCompleto) {
-        super(nombre, tipo, password, nomCompleto);
+    //CONSTRUCOTR
+    public TipoMov() {
     }
-    
 }

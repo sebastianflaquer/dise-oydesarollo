@@ -5,17 +5,14 @@
  */
 package Modelo;
 
+import java.util.List;
+
 /**
  *
  * @author Laura
  */
-public class Admin extends Usuario {
-    //ATRIBUTOS
-    
-    
-    //CONSTRUCTOR
-    public Admin(String nombre, Tipo tipo, String password, String nomCompleto) {
-        super(nombre, tipo, password, nomCompleto);
-    }
+public class Sistema {
+    private List<Usuario> usuarios;
+    private List<Partida> partidas;
     
 }

@@ -9,24 +9,28 @@ package Modelo;
  *
  * @author Laura
  */
-public class Jugador extends Usuario {
-
+public class Apuesta extends TipoMov {
+    
     //ATRIBUTOS
-    private double saldo;
+    private double monto;
+    
     
     //SETTERS
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
+    public void setMonto(double monto) {
+        this.monto = monto;
     }
     
     //GETTERS
-    public double getSaldo() {
-        return saldo;
+    public double getMonto() {
+        return monto;
     }
     
+
     //CONSTRUCTOR
-    public Jugador(String nombre, Tipo tipo, String password, String nomCompleto) {
-        super(nombre, tipo, password, nomCompleto);
+    public Apuesta(double monto) {
+        this.monto = monto;
     }
+    
+    
     
 }
