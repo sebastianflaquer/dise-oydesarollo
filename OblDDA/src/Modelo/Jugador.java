@@ -9,7 +9,7 @@ package Modelo;
  *
  * @author Laura
  */
-public class Jugador extends Usuario {
+public class Jugador extends Tipo {
 
     //ATRIBUTOS
     private double saldo;
@@ -25,8 +25,9 @@ public class Jugador extends Usuario {
     }
     
     //CONSTRUCTOR
-    public Jugador(String nombre, Tipo tipo, String password, String nomCompleto) {
-        super(nombre, tipo, password, nomCompleto);
+    public Jugador(double saldo) {
+        this.saldo = saldo;
     }
+    
     
 }

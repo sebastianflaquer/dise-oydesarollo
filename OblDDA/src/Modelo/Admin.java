@@ -9,13 +9,15 @@ package Modelo;
  *
  * @author Laura
  */
-public class Admin extends Usuario {
+public class Admin extends Tipo {
+
+    
     //ATRIBUTOS
     
     
     //CONSTRUCTOR
-    public Admin(String nombre, Tipo tipo, String password, String nomCompleto) {
-        super(nombre, tipo, password, nomCompleto);
+    public Admin() {
+        
     }
     
 }

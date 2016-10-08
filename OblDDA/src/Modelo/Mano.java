@@ -55,6 +55,7 @@ public class Mano {
     }
     
     
+    
     //CONSTRUCOTR
     public Mano(List<Ficha> fichasJ1, List<Ficha> fichasJ2, List<Ficha> fichasMazo, List<Ficha> fichasJugadas) {
         this.fichasJ1 = fichasJ1;

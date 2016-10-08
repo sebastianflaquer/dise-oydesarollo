@@ -86,8 +86,28 @@ public class Partida {
     
     
     //METODOS
+    private Partida()
+    {
+        this.estado = "Sin Iniciar";
+    }
     
     public void SumarSaldos()
     {}
+    
+    
+    
+    
+    //VALIDAR SALDO
+    public boolean ValidarSaldo( Jugador jugador){        
+        boolean ret = false;        
+        if(jugador.getSaldo() >= apuestaInicial){
+            ret = true;
+        }        
+        return ret;
+    }
+    
+    
+    
+    
 
 }

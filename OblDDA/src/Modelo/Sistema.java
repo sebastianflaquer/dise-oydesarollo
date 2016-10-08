@@ -15,4 +15,31 @@ public class Sistema {
     private List<Usuario> usuarios;
     private List<Partida> partidas;
     
+    private static Sistema instancia;
+    
+    public static Sistema GetInstancia()
+    {
+        if (instancia == null) 
+            instancia = new Sistema();       
+        
+        return instancia;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public void setPartidas(List<Partida> partidas) {
+        this.partidas = partidas;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public List<Partida> getPartidas() {
+        return partidas;
+    }
+
+    
 }

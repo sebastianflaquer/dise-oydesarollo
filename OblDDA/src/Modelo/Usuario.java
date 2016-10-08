@@ -49,14 +49,32 @@ public class Usuario {
     public void setNomCompleto(String nomCompleto) {
         this.nomCompleto = nomCompleto;
     }
-    
-    
+        
     //CONSTRUCTOR
     public Usuario(String nombre, Tipo tipo, String password, String nomCompleto) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.password = password;
         this.nomCompleto = nomCompleto;
+    }
+    
+    public boolean ValidarUsuario(String nombre, String password){
+        boolean ret = false;
+        
+        int i=0;
+        while(i < Sistema.GetInstancia().getUsuarios().size())
+        {
+            if(Sistema.GetInstancia().getUsuarios().get(i).nombre.equals(nombre) && 
+                    Sistema.GetInstancia().getUsuarios().get(i).password.equals(password))
+            {
+                ret = true;
+            }
+            else
+            {
+               i++;
+            }
+        }
+        return ret;
     }
     
 }
