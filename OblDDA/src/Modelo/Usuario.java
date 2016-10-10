@@ -59,6 +59,9 @@ public class Usuario {
         this.password = password;
         this.nomCompleto = nomCompleto;
     }
+    public Usuario() {
+        
+    }
     
     // VALIDAR USUARIO
     public boolean ValidarUsuario(String nombre, String password){
