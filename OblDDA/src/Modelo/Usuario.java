@@ -10,11 +10,13 @@ package Modelo;
  * @author Laura
  */
 public class Usuario {
+    
     //ATRIBUTOS
     private String nombre;
     private Tipo tipo;
     private String password;
     private String nomCompleto;
+    
     
     //GETTERS
     public String getNombre() {
@@ -58,6 +60,7 @@ public class Usuario {
         this.nomCompleto = nomCompleto;
     }
     
+    // VALIDAR USUARIO
     public boolean ValidarUsuario(String nombre, String password){
         boolean ret = false;
         
@@ -76,5 +79,7 @@ public class Usuario {
         }
         return ret;
     }
+    
+    
     
 }

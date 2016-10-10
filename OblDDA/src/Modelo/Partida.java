@@ -21,29 +21,22 @@ public class Partida {
     private List<Mano> manos;
 
     
-
-    
     //SETTERS    
     public void setId(int id) {
         this.id = id;
     }
-    
     public void setJugador1(Jugador jugador1) {
         this.jugador1 = jugador1;
     }
-
     public void setJugador2(Jugador jugador2) {
         this.jugador2 = jugador2;
     }
-
     public void setEstado(String estado) {
         this.estado = estado;
     }
-
     public static void setApuestaInicial(double apuestaInicial) {
         Partida.apuestaInicial = apuestaInicial;
     }
-
     public void setManos(List<Mano> manos) {
         this.manos = manos;
     }
@@ -53,27 +46,21 @@ public class Partida {
     public int getId() {
         return id;
     }
-    
     public Jugador getJugador1() {
         return jugador1;
     }
-
     public Jugador getJugador2() {
         return jugador2;
     }
-
     public String getEstado() {
         return estado;
     }
-
     public static double getApuestaInicial() {
         return apuestaInicial;
     }
-
     public List<Mano> getManos() {
         return manos;
     }
-
     
     //CONSTRUCTOR
     public Partida(int id, Jugador jugador1, Jugador jugador2, String estado, List<Mano> manos) {
