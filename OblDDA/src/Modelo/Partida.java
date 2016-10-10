@@ -12,7 +12,10 @@ import java.util.List;
  * @author Laura
  */
 public class Partida {
+    
+    //================================================================================
     //ATRIBUTOS
+    //================================================================================
     private int id;
     private Jugador jugador1;
     private Jugador jugador2;
@@ -20,8 +23,9 @@ public class Partida {
     private static double apuestaInicial;
     private List<Mano> manos;
 
-    
-    //SETTERS    
+    //================================================================================
+    //SETTERS
+    //================================================================================
     public void setId(int id) {
         this.id = id;
     }
@@ -41,8 +45,9 @@ public class Partida {
         this.manos = manos;
     }
 
-    
+    //================================================================================
     //GETTERS
+    //================================================================================
     public int getId() {
         return id;
     }
@@ -61,8 +66,10 @@ public class Partida {
     public List<Mano> getManos() {
         return manos;
     }
-    
+
+    //================================================================================
     //CONSTRUCTOR
+    //================================================================================
     public Partida(int id, Jugador jugador1, Jugador jugador2, String estado, List<Mano> manos) {
         this.id = id;
         this.jugador1 = jugador1;
@@ -71,18 +78,16 @@ public class Partida {
         this.manos = manos;
     }
     
-    
+    //================================================================================
     //METODOS
-    private Partida()
-    {
+    //================================================================================
+    private Partida(){
         this.estado = "Sin Iniciar";
     }
     
-    public void SumarSaldos()
-    {}
+    public void SumarSaldos(){
     
-    
-    
+    }
     
     //VALIDAR SALDO
     public boolean ValidarSaldo( Jugador jugador){        
