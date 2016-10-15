@@ -7,11 +7,9 @@ package Modelo;
 
 import java.util.List;
 
-/**
- *
- * @author Laura
- */
+
 public class Sistema {
+
     private List<Usuario> usuarios;
     private List<Partida> partidas;
     
@@ -41,5 +39,12 @@ public class Sistema {
         return partidas;
     }
 
+    public void agregar(Usuario u) {
+        if (u != null)
+        {
+            usuarios.add(u);
+        }
+        
+    }
     
 }
