@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+import static Modelo.Ficha.ObtenerFichaRandom;
 import java.util.List;
 
 /**
@@ -12,11 +13,16 @@ import java.util.List;
  * @author Laura
  */
 public class Mano {
+
+    
+
+    
     //ATRIBUTOS
     private List<Ficha> fichasJ1;
     private List<Ficha> fichasJ2;
     private List<Ficha> fichasMazo;
     private List<Ficha> fichasJugadas;
+    private Movimiento movimiento;
     
 
     //SETTERS
@@ -34,6 +40,10 @@ public class Mano {
 
     public void setFichasJugadas(List<Ficha> fichasJugadas) {
         this.fichasJugadas = fichasJugadas;
+    }
+    
+    public void setMovimiento(Movimiento movimiento) {
+        this.movimiento = movimiento;
     }
 
     
@@ -53,6 +63,9 @@ public class Mano {
     public List<Ficha> getFichasJugadas() {
         return fichasJugadas;
     }
+    public Movimiento getMovimiento() {
+        return movimiento;
+    }
     
     
     
@@ -64,7 +77,50 @@ public class Mano {
         this.fichasJugadas = fichasJugadas;
     }
     
+    public Mano(){}
+    
+    public Mano GetUltimaMano()
+    {
+        Mano ultima = new Mano();
+        return ultima;
+    }
     
     //METODOS
+    
+    //REPARTIR FICHAS A LOS JUGADORES
+    public void repartirFichasAJugadores(){
+        
+        //Cargo lista fichas jugador 1
+        for(int i1 = 0; i1<7; i1++){
+            Ficha unaF = ObtenerFichaRandom();
+            fichasJ1.add(unaF);
+            actualizarFichasMazo(unaF);
+        }
+        
+        //Cargo lista fichas jugador 2
+        for(int i2 = 0; i2<7; i2++){
+            Ficha unaF = ObtenerFichaRandom();
+            fichasJ2.add(unaF);
+            actualizarFichasMazo(unaF);
+        }        
+    }
+    
+    //ACTUALIZAR FICHAS MAZO
+    public void actualizarFichasMazo(Ficha unaFicha){
+        for(int i=0; i<this.fichasMazo.size(); i++)
+        {
+            if(this.fichasMazo.get(i).equals(unaFicha))
+            {
+                this.fichasMazo.remove(i);
+            }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
     
 }

@@ -5,11 +5,41 @@
  */
 package Modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 /**
  *
  * @author Laura
  */
 public class Ficha {
+
+//    static Ficha ObternerFichaPorId(int idFicha) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//    }
+    
+    //METODO RANDOM PARA OBTER ITEM DE UNA LISTA
+    static Random rand = new Random();    
+    static <T> T getRandomItem(List<T> list) {
+        return list.get(rand.nextInt(list.size()));
+    }
+    
+    //OBTENER UNA FICHA RANDOM
+    static Ficha ObtenerFichaRandom() {
+        //preguntar al profesor como hacer el random
+        
+        //CREO UNA MANO
+        Mano unaM = new Mano();
+        //CREO LISTA CON LA LISTA DEL MAZO
+        List<Ficha> lista = unaM.GetUltimaMano().getFichasMazo();
+        //OBTIENE UNA FICHA RANDOM
+        Ficha fichaRandom = getRandomItem(lista);
+        
+        return fichaRandom;
+    }
+    
+    
     
     //ATRIBUTOS
     private int id;
@@ -22,6 +52,8 @@ public class Ficha {
         this.valor1 = valor1;
         this.valor2 = valor2;
     }
+
+    private Ficha(){}
 
     //GETTERS
     public int getId() {

@@ -11,7 +11,9 @@ import Modelo.Sistema;
 import Modelo.Tipo;
 import Modelo.Usuario;
 import Vista.ILogin;
+import Vista.IMesa;
 import Vista.Login;
+import Vista.Mesa;
 import controlador.ControladorSistema;
 
 /**
@@ -37,6 +39,7 @@ public class Main {
         vista.setControlador(control);
         
         
+        //new Mesa().setVisible(true);
         
         
     }

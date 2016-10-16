@@ -19,4 +19,6 @@ public interface IMesa {
     //public String getContrasena();    
     public void SetErrorMsj(String mensaje);
     
+    public void setVisible(boolean b);
+    
 }

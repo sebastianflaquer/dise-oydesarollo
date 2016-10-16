@@ -98,6 +98,38 @@ public class Partida {
         return ret;
     }
     
+    //ROBAR UNA FICHA DEL MAZO
+    public void AddFicha(Jugador j)
+    {
+         Ficha nueva = Ficha.ObtenerFichaRandom();
+         Mano actual = new Mano();
+         actual.getFichasJ1().add(nueva);
+    }
+    
+    //OBTIENE EL TURNO ACTUAL
+    public Jugador GetTurnoActual()
+    {
+        return this.getJugador1();
+    }
+    
+    //INICIAR PARTIDA
+    public void InicialPartida()
+    {
+        Mano primera = new Mano();
+        primera.repartirFichasAJugadores();
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

@@ -4,9 +4,12 @@
  * and open the template in the editor.
  */
 package controlador;
+import Modelo.Jugador;
+import Modelo.Partida;
 import Modelo.Usuario;
 import Vista.ILogin;
 import Vista.IMesa;
+import Vista.Mesa;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,6 +20,7 @@ import java.awt.event.ActionListener;
 public class ControladorSistema implements ActionListener {
     private ILogin vistaLogin;
     private IMesa vistaMesa;
+    private Partida partida;
 
     public ControladorSistema(ILogin vista) {
         
@@ -34,13 +38,20 @@ public class ControladorSistema implements ActionListener {
             if (esValido = true)
             {
                 vistaLogin.SetErrorMsj("vpe");
-                // this.vista.setVisible(false);
-                vistaMesa.inicializar();
+                this.vistaLogin.setVisible(false);
+                
+                new Mesa().setVisible(true);
+                vistaMesa.SetErrorMsj("funca!");
             }
             else
             {
                 vistaLogin.SetErrorMsj("Error!!");
             }
+        }
+        
+        else if(e.getActionCommand().equals("AddFicha"))
+        {
+            partida.AddFicha(partida.GetTurnoActual());
         }
         // controlador.ControladorSistema controlador;        que era esto???
     }
