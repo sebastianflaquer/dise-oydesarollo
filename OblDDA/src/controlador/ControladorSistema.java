@@ -6,7 +6,7 @@
 package controlador;
 import Modelo.Usuario;
 import Vista.ILogin;
-import Vista.Login;
+import Vista.IMesa;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,11 +15,12 @@ import java.awt.event.ActionListener;
  * @author Laura
  */
 public class ControladorSistema implements ActionListener {
-    private ILogin vista;
+    private ILogin vistaLogin;
+    private IMesa vistaMesa;
 
     public ControladorSistema(ILogin vista) {
         
-        this.vista = vista;        
+        this.vistaLogin = vista;        
     }
 
     @Override
@@ -29,15 +30,19 @@ public class ControladorSistema implements ActionListener {
         {
             //proceos el login            
             Usuario unUsu = new Usuario();
-            boolean esValido = unUsu.ValidarUsuario( vista.getUsuario(), vista.getContrasena());
-            
-            if (esValido == true)
+            boolean esValido = unUsu.ValidarUsuario(vistaLogin.getUsuario(), vistaLogin.getContrasena());
+            if (esValido = true)
             {
-                vista.SetErrorMsj("Esto es un error");
+                vistaLogin.SetErrorMsj("vpe");
                 // this.vista.setVisible(false);
+                vistaMesa.inicializar();
+            }
+            else
+            {
+                vistaLogin.SetErrorMsj("Error!!");
             }
         }
-        controlador.ControladorSistema controlador;
+        // controlador.ControladorSistema controlador;        que era esto???
     }
     
 }

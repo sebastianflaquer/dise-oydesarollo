@@ -28,7 +28,7 @@ public class Main {
         
         //cargarUsuarios();
         
-        new Login().setVisible(true);
+        //new Login().setVisible(true);
         
         ILogin vista = (ILogin) new Login();
         ControladorSistema control = new ControladorSistema(vista);
