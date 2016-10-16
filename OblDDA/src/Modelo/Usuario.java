@@ -62,12 +62,10 @@ public class Usuario {
     public Usuario() {
         
     }
-   
     
     // VALIDAR USUARIO
     public boolean ValidarUsuario(String nombre, String password){
-        boolean ret = true;
-        
+        boolean ret = true;        
 //        int i=0;
 //        while(i < Sistema.GetInstancia().getUsuarios().size())
 //        {

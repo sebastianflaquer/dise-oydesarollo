@@ -34,7 +34,7 @@ public class ControladorSistema implements ActionListener {
             if (esValido == true)
             {
                 vista.SetErrorMsj("Esto es un error");
-                // this.vista.setVisible(false);
+                this.vista.setVisible(false);
             }
         }
         controlador.ControladorSistema controlador;
