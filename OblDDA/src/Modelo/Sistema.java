@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Sistema {
 
-    private List<Usuario> usuarios;
+    private ListaUsuarios usuarios = new ListaUsuarios();
     private List<Partida> partidas;
     
     private static Sistema instancia;
@@ -23,7 +23,7 @@ public class Sistema {
         return instancia;
     }
 
-    public void setUsuarios(List<Usuario> usuarios) {
+    public void setUsuarios(ListaUsuarios usuarios) {
         this.usuarios = usuarios;
     }
 
@@ -31,7 +31,7 @@ public class Sistema {
         this.partidas = partidas;
     }
 
-    public List<Usuario> getUsuarios() {
+    public ListaUsuarios getUsuarios() {
         return usuarios;
     }
 
@@ -42,7 +42,7 @@ public class Sistema {
     public void agregar(Usuario u) {
         if (u != null)
         {
-            usuarios.add(u);
+            usuarios.agregarInicio(u);
         }
         
     }
