@@ -66,19 +66,19 @@ public class Usuario {
     // VALIDAR USUARIO
     public boolean ValidarUsuario(String nombre, String password){
         boolean ret = true;        
-//        int i=0;
-//        while(i < Sistema.GetInstancia().getUsuarios().size())
-//        {
-//            if(Sistema.GetInstancia().getUsuarios().get(i).nombre.equals(nombre) && 
-//                    Sistema.GetInstancia().getUsuarios().get(i).password.equals(password))
-//            {
-//                ret = true;
-//            }
-//            else
-//            {
-//               i++;
-//            }
-//        }
+        int i=0;
+        while(i < Sistema.GetInstancia().getUsuarios().size())
+        {
+            if(Sistema.GetInstancia().getUsuarios().get(i).nombre.equals(nombre) && 
+                    Sistema.GetInstancia().getUsuarios().get(i).password.equals(password))
+            {
+                ret = true;
+            }
+            else
+            {
+               i++;
+            }
+        }
         return ret;
     }  
     

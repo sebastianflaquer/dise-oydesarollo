@@ -35,7 +35,7 @@ public class ControladorSistema implements ActionListener {
             //proceos el login            
             Usuario unUsu = new Usuario();
             boolean esValido = unUsu.ValidarUsuario(vistaLogin.getUsuario(), vistaLogin.getContrasena());
-            if (esValido = true)
+            if (esValido == true)
             {
                 vistaLogin.SetErrorMsj("vpe");
                 this.vistaLogin.setVisible(false);
@@ -47,8 +47,7 @@ public class ControladorSistema implements ActionListener {
             {
                 vistaLogin.SetErrorMsj("Error!!");
             }
-        }
-        
+        }        
         else if(e.getActionCommand().equals("AddFicha"))
         {
             partida.AddFicha(partida.GetTurnoActual());

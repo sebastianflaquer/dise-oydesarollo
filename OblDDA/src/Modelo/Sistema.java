@@ -5,12 +5,15 @@
  */
 package Modelo;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 
 public class Sistema {
 
-    private List<Usuario> usuarios;
+    private List<Usuario> usuarios = new List<Usuario>();
     private List<Partida> partidas;
     
     private static Sistema instancia;
@@ -40,11 +43,10 @@ public class Sistema {
     }
 
     public void agregar(Usuario u) {
-        if (u != null)
-        {
+        if (u != null){
             usuarios.add(u);
-        }
-        
-    }
+        }        
+    } 
+    
     
 }

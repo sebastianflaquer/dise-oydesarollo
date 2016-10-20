@@ -2,3 +2,5 @@
 
 
 1 - Nos esta tirando error de NullPinterExeption en MAIN al cargar los usuarios.
+
+2 - Las Fichas, se agregan dinamicamente? como creo un botton dinamico.

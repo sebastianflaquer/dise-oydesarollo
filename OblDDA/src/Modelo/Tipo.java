@@ -11,4 +11,17 @@ package Modelo;
  */
 public class Tipo {
     
+    
+    
+    
+    //METODOS
+    
+    //PUEDO JUGAR
+    public boolean puedoJugar(){
+        //FALTA ARMAR ESTA FUNCION EN VEZ DE EN UNA CLASE TIPO, TIENE QUE SER INTERFAZ
+        return true;
+    }
+    
+    
+    
 }
