@@ -16,6 +16,17 @@ public class Usuario {
     private Tipo tipo;
     private String password;
     private String nomCompleto;
+    private Usuario sig;
+    
+    
+
+    public void setSig(Usuario sig) {
+        this.sig = sig;
+    }
+
+    public Usuario getSig() {
+        return sig;
+    }
     
     
     //GETTERS
@@ -81,6 +92,7 @@ public class Usuario {
         }
         return ret;
     }  
+    
     
     
 }
