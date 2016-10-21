@@ -12,7 +12,7 @@ import controladores.ControladorSistema;
  *
  * @author Mauro
  */
-public class Mesa extends javax.swing.JFrame implements IMesa {
+public class Mesa extends javax.swing.JFrame implements IMesa { 
 
     /**
      * Creates new form Mesa
@@ -265,10 +265,13 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     public void SetNombreUsuario(String nombreUsuario) {
         this.LblNombre.setText(nombreUsuario);
     }
-
+    
     @Override
     public void setControlador(ControladorSistema c) {
         this.btnMasFicha.addActionListener(c);
     }
+
+
+ 
     
 }

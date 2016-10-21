@@ -10,14 +10,14 @@ package Controladores;
  */
 public interface IMesa {
     
-    void setControlador(ControladorSistema  c);    
-    void inicializar();
+    public void setControlador(ControladorSistema  c);    
+    public void inicializar();
     
     //public String getUsuario();
     //public String getContrasena();    
     public void SetErrorMsj(String mensaje);
     public void SetNombreUsuario(String nombreUsuario);
     
-    public void setVisible(boolean b);
+    public void setVisible(boolean b);  
     
 }

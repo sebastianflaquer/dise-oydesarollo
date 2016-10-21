@@ -10,20 +10,26 @@ import Juegos.Partida;
 import Usuarios.Usuario;
 import Vistas.Mesa;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.ActionListener; 
 
-/**
- *
- * @author Laura
- */
+
+
+
 public class ControladorSistema implements ActionListener {
+
+    
     private ILogin vistaLogin;
     private IMesa vistaMesa;
     private Partida partida;
 
-    public ControladorSistema(ILogin vista) {
-        this.vistaLogin = vista;        
+//    public ControladorSistema(ILogin vista) {
+//        this.vistaLogin = vista;        
+//    }
+    
+    public ControladorSistema(ILogin vistaLog) {
+        this.vistaLogin = vistaLog;
     }
+   
 
     @Override
     public void actionPerformed(ActionEvent e) {
