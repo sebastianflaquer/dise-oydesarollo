@@ -76,9 +76,9 @@ public class Usuario {
     
     // VALIDAR USUARIO
     public boolean ValidarUsuario(String nombre, String password){
-        boolean ret = true;        
+        boolean ret = false;        
         int i=0;
-        while(i < Sistema.GetInstancia().getUsuarios().size())
+        while(i < Sistema.GetInstancia().getUsuarios().size() && ret==false)
         {
             if(Sistema.GetInstancia().getUsuarios().get(i).nombre.equals(nombre) && 
                     Sistema.GetInstancia().getUsuarios().get(i).password.equals(password))

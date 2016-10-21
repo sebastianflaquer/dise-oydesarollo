@@ -5,13 +5,14 @@
  */
 package Modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class Sistema {
 
-    private ListaUsuarios usuarios = new ListaUsuarios();
-    private List<Partida> partidas;
+    private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
+    private ArrayList<Partida> partidas = new ArrayList<Partida>();
     
     private static Sistema instancia;
     
@@ -23,15 +24,15 @@ public class Sistema {
         return instancia;
     }
 
-    public void setUsuarios(ListaUsuarios usuarios) {
+    public void setUsuarios(ArrayList<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
 
-    public void setPartidas(List<Partida> partidas) {
+    public void setPartidas(ArrayList<Partida> partidas) {
         this.partidas = partidas;
     }
 
-    public ListaUsuarios getUsuarios() {
+    public ArrayList<Usuario> getUsuarios() {
         return usuarios;
     }
 
@@ -42,7 +43,7 @@ public class Sistema {
     public void agregar(Usuario u) {
         if (u != null)
         {
-            usuarios.agregarInicio(u);
+            usuarios.add(u);
         }
         
     }

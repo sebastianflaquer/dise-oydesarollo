@@ -18,6 +18,7 @@ public interface IMesa {
     //public String getUsuario();
     //public String getContrasena();    
     public void SetErrorMsj(String mensaje);
+    public void SetNombreUsuario(String nombreUsuario);
     
     public void setVisible(boolean b);
     

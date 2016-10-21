@@ -34,6 +34,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        LblNombre = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel5 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -70,6 +71,8 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(LblNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -85,7 +88,8 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(LblNombre))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
@@ -221,6 +225,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LblNombre;
     private javax.swing.JButton btnMasFicha;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
@@ -258,6 +263,11 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     @Override
     public void SetErrorMsj(String mensaje) {
         //this.lblErorMsj.setText(mensaje);
+    }
+    
+    @Override
+    public void SetNombreUsuario(String nombreUsuario) {
+        this.LblNombre.setText(nombreUsuario);
     }
     
 }

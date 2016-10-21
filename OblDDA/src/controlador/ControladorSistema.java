@@ -37,11 +37,13 @@ public class ControladorSistema implements ActionListener {
             boolean esValido = unUsu.ValidarUsuario(vistaLogin.getUsuario(), vistaLogin.getContrasena());
             if (esValido == true)
             {
+                unUsu.setNombre(vistaLogin.getUsuario());
                 vistaLogin.SetErrorMsj("vpe");
                 this.vistaLogin.setVisible(false);
                 
-                new Mesa().setVisible(true);
-                vistaMesa.SetErrorMsj("funca!");
+                this.vistaMesa = new Mesa();
+                vistaMesa.setVisible(true);
+                vistaMesa.SetNombreUsuario(unUsu.getNombre());
             }
             else
             {
