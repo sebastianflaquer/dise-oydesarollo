@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Modelo.Usuario;
 import controlador.ControladorSistema;
 
 /**
@@ -35,6 +36,8 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         LblNombre = new javax.swing.JLabel();
+        LblSaldo = new javax.swing.JLabel();
+        LblApuestaActual = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel5 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -62,6 +65,8 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
 
         jButton1.setText("Aumentar Apuesta");
 
+        LblSaldo.setToolTipText("");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -73,12 +78,18 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(LblNombre)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 287, Short.MAX_VALUE)
                         .addComponent(jButton1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(LblSaldo))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(LblApuestaActual)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -91,9 +102,13 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
                     .addComponent(jButton1)
                     .addComponent(LblNombre))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(LblSaldo))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(LblApuestaActual))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -225,7 +240,9 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LblApuestaActual;
     private javax.swing.JLabel LblNombre;
+    private javax.swing.JLabel LblSaldo;
     private javax.swing.JButton btnMasFicha;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
@@ -268,6 +285,20 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     @Override
     public void SetNombreUsuario(String nombreUsuario) {
         this.LblNombre.setText(nombreUsuario);
+    }
+
+    @Override
+    public void CargarDatosDelJugador(Usuario unUsu) {
+        
+        //get nombre de usuario
+        this.LblNombre.setText(unUsu.getNomCompleto());
+        
+        //get saldo
+        //this.LblSaldo.setText(unUsu.getTipo());
+        
+        //get apuesta actual
+        //this.LblApuestaActual.setText()
+        
     }
     
 }

@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,6 +23,18 @@ public class Partida {
     private String estado;    // "En Juego", "Finalizado" o "Sin Iniciar" 
     private static double apuestaInicial;
     private List<Mano> manos;
+    private ArrayList<Ficha> fichas = new ArrayList<Ficha>();
+
+       
+    
+    private static Partida instancia;
+    public static Partida GetInstancia()
+    {
+        if (instancia == null) 
+            instancia = new Partida();       
+        
+        return instancia;
+    }
 
     //================================================================================
     //SETTERS
@@ -43,6 +56,9 @@ public class Partida {
     }
     public void setManos(List<Mano> manos) {
         this.manos = manos;
+    }
+    public void setFichas(ArrayList<Ficha> fichas) {
+        this.fichas = fichas;
     }
 
     //================================================================================
@@ -66,6 +82,11 @@ public class Partida {
     public List<Mano> getManos() {
         return manos;
     }
+    public ArrayList<Ficha> getFichas() {
+        return fichas;
+    }
+    
+    
 
     //================================================================================
     //CONSTRUCTOR
@@ -81,6 +102,22 @@ public class Partida {
     //================================================================================
     //METODOS
     //================================================================================
+    
+    //INICIAR PARTIDA
+    public void InicialPartida()
+    {
+        //cargar jugadores
+        
+        //cambiarestado
+        
+        //crear mano y agregar a la lista
+        Mano primera = new Mano();
+        
+        //repartir ficha a los jugadores
+        primera.repartirFichasAJugadores();
+        
+    }
+    
     private Partida(){
         this.estado = "Sin Iniciar";
     }
@@ -90,7 +127,7 @@ public class Partida {
     }
     
     //VALIDAR SALDO
-    public boolean ValidarSaldo( Jugador jugador){        
+    public boolean ValidarSaldo(Jugador jugador){        
         boolean ret = false;        
         if(jugador.getSaldo() >= apuestaInicial){
             ret = true;
@@ -99,7 +136,7 @@ public class Partida {
     }
     
     //ROBAR UNA FICHA DEL MAZO
-    public void AddFicha(Jugador j)
+    public void AddFichaJugador(Jugador j)
     {
          Ficha nueva = Ficha.ObtenerFichaRandom();
          Mano actual = new Mano();
@@ -112,13 +149,15 @@ public class Partida {
         return this.getJugador1();
     }
     
-    //INICIAR PARTIDA
-    public void InicialPartida()
-    {
-        Mano primera = new Mano();
-        primera.repartirFichasAJugadores();
-        
+    //AGREGA FICHAS A LA LISTA DE FICHAS
+    public void agregarFicha(Ficha f) {
+        if (f != null)
+        {
+            fichas.add(f);
+        }
     }
+    
+    
     
     
     

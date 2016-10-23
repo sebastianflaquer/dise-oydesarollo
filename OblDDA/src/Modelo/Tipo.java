@@ -9,14 +9,14 @@ package Modelo;
  *
  * @author Laura
  */
-public class Tipo {
-    
-    
-    
+public class Tipo implements ITipo {    
     
     //METODOS
     
+    
+    
     //PUEDO JUGAR
+    @Override
     public boolean puedoJugar(){
         //FALTA ARMAR ESTA FUNCION EN VEZ DE EN UNA CLASE TIPO, TIENE QUE SER INTERFAZ
         return true;

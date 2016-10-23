@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Modelo.Usuario;
 import controlador.ControladorSistema;
 /**
  *
@@ -18,8 +19,12 @@ public interface IMesa {
     //public String getUsuario();
     //public String getContrasena();    
     public void SetErrorMsj(String mensaje);
+    
     public void SetNombreUsuario(String nombreUsuario);
     
     public void setVisible(boolean b);
+    
+    //CARGAR DATOS DEL JUGADOR A LA MESA
+    public void CargarDatosDelJugador(Usuario unUsu);
     
 }

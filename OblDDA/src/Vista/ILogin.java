@@ -20,6 +20,7 @@ public interface ILogin {
     public String getUsuario();
     public String getContrasena();    
     public void SetErrorMsj(String mensaje);
+    public void getNombreCOmpleto();
     //void escribeCambio(String s);
 
     public void setVisible(boolean b);

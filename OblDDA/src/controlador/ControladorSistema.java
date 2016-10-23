@@ -38,21 +38,22 @@ public class ControladorSistema implements ActionListener {
             if (esValido == true)
             {
                 unUsu.setNombre(vistaLogin.getUsuario());
-                vistaLogin.SetErrorMsj("vpe");
+                //vistaLogin.SetErrorMsj("");
                 this.vistaLogin.setVisible(false);
                 
                 this.vistaMesa = new Mesa();
                 vistaMesa.setVisible(true);
-                vistaMesa.SetNombreUsuario(unUsu.getNombre());
+                vistaMesa.CargarDatosDelJugador(unUsu);
+                //vistaMesa.SetNombreUsuario(unUsu.getNomCompleto());
             }
             else
             {
-                vistaLogin.SetErrorMsj("Error!!");
+                vistaLogin.SetErrorMsj("Nombre de Usuario o Contraseña Incorrecto");
             }
         }        
         else if(e.getActionCommand().equals("AddFicha"))
         {
-            partida.AddFicha(partida.GetTurnoActual());
+            partida.AddFichaJugador(partida.GetTurnoActual());
         }
         // controlador.ControladorSistema controlador;        que era esto???
     }

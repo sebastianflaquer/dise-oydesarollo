@@ -12,55 +12,38 @@ package Modelo;
 public class Usuario {
     
     //ATRIBUTOS
-    private String nombre;
-    private Tipo tipo;
+    private String nombre;    
     private String password;
     private String nomCompleto;
-    private Usuario sig;
-    
-    
-
-    public void setSig(Usuario sig) {
-        this.sig = sig;
-    }
-
-    public Usuario getSig() {
-        return sig;
-    }
+    private Tipo tipo;
     
     
     //GETTERS
     public String getNombre() {
         return nombre;
     }
-
-    public Tipo getTipo() {
-        return tipo;
-    }
-
     public String getPassword() {
         return password;
     }
-
     public String getNomCompleto() {
         return nomCompleto;
+    }
+    public Tipo getTipo() {
+        return tipo;
     }
     
     //SETTERS
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
-
     public void setNomCompleto(String nomCompleto) {
         this.nomCompleto = nomCompleto;
+    }
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
     }
         
     //CONSTRUCTOR
@@ -81,7 +64,7 @@ public class Usuario {
         while(i < Sistema.GetInstancia().getUsuarios().size() && ret==false)
         {
             if(Sistema.GetInstancia().getUsuarios().get(i).nombre.equals(nombre) && 
-                    Sistema.GetInstancia().getUsuarios().get(i).password.equals(password))
+                Sistema.GetInstancia().getUsuarios().get(i).password.equals(password))
             {
                 ret = true;
             }
@@ -91,8 +74,5 @@ public class Usuario {
             }
         }
         return ret;
-    }  
-    
-    
-    
+    }
 }
