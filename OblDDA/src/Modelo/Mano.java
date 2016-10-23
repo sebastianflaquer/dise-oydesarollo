@@ -6,6 +6,7 @@
 package Modelo;
 
 import static Modelo.Ficha.ObtenerFichaRandom;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,54 +14,50 @@ import java.util.List;
  * @author Laura
  */
 public class Mano {
-
     
-
-    
+    //================================================================================
     //ATRIBUTOS
-    private List<Ficha> fichasJ1;
-    private List<Ficha> fichasJ2;
-    private List<Ficha> fichasMazo;
-    private List<Ficha> fichasJugadas;
+    //================================================================================
+    private ArrayList<Ficha> fichasJ1 = new ArrayList<Ficha>();
+
+    
+    private ArrayList<Ficha> fichasJ2 = new ArrayList<Ficha>();
+    private ArrayList<Ficha> fichasMazo = new ArrayList<Ficha>();
+    private ArrayList<Ficha> fichasJugadas = new ArrayList<Ficha>();
     private Movimiento movimiento;
     
-
+    //================================================================================
     //SETTERS
-    public void setFichasJ1(List<Ficha> fichasJ1) {
+    //================================================================================
+    public void setFichasJ1(ArrayList<Ficha> fichasJ1) {
         this.fichasJ1 = fichasJ1;
     }
-
-    public void setFichasJ2(List<Ficha> fichasJ2) {
+    public void setFichasJ2(ArrayList<Ficha> fichasJ2) {
         this.fichasJ2 = fichasJ2;
     }
-
-    public void setFichasMazo(List<Ficha> fichasMazo) {
+    public void setFichasMazo(ArrayList<Ficha> fichasMazo) {
         this.fichasMazo = fichasMazo;
     }
-
-    public void setFichasJugadas(List<Ficha> fichasJugadas) {
+    public void setFichasJugadas(ArrayList<Ficha> fichasJugadas) {
         this.fichasJugadas = fichasJugadas;
-    }
-    
+    }    
     public void setMovimiento(Movimiento movimiento) {
         this.movimiento = movimiento;
     }
 
-    
+    //================================================================================
     //GETTERS
-    public List<Ficha> getFichasJ1() {
+    //================================================================================
+    public ArrayList<Ficha> getFichasJ1() {
         return fichasJ1;
     }
-
-    public List<Ficha> getFichasJ2() {
+    public ArrayList<Ficha> getFichasJ2() {
         return fichasJ2;
     }
-
-    public List<Ficha> getFichasMazo() {
+    public ArrayList<Ficha> getFichasMazo() {
         return fichasMazo;
     }
-
-    public List<Ficha> getFichasJugadas() {
+    public ArrayList<Ficha> getFichasJugadas() {
         return fichasJugadas;
     }
     public Movimiento getMovimiento() {
@@ -68,24 +65,24 @@ public class Mano {
     }
     
     
-    
-    //CONSTRUCOTR
-    public Mano(List<Ficha> fichasJ1, List<Ficha> fichasJ2, List<Ficha> fichasMazo, List<Ficha> fichasJugadas) {
+    //================================================================================
+    //CONSTRUCTOR
+    //================================================================================//CONSTRUCOTR
+    public Mano(ArrayList<Ficha> fichasJ1, ArrayList<Ficha> fichasJ2, ArrayList<Ficha> fichasMazo, ArrayList<Ficha> fichasJugadas) {
         this.fichasJ1 = fichasJ1;
         this.fichasJ2 = fichasJ2;
         this.fichasMazo = fichasMazo;
         this.fichasJugadas = fichasJugadas;
     }
     
-    public Mano(){}
+    public Mano(){
     
-    public Mano GetUltimaMano()
-    {
-        Mano ultima = new Mano();
-        return ultima;
     }
     
+    
+    //================================================================================
     //METODOS
+    //================================================================================
     
     //REPARTIR FICHAS A LOS JUGADORES
     public void repartirFichasAJugadores(){
@@ -115,12 +112,13 @@ public class Mano {
             }
         }
     }
-    
-    
-    
-    
-    
-    
-    
+
+    //TRAE LA ULTIMA MANO
+    public Mano GetUltimaMano()
+    {
+        //FALTA ARMAR, HAY QUE RECORRER LA LISTA Y TRAER LA ULTIMA
+        Mano ultima = new Mano();
+        return ultima;
+    }
     
 }

@@ -12,6 +12,8 @@ package Modelo;
  */
 public interface ITipo {
 
+    
+    
     //METODOS
     //PUEDO JUGAR
     boolean puedoJugar();

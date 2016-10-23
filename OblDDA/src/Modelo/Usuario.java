@@ -11,14 +11,18 @@ package Modelo;
  */
 public class Usuario {
     
+    //================================================================================
     //ATRIBUTOS
+    //================================================================================
     private String nombre;    
     private String password;
     private String nomCompleto;
     private Tipo tipo;
     
     
+    //================================================================================
     //GETTERS
+    //================================================================================
     public String getNombre() {
         return nombre;
     }
@@ -32,7 +36,9 @@ public class Usuario {
         return tipo;
     }
     
+    //================================================================================
     //SETTERS
+    //================================================================================
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -46,7 +52,9 @@ public class Usuario {
         this.tipo = tipo;
     }
         
+    //================================================================================
     //CONSTRUCTOR
+    //================================================================================
     public Usuario(String nombre, Tipo tipo, String password, String nomCompleto) {
         this.nombre = nombre;
         this.tipo = tipo;
@@ -57,22 +65,29 @@ public class Usuario {
         
     }
     
+    
+    //================================================================================
+    //METODOS
+    //================================================================================
+    
     // VALIDAR USUARIO
-    public boolean ValidarUsuario(String nombre, String password){
+    public Usuario ValidarUsuario(String nombre, String password){
+        
+        Usuario unUsu = new Usuario();
         boolean ret = false;        
         int i=0;
         while(i < Sistema.GetInstancia().getUsuarios().size() && ret==false)
         {
-            if(Sistema.GetInstancia().getUsuarios().get(i).nombre.equals(nombre) && 
-                Sistema.GetInstancia().getUsuarios().get(i).password.equals(password))
-            {
+            if(Sistema.GetInstancia().getUsuarios().get(i).nombre.equals(nombre) && Sistema.GetInstancia().getUsuarios().get(i).password.equals(password)){
                 ret = true;
-            }
-            else
-            {
+                unUsu.setNombre(nombre);
+                unUsu.setPassword(password);
+                unUsu.nomCompleto = Sistema.GetInstancia().getUsuarios().get(i).nomCompleto;
+                unUsu.tipo = Sistema.GetInstancia().getUsuarios().get(i).tipo;
+            }else{
                i++;
             }
         }
-        return ret;
+        return unUsu;
     }
 }

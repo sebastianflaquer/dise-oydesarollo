@@ -24,8 +24,6 @@ public class Partida {
     private static double apuestaInicial;
     private List<Mano> manos;
     private ArrayList<Ficha> fichas = new ArrayList<Ficha>();
-
-       
     
     private static Partida instancia;
     public static Partida GetInstancia()
@@ -85,8 +83,6 @@ public class Partida {
     public ArrayList<Ficha> getFichas() {
         return fichas;
     }
-    
-    
 
     //================================================================================
     //CONSTRUCTOR
@@ -111,19 +107,20 @@ public class Partida {
         //cambiarestado
         
         //crear mano y agregar a la lista
-        Mano primera = new Mano();
+        Mano primeraMano = new Mano();
         
         //repartir ficha a los jugadores
-        primera.repartirFichasAJugadores();
+        primeraMano.repartirFichasAJugadores();
+        
         
     }
     
-    private Partida(){
+    public Partida(){
         this.estado = "Sin Iniciar";
     }
     
     public void SumarSaldos(){
-    
+        
     }
     
     //VALIDAR SALDO
@@ -156,21 +153,5 @@ public class Partida {
             fichas.add(f);
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
 }

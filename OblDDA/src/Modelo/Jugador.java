@@ -9,19 +9,18 @@ package Modelo;
  *
  * @author Laura
  */
-public class Jugador extends Tipo {
+public class Jugador extends Tipo{
 
     //ATRIBUTOS
     private double saldo;
     
-    //SETTERS
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
-    }
-    
     //GETTERS
     public double getSaldo() {
         return saldo;
+    }
+    //SETTERS
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
     }
     
     //CONSTRUCTOR

@@ -5,8 +5,14 @@
  */
 package Vista;
 
+import Modelo.Ficha;
+import Modelo.Mano;
+import Modelo.Partida;
 import Modelo.Usuario;
 import controlador.ControladorSistema;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JButton;
 
 /**
  *
@@ -43,14 +49,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         jPanel4 = new javax.swing.JPanel();
         btnMasFicha = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
+        fichasJugadorPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,29 +121,8 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
 
         jLabel4.setText("Mis Fichas:");
 
-        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel1.setLayout(new java.awt.GridLayout(2, 7, 1, 1));
-
-        jButton3.setText("jButton3");
-        jPanel1.add(jButton3);
-
-        jButton4.setText("jButton3");
-        jPanel1.add(jButton4);
-
-        jButton5.setText("jButton3");
-        jPanel1.add(jButton5);
-
-        jButton6.setText("jButton3");
-        jPanel1.add(jButton6);
-
-        jButton7.setText("jButton3");
-        jPanel1.add(jButton7);
-
-        jButton8.setText("jButton3");
-        jPanel1.add(jButton8);
-
-        jButton9.setText("jButton3");
-        jPanel1.add(jButton9);
+        fichasJugadorPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        fichasJugadorPanel.setLayout(new java.awt.GridLayout(2, 7, 1, 1));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -154,7 +132,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                        .addComponent(fichasJugadorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                         .addGap(67, 67, 67))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel4)
@@ -170,7 +148,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(fichasJugadorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(btnMasFicha)
@@ -244,19 +222,12 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     private javax.swing.JLabel LblNombre;
     private javax.swing.JLabel LblSaldo;
     private javax.swing.JButton btnMasFicha;
+    private javax.swing.JPanel fichasJugadorPanel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -275,6 +246,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         //uno.jPanel1.setVisible(true);
         //uno.initComponents();
         setVisible(true);
+        CargarFichasDelJugador();
     }
 
     @Override
@@ -291,13 +263,42 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     public void CargarDatosDelJugador(Usuario unUsu) {
         
         //get nombre de usuario
-        this.LblNombre.setText(unUsu.getNomCompleto());
+        if(unUsu.getNomCompleto() != null){
+            this.LblNombre.setText(unUsu.getNomCompleto());
+        }else{
+            this.LblNombre.setText("trajo null");
+        }
         
         //get saldo
         //this.LblSaldo.setText(unUsu.getTipo());
         
         //get apuesta actual
-        //this.LblApuestaActual.setText()
+        //this.LblApuestaActual.setText()        
+    }
+    
+    @Override
+    public void CargarFichasDelJugador(){
+        
+        //CREA UNA NUEVA PARTIDA
+        Partida nuevaP = new Partida();
+        
+        //BUSCA LA ULTIMA MANO PARA OBETER LA LISTA DE FICHAS
+        List<Mano> ListaManos = nuevaP.getManos();        
+        Mano manoActual = ListaManos.get(ListaManos.size() -1);
+        
+        //OBTIENE LA LISTA DE FICHAS DEL JUGADOR UNO
+        ArrayList<Ficha> Ljug1 = manoActual.getFichasJ1();
+        //ArrayList<Ficha> Ljug2 = manoActual.getFichasJ2();
+        
+        //AGREGA LAS FICHAS DINAMICAMENTES
+        //ACA HAY QUE CARGAR LAS 7 FICHAS INICIALES DE CADA JUGADOR
+        for( int i = 0; i >= Ljug1.size(); i++){
+            Ficha unaF = Ljug1.get(i);
+            int val1 = unaF.getValor1();
+            int val2 = unaF.getValor2();            
+            this.fichasJugadorPanel.add(new JButton(Integer.toString(val1) + "-" + Integer.toString(val2)));
+            validate();
+        }
         
     }
     

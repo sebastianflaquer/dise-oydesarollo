@@ -16,15 +16,14 @@ public interface IMesa {
     void setControlador(ControladorSistema  c);    
     void inicializar();
     
-    //public String getUsuario();
-    //public String getContrasena();    
     public void SetErrorMsj(String mensaje);
-    
     public void SetNombreUsuario(String nombreUsuario);
-    
     public void setVisible(boolean b);
     
     //CARGAR DATOS DEL JUGADOR A LA MESA
     public void CargarDatosDelJugador(Usuario unUsu);
+    
+    //CARGAR FICHAS DEL JUGADOR
+    public void CargarFichasDelJugador();
     
 }

@@ -44,6 +44,7 @@ public class Main {
                 
     }
     
+    //CARGA LOS USUARIOS AL SISTEMA
     private static void cargarUsuarios() {
         Sistema s = Sistema.GetInstancia();
 
@@ -52,6 +53,7 @@ public class Main {
         s.agregar(new Usuario("admin", (Tipo) new Admin(), "pass","Pedro Hernandez"));
     }
     
+    //CARGA LAS FICHAS A LA PARTIDA
     private static void cargarFichas() {
         Partida p = Partida.GetInstancia();
         //Sistema s = Sistema.GetInstancia();

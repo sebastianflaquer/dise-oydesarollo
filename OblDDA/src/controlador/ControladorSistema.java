@@ -24,7 +24,7 @@ public class ControladorSistema implements ActionListener {
 
     public ControladorSistema(ILogin vista) {
         
-        this.vistaLogin = vista;        
+        this.vistaLogin = vista;
     }
 
     @Override
@@ -32,18 +32,23 @@ public class ControladorSistema implements ActionListener {
         
         if(e.getActionCommand().equals("LOGIN"))
         {
-            //proceos el login            
+            //VALIDAR Y CARGAR USUARIO
+            
             Usuario unUsu = new Usuario();
-            boolean esValido = unUsu.ValidarUsuario(vistaLogin.getUsuario(), vistaLogin.getContrasena());
-            if (esValido == true)
+            unUsu = unUsu.ValidarUsuario(vistaLogin.getUsuario(), vistaLogin.getContrasena());
+            
+            //boolean esValido = unUsu.ValidarUsuario(vistaLogin.getUsuario(), vistaLogin.getContrasena());
+            
+            if(unUsu!= null)
             {
-                unUsu.setNombre(vistaLogin.getUsuario());
+                //unUsu.setNombre(vistaLogin.getUsuario());
                 //vistaLogin.SetErrorMsj("");
                 this.vistaLogin.setVisible(false);
                 
                 this.vistaMesa = new Mesa();
                 vistaMesa.setVisible(true);
                 vistaMesa.CargarDatosDelJugador(unUsu);
+                vistaMesa.CargarFichasDelJugador();
                 //vistaMesa.SetNombreUsuario(unUsu.getNomCompleto());
             }
             else
