@@ -1,0 +1,26 @@
+TAREAS:
+
+1- Definir Usuarios
+
+2- Ingreso
+	A- Mismo jugador no puede ingresar 2 veces al mismo tiempo.
+	B- Si es Admin se despliega otro JPanel diferente al de Usuarios.
+	C- Partida inicia automatico si hay otro esperando o queda en espera de otro Jugador.
+	D- Varias partidas el mismo tiempo.
+	E- Validar Saldo de Jugadores al entrar a la partida.
+
+3- Prototipo del Juego
+
+4- Monitoreo
+
+
+
+
+ENTREGA:
+
+- Implementación del sistema
+- Diagrama de Clases Conceptual 		-IMPRIMIR
+- Diagrama de Clases de Diseño (incluye todas las entidades que participan en la solución).      -IMPRIMIR
+- Auto Evaluación 
+- Datos de Prueba
+
