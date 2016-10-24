@@ -10,7 +10,7 @@ package Controladores;
  */
 public interface IMesa {
     
-    public void setControlador(ControladorSistema  c);    
+    public void setControlador(ControladorJuego  c);    
     public void inicializar();
     
     //public String getUsuario();

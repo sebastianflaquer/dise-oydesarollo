@@ -5,8 +5,8 @@
  */
 package Vistas;
 
+import Controladores.ControladorJuego;
 import Controladores.IMesa;
-import controladores.ControladorSistema;
 
 /**
  *
@@ -265,11 +265,15 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     public void SetNombreUsuario(String nombreUsuario) {
         this.LblNombre.setText(nombreUsuario);
     }
-    
+
     @Override
-    public void setControlador(ControladorSistema c) {
-        this.btnMasFicha.addActionListener(c);
+    public void setControlador(ControladorJuego c) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+
+    
+    
 
 
  

@@ -6,7 +6,6 @@
 
 package Controladores;
 
-import controladores.ControladorSistema; 
 
 /**
  *
@@ -14,7 +13,7 @@ import controladores.ControladorSistema;
  */
 public interface ILogin {
     
-    void setControlador(ControladorSistema  c);    
+    void setControlador(ControladorJuego  c);    
     void inicializar();
     
     public String getUsuario();

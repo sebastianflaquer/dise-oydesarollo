@@ -5,10 +5,8 @@
  */
 package Vistas;
 
+import Controladores.ControladorJuego;
 import Controladores.ILogin;
-import Usuarios.Jugador;
-import Usuarios.Usuario;
-import controladores.ControladorSistema;
 
 /**
  *
@@ -168,7 +166,7 @@ public class Login extends javax.swing.JFrame implements ILogin  {
 
 
     @Override
-    public void setControlador(ControladorSistema c) {
+    public void setControlador(ControladorJuego c) {
         this.jbtnLogin.addActionListener(c);
     }
 

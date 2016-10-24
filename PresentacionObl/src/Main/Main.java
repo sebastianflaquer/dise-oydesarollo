@@ -5,16 +5,14 @@
  */
 package Main;
 
+import Controladores.ControladorJuego;
+import Controladores.ILogin;
 import Usuarios.Admin;
 import Usuarios.Jugador;
 import Fachada.Sistema;
-import Usuarios.Tipo;
 import Usuarios.Usuario;
-import Controladores.ILogin;
-import Controladores.IMesa;
+import Usuarios.ITipo;
 import Vistas.Login;
-import Vistas.Mesa;
-import controladores.ControladorSistema;
 
 /**
  *
@@ -29,17 +27,18 @@ public class Main {
         // TODO code application logic here
         
         cargarUsuarios();
-        
-        //new Login().setVisible(true);
-        
+
+//        ILogin vista = (ILogin) new Login();
+//        ControladorSistema control = new ControladorSistema(vista);
+//        
+//        vista.inicializar();
+//        vista.setControlador(control);
+
         ILogin vista = (ILogin) new Login();
-        ControladorSistema control = new ControladorSistema(vista);
-        
+        ControladorJuego cont = new ControladorJuego(vista);
         vista.inicializar();
-        vista.setControlador(control);
+        vista.setControlador(cont);
         
-        
-        //new Mesa().setVisible(true);
         
         
     }
@@ -47,9 +46,9 @@ public class Main {
     private static void cargarUsuarios() {
         Sistema s = Sistema.GetInstancia();
 
-        s.agregar(new Usuario("nom", (Tipo) new Jugador(100), "pass" ,"Juan perez"));
-        s.agregar(new Usuario("nom2", (Tipo) new Jugador(100), "pass2","Ana Gonzalez"));
-        s.agregar(new Usuario("admin", (Tipo) new Admin(), "pass","Pedro Hernandez"));
+        s.agregar(new Usuario("nom", (ITipo) new Jugador(100), "pass" ,"Juan perez"));
+        s.agregar(new Usuario("nom2", (ITipo) new Jugador(100), "pass2","Ana Gonzalez"));
+        s.agregar(new Usuario("admin", (ITipo) new Admin(), "pass","Pedro Hernandez"));
     }
     
 }

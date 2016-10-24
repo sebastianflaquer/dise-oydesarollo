@@ -7,28 +7,16 @@ package Usuarios;
 
 import Fachada.Sistema;
 
-/**
- *
- * @author Laura
- */
+
+
 public class Usuario {
     
     //ATRIBUTOS
     private String nombre;
-    private Tipo tipo;
+    private ITipo tipo;
     private String password;
     private String nomCompleto;
-    private Usuario sig;
     
-    
-
-    public void setSig(Usuario sig) {
-        this.sig = sig;
-    }
-
-    public Usuario getSig() {
-        return sig;
-    }
     
     
     //GETTERS
@@ -36,8 +24,8 @@ public class Usuario {
         return nombre;
     }
 
-    public Tipo getTipo() {
-        return tipo;
+    public ITipo getTipo() {
+        return (ITipo) tipo;
     }
 
     public String getPassword() {
@@ -53,8 +41,8 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
+    public void setTipo(ITipo tipo) {
+        this.tipo = (ITipo) tipo;
     }
 
     public void setPassword(String password) {
@@ -66,7 +54,7 @@ public class Usuario {
     }
         
     //CONSTRUCTOR
-    public Usuario(String nombre, Tipo tipo, String password, String nomCompleto) {
+    public Usuario(String nombre, ITipo tipo, String password, String nomCompleto) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.password = password;

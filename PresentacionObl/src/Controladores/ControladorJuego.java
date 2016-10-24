@@ -3,37 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controladores;
+package Controladores;
 
-import Usuarios.Jugador;
 import Juegos.Partida;
 import Usuarios.Usuario;
 import Vistas.Mesa;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener; 
+import java.awt.event.ActionListener;
 
-
-
-
-public class ControladorSistema implements ActionListener {
-
-    
+/**
+ *
+ * @author Mauro
+ */
+public class ControladorJuego implements ActionListener {
     private ILogin vistaLogin;
     private IMesa vistaMesa;
     private Partida partida;
 
-//    public ControladorSistema(ILogin vista) {
-//        this.vistaLogin = vista;        
-//    }
     
-    public ControladorSistema(ILogin vistaLog) {
+    public ControladorJuego(ILogin vistaLog) {
         this.vistaLogin = vistaLog;
     }
-   
-
+    
+    
     @Override
     public void actionPerformed(ActionEvent e) {
-        
         if(e.getActionCommand().equals("LOGIN"))
         {
             //proceos el login            
@@ -58,7 +52,6 @@ public class ControladorSistema implements ActionListener {
         {
             partida.AddFicha(partida.GetTurnoActual());
         }
-        // controlador.ControladorSistema controlador;        que era esto???
     }
     
 }

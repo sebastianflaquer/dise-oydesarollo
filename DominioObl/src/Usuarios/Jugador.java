@@ -9,7 +9,7 @@ package Usuarios;
  *
  * @author Laura
  */
-public class Jugador extends Tipo {
+public class Jugador implements ITipo {
 
     //ATRIBUTOS
     private double saldo;
@@ -27,6 +27,11 @@ public class Jugador extends Tipo {
     //CONSTRUCTOR
     public Jugador(double saldo) {
         this.saldo = saldo;
+    }
+
+    @Override
+    public boolean puedoJugar() {
+        return true;
     }
     
     

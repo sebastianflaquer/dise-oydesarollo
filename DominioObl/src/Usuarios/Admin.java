@@ -5,11 +5,9 @@
  */
 package Usuarios;
 
-/**
- *
- * @author Laura
- */
-public class Admin extends Tipo {
+
+
+public class Admin implements ITipo {
 
     
     //ATRIBUTOS
@@ -18,6 +16,11 @@ public class Admin extends Tipo {
     //CONSTRUCTOR
     public Admin() {
         
+    }
+    
+    @Override
+    public boolean puedoJugar() {
+        return false;
     }
     
 }
