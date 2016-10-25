@@ -127,12 +127,9 @@ public class Partida extends Observable{
         
         
         
-    }
+    }    
+    public void SumarSaldos(){}
     
-    
-    public void SumarSaldos(){
-    
-    }
     
     //VALIDAR SALDO
     public boolean ValidarSaldo( Jugador jugador){        
