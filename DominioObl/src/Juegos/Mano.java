@@ -68,10 +68,7 @@ public class Mano {
     //CONSTRUCTOR
     //================================================================================//CONSTRUCOTR
     public Mano() {
-        this.fichasJ1 = null;
-        this.fichasJ2 = null;
-        this.fichasMazo = null;
-        this.fichasJugadas = null;
+      
     }
     
     
@@ -109,11 +106,7 @@ public class Mano {
                 this.fichasMazo.remove(i);
             }
         }
-    }
-
-    
-    
-    
+    }   
     
     //METODO RANDOM PARA OBTER ITEM DE UNA LISTA
     static Random rand = new Random();    

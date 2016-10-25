@@ -27,6 +27,8 @@ public class Partida extends Observable{
     private ArrayList<Mano> manos = new ArrayList<Mano>();
     //private ArrayList<Ficha> fichas = new ArrayList<Ficha>();
     
+    
+    
     private static Partida instancia;
     public static Partida GetInstancia()
     {
@@ -119,9 +121,12 @@ public class Partida extends Observable{
         //cargar jugadores        
         //cambiarestado        
         //crear mano y agregar a la lista
-        Mano primeraMano = new Mano();
+        Mano primeraMano = GetUltimaMano();
         //repartir ficha a los jugadores
         primeraMano.repartirFichasAJugadores();
+        
+        
+        
     }
     
     
@@ -164,7 +169,7 @@ public class Partida extends Observable{
     public void agregarFicha(Ficha f) {
         if (f != null)
         {
-            Mano m = new Mano();
+            Mano m = GetUltimaMano();
             m.getFichasMazo().add(f);
         }
     }

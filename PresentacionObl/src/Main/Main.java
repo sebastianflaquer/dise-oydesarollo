@@ -7,13 +7,14 @@ package Main;
 
 import Controladores.ControladorJuego;
 import Controladores.ILogin;
-import Usuarios.Admin;
-import Usuarios.Jugador;
 import Fachada.Sistema;
 import Juegos.Ficha;
+import Juegos.Mano;
 import Juegos.Partida;
-import Usuarios.Usuario;
+import Usuarios.Admin;
 import Usuarios.ITipo;
+import Usuarios.Jugador;
+import Usuarios.Usuario;
 import Vistas.Login;
 
 /**
@@ -29,7 +30,15 @@ public class Main {
         // TODO code application logic here
         
         cargarUsuarios();
-        cargarFichas();
+        
+        Sistema s = Sistema.GetInstancia();
+        //Partida p = Partida.GetInstancia();
+        Partida p = new Partida();
+        //p.setJugador1(jugador1);
+        //p.setJugador2(jugador2);
+        s.agregarPartida(p);
+        
+        cargarFichas(p);
 
 //      ILogin vista = (ILogin) new Login();
 //      ControladorSistema control = new ControladorSistema(vista);
@@ -38,9 +47,13 @@ public class Main {
 //      vista.setControlador(control);
 
         ILogin vista = (ILogin) new Login();
-        ControladorJuego cont = new ControladorJuego(vista);
+        ControladorJuego cont = new ControladorJuego(vista,p);
         vista.inicializar();
         vista.setControlador(cont);
+        
+        //AGREGA LAS FICHAS DE CADA JUGADOR A LA MESA
+        cont.agregaFichasMesa();
+        
         
     }
     
@@ -54,24 +67,25 @@ public class Main {
     }
     
     //CARGA LAS FICHAS A LA PARTIDA
-    private static void cargarFichas() {
-        Sistema s = Sistema.GetInstancia();
-        //Partida p = Partida.GetInstancia();
-        Partida p = new Partida();
-        //p.setJugador1(jugador1);
-        //p.setJugador2(jugador2);
-        s.agregarPartida(p);
+    private static void cargarFichas(Partida p) {
+        
         //Sistema s = Sistema.GetInstancia();
-        p.InicialPartida();
+        //CREA LA PRIMER MANO Y LA AGREGA EN LA LISTA
+        Mano m = new Mano();
+        p.agregarMano(m);
+        
         //AGREGA LAS FICHAS AL MAZO
         int contador = 0;
         for(int l=0; l<= 6; l++){
             int r = l;
             for(r = l; r <= 6; r++){                
-                p.agregarFicha(new Ficha( contador , l, r));                
+                p.agregarFicha(new Ficha( contador, l, r));                
                 contador ++;
             }
         }
+        
+        p.InicialPartida();
+        
           //0
 //        p.agregarFicha(new Ficha( 1, 0, 0));
 //        p.agregarFicha(new Ficha( 1, 0, 1));

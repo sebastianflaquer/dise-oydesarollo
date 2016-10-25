@@ -5,11 +5,13 @@
  */
 package Controladores;
 
+import Juegos.Ficha;
 import Juegos.Partida;
 import Usuarios.Usuario;
 import Vistas.Mesa;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -23,8 +25,9 @@ public class ControladorJuego implements ActionListener, Observer {
     private Partida partida;
 
     
-    public ControladorJuego(ILogin vistaLog) {
+    public ControladorJuego(ILogin vistaLog, Partida p) {
         this.vistaLogin = vistaLog;
+        this.partida = p;
     }
     
     
@@ -46,6 +49,7 @@ public class ControladorJuego implements ActionListener, Observer {
                 this.vistaMesa = new Mesa();
                 vistaMesa.setVisible(true);
                 vistaMesa.CargarDatosDelJugador(unUsu);
+                
                 //vistaMesa.CargarFichasDelJugador();
                 //vistaMesa.SetNombreUsuario(unUsu.getNomCompleto());
             }
@@ -60,6 +64,18 @@ public class ControladorJuego implements ActionListener, Observer {
         }
     }
 
+    //ACTUALIZA LAS FICHAS DE LA MESA DE LOS JUGADORES
+    public void agregaFichasMesa(){        
+        ArrayList<Ficha> lfichas = partida.GetUltimaMano().getFichasJ1();        
+        for(int i = 0; i< lfichas.size(); i++){
+            int val1 = lfichas.get(i).getValor1();
+            int val2 = lfichas.get(i).getValor2();
+            vistaMesa.CargarFichasDelJugador(val1, val2);
+        }
+    }
+    
+    
+    
     @Override
     public void update(Observable o, Object arg) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

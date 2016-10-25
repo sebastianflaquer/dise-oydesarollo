@@ -25,6 +25,7 @@ public interface IMesa {
     
     //CARGAR DATOS DEL JUGADOR A LA MESA
     public void CargarDatosDelJugador(Usuario unUsu);
+    public void CargarFichasDelJugador(int val1, int val2);
     
     
 }
