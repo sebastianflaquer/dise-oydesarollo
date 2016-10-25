@@ -49,8 +49,8 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         LblNombre = new javax.swing.JLabel();
         lblSaldo = new javax.swing.JLabel();
         lblApuestaActual = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel5 = new javax.swing.JPanel();
+        jScrollPaneFichasJuego = new javax.swing.JScrollPane();
+        fichasJuegoPanel = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         btnMasFicha = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -114,9 +114,8 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel5.setLayout(new java.awt.GridLayout(1, 28, 1, 1));
-        jScrollPane1.setViewportView(jPanel5);
+        fichasJuegoPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPaneFichasJuego.setViewportView(fichasJuegoPanel);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -166,7 +165,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPaneFichasJuego)
                     .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -177,7 +176,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPaneFichasJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -227,6 +226,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LblNombre;
     private javax.swing.JButton btnMasFicha;
+    private javax.swing.JPanel fichasJuegoPanel;
     private javax.swing.JPanel fichasJugadorPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -235,8 +235,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPaneFichasJuego;
     private javax.swing.JLabel lblApuestaActual;
     private javax.swing.JLabel lblSaldo;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
@@ -304,7 +303,6 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         
         ImageIcon image = new ImageIcon("/images/"+val1+"-"+val2+".jpg");
         //ImageIcon image = new ImageIcon(this.getClass().getResource("/images/"+val1+"-"+val2+".jpg"));
-
         
         JButton btn = new JButton(image);
         btn.setPreferredSize( new Dimension(74, 38));
@@ -313,6 +311,8 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         //btn.addActionListener((ActionListener) this);
         this.fichasJugadorPanel.add(val1+"-"+val2,btn);
         validate();
+        
+        
     }    
 //      
     

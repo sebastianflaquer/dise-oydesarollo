@@ -13,5 +13,4 @@ public interface ITipo {
     
     public boolean puedoJugar();
     
-    
 }

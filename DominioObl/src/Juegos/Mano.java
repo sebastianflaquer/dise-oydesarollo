@@ -13,9 +13,7 @@ import java.util.Random;
  *
  * @author Laura
  */
-public class Mano {
-
-    
+public class Mano {    
 
     //================================================================================
     //ATRIBUTOS

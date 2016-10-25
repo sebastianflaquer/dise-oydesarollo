@@ -6,6 +6,7 @@
 package Juegos;
 
 import Usuarios.Jugador;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -184,7 +185,26 @@ public class Partida extends Observable{
     //ACTUALIZA TODOS LOS DATOS DE LAS MESAS
     public void actualizarMesa() {        
     }
-    
+
+    //ingresarMovimiento
+    public void ingresarMovimiento() {
+        //Validar si la ficha se puede poner en la lista de fichas jugadas
+        //validarMovimiento();    
+        
+    }
+
+    private void validarMovimiento(Ficha f) {
+        
+        //se fija en el listado de fichasen juego puede poner la ficha al principio, al final, en ambos lugares o en ninguno
+        //Si al principio o final lo agrega (llama a una funcion que la agrega)
+        //.actualizarFichasMazo();
+        
+
+        //si en ambos pregunta
+        //si en ninguno tira error.
+        
+    }
+
 
     
     

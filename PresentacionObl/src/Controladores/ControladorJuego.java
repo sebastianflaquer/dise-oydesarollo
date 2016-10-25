@@ -33,8 +33,8 @@ public class ControladorJuego implements ActionListener, Observer {
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand().equals("LOGIN"))
-        {
+        //LOGIN
+        if(e.getActionCommand().equals("LOGIN")){
             //VALIDAR Y CARGAR USUARIO            
             Usuario unUsu = new Usuario();
             unUsu = unUsu.ValidarUsuario(vistaLogin.getUsuario(), vistaLogin.getContrasena());
@@ -61,11 +61,18 @@ public class ControladorJuego implements ActionListener, Observer {
                 vistaLogin.SetErrorMsj("Nombre de Usuario o Contraseña Incorrecto");
             }
         }        
-        else if(e.getActionCommand().equals("ADDFICHA"))
-        {
+        //ADDFICHA
+        else if(e.getActionCommand().equals("ADDFICHA")){            
             partida.AddFichaJugador(partida.GetUltimaMano());
             partida.actualizarMesa();
         }
+        //BOTONFICHA
+        else if(e.getActionCommand().equals("botonFicha")){
+            
+            //AGREGAR FICHA A FICHAS JUGADAS
+            //partida.ingresarMovimiento(e);
+            
+        }        
     }
 
     //ACTUALIZA LAS FICHAS DE LA MESA DE LOS JUGADORES
