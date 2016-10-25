@@ -18,9 +18,7 @@ public class Mano {
     //================================================================================
     //ATRIBUTOS
     //================================================================================
-    private ArrayList<Ficha> fichasJ1 = new ArrayList<Ficha>();
-
-    
+    private ArrayList<Ficha> fichasJ1 = new ArrayList<Ficha>();    
     private ArrayList<Ficha> fichasJ2 = new ArrayList<Ficha>();
     private ArrayList<Ficha> fichasMazo = new ArrayList<Ficha>();
     private ArrayList<Ficha> fichasJugadas = new ArrayList<Ficha>();

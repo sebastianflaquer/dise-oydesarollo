@@ -47,7 +47,6 @@ public class Main {
     //CARGA LOS USUARIOS AL SISTEMA
     private static void cargarUsuarios() {
         Sistema s = Sistema.GetInstancia();
-
         s.agregar(new Usuario("juan", (Tipo) new Jugador(1000), "pass" ,"Juan perez"));
         s.agregar(new Usuario("ana", (Tipo) new Jugador(25000), "pass","Ana Gonzalez"));
         s.agregar(new Usuario("admin", (Tipo) new Admin(), "pass","Pedro Hernandez"));

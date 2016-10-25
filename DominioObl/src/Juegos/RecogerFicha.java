@@ -28,7 +28,4 @@ public class RecogerFicha extends TipoMov{
     public RecogerFicha(Ficha ficha) {
         this.ficha = ficha;
     }
-    
-    
-    
 }

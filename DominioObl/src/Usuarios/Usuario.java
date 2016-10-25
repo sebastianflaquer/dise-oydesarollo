@@ -65,23 +65,25 @@ public class Usuario {
     }
     
     // VALIDAR USUARIO
-    public boolean ValidarUsuario(String nombre, String password){
+    public Usuario ValidarUsuario(String nombre, String password){
+        
+        Usuario unUsu = new Usuario();
         boolean ret = false;        
         int i=0;
         while(i < Sistema.GetInstancia().getUsuarios().size() && ret==false)
         {
-            if(Sistema.GetInstancia().getUsuarios().get(i).nombre.equals(nombre) && 
-                    Sistema.GetInstancia().getUsuarios().get(i).password.equals(password))
-            {
+            if(Sistema.GetInstancia().getUsuarios().get(i).nombre.equals(nombre) && Sistema.GetInstancia().getUsuarios().get(i).password.equals(password)){
                 ret = true;
-            }
-            else
-            {
+                unUsu.setNombre(nombre);
+                unUsu.setPassword(password);
+                unUsu.nomCompleto = Sistema.GetInstancia().getUsuarios().get(i).nomCompleto;
+                unUsu.tipo = Sistema.GetInstancia().getUsuarios().get(i).tipo;
+            }else{
                i++;
             }
         }
-        return ret;
-    }  
+        return unUsu;
+    }
     
     
     

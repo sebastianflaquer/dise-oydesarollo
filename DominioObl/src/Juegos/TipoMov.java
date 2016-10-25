@@ -16,5 +16,6 @@ public class TipoMov {
     
     //CONSTRUCOTR
     public TipoMov() {
+        
     }
 }

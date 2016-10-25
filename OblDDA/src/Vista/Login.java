@@ -187,7 +187,7 @@ public class Login extends javax.swing.JFrame implements ILogin  {
     }
 
     @Override
-    public void getNombreCOmpleto() {
+    public void getNombreCompleto() {
         
     }
 }

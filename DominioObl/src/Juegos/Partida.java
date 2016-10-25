@@ -5,28 +5,44 @@
  */
 package Juegos;
 
-import java.util.List;
 import Usuarios.Jugador;
+import java.util.ArrayList;
+import java.util.Observable;
 
 /**
  *
  * @author Laura
  */
-public class Partida {
+public class Partida extends Observable{
     
     //================================================================================
     //ATRIBUTOS
     //================================================================================
+    private static int ultId=0;
     private int id;
     private Jugador jugador1;
     private Jugador jugador2;
     private String estado;    // "En Juego", "Finalizado" o "Sin Iniciar" 
     private static double apuestaInicial;
-    private List<Mano> manos;
+    private ArrayList<Mano> manos = new ArrayList<Mano>();
+    //private ArrayList<Ficha> fichas = new ArrayList<Ficha>();
+    
+    private static Partida instancia;
+    public static Partida GetInstancia()
+    {
+        if (instancia == null) 
+            instancia = new Partida();       
+        
+        return instancia;
+    }
 
     //================================================================================
     //SETTERS
     //================================================================================
+    
+    public static void setUltId(int ultId) {
+        Partida.ultId = ultId;
+    }
     public void setId(int id) {
         this.id = id;
     }
@@ -42,13 +58,17 @@ public class Partida {
     public static void setApuestaInicial(double apuestaInicial) {
         Partida.apuestaInicial = apuestaInicial;
     }
-    public void setManos(List<Mano> manos) {
+    public void setManos(ArrayList<Mano> manos) {
         this.manos = manos;
     }
 
     //================================================================================
     //GETTERS
     //================================================================================
+    
+    public static int getUltId() {
+        return ultId;
+    }
     public int getId() {
         return id;
     }
@@ -64,27 +84,47 @@ public class Partida {
     public static double getApuestaInicial() {
         return apuestaInicial;
     }
-    public List<Mano> getManos() {
+    public ArrayList<Mano> getManos() {
         return manos;
     }
 
     //================================================================================
     //CONSTRUCTOR
     //================================================================================
-    public Partida(int id, Jugador jugador1, Jugador jugador2, String estado, List<Mano> manos) {
-        this.id = id;
-        this.jugador1 = jugador1;
-        this.jugador2 = jugador2;
-        this.estado = estado;
-        this.manos = manos;
+    public Partida() {
+        this.id=++Partida.ultId;
+        this.jugador1 = null;
+        this.jugador2 = null;
+        this.estado = "Sin Iniciar";
+        this.manos = new ArrayList<Mano>();
     }
     
     //================================================================================
     //METODOS
     //================================================================================
-    private Partida(){
-        this.estado = "Sin Iniciar";
+    
+    public void agregarMano(Mano m)
+    {
+        if(m != null)
+        {
+            this.manos.add(m);
+        }
     }
+    
+    
+    
+    //INICIAR PARTIDA
+    public void InicialPartida()
+    {
+        //cargar jugadores        
+        //cambiarestado        
+        //crear mano y agregar a la lista
+        Mano primeraMano = new Mano();
+        
+        //repartir ficha a los jugadores
+        primeraMano.repartirFichasAJugadores();
+    }
+    
     
     public void SumarSaldos(){
     
@@ -100,7 +140,7 @@ public class Partida {
     }
     
     //ROBAR UNA FICHA DEL MAZO
-    public void AddFicha(Jugador j)
+    public void AddFichaJugador(Jugador j)
     {
          Ficha nueva = Ficha.ObtenerFichaRandom();
          Mano actual = new Mano();
@@ -113,13 +153,42 @@ public class Partida {
         return this.getJugador1();
     }
     
-    //INICIAR PARTIDA
-    public void InicialPartida()
-    {
-        Mano primera = new Mano();
-        primera.repartirFichasAJugadores();
+    //AGREGA FICHAS A LA LISTA DE FICHAS
+    public void agregarFicha(Ficha f) {
+        if (f != null)
+        {
+            fichas.add(f);
+        }
+    }
+    
+    //CREA UNA NUEVA MANO Y REPARTE LAS FICHAS
+    public void repartirFichasIniciales(Partida p) {
+        
+        //Mano unaM = new Mano();
+        p.GetUltimaMano().repartirFichasAJugadores();
+        this.manos.add(p.GetUltimaMano());
         
     }
+    
+    //TRAE LA ULTIMA MANO
+    public Mano GetUltimaMano()
+    {
+        Mano unaM = new Mano();
+        unaM = this.manos.get(this.manos.size() -1);
+        //FALTA ARMAR, HAY QUE RECORRER LA LISTA Y TRAER LA ULTIMA
+        
+        return unaM;
+    }
+    
+    //INICIAR PARTIDA
+//    public void InicialPartida()
+//    {
+//        Mano primera = new Mano();
+//        primera.repartirFichasAJugadores();
+//        
+//    }
+
+    
     
     
     

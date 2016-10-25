@@ -15,9 +15,50 @@ import java.util.Random;
  */
 public class Ficha {
 
-//    static Ficha ObternerFichaPorId(int idFicha) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
+    //ATRIBUTOS
+    private int id;
+    private int valor1;
+    private int valor2;
+    
+    //================================================================================
+    //GETTERS
+    //================================================================================
+    public int getId() {
+        return id;
+    }
+    public int getValor1() {
+        return valor1;
+    }
+    public int getValor2() {
+        return valor2;
+    }
+    
+    //================================================================================
+    //SETTERS
+    //================================================================================
+    public void setId(int id) {
+        this.id = id;
+    }
+    public void setValor1(int valor1) {
+        this.valor1 = valor1;
+    }
+    public void setValor2(int valor2) {
+        this.valor2 = valor2;
+    }
+    
+    //================================================================================
+    //CONSTRUCTOR
+    //================================================================================
+    public Ficha(int id, int valor1, int valor2) {
+        this.id = id;
+        this.valor1 = valor1;
+        this.valor2 = valor2;
+    }
+    private Ficha(){}
+    
+    //================================================================================
+    //METODOS
+    //================================================================================
     
     //METODO RANDOM PARA OBTER ITEM DE UNA LISTA
     static Random rand = new Random();    
@@ -26,60 +67,17 @@ public class Ficha {
     }
     
     //OBTENER UNA FICHA RANDOM
-    static Ficha ObtenerFichaRandom() {
+    static Ficha ObtenerFichaRandom(Partida p) {
         //preguntar al profesor como hacer el random
         
         //CREO UNA MANO
-        Mano unaM = new Mano();
+        //Mano unaM = new Mano();
         //CREO LISTA CON LA LISTA DEL MAZO
-        List<Ficha> lista = unaM.GetUltimaMano().getFichasMazo();
+        ArrayList<Ficha> lista = p.GetUltimaMano().getFichasMazo();
         //OBTIENE UNA FICHA RANDOM
         Ficha fichaRandom = getRandomItem(lista);
         
         return fichaRandom;
-    }
-    
-    
-    
-    //ATRIBUTOS
-    private int id;
-    private int valor1;
-    private int valor2;
-
-    //CONSTRUCTOR
-    public Ficha(int id, int valor1, int valor2) {
-        this.id = id;
-        this.valor1 = valor1;
-        this.valor2 = valor2;
-    }
-
-    private Ficha(){}
-
-    //GETTERS
-    public int getId() {
-        return id;
-    }
-
-    public int getValor1() {
-        return valor1;
-    }
-
-    public int getValor2() {
-        return valor2;
-    }
-
-    
-    //SETTERS
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setValor1(int valor1) {
-        this.valor1 = valor1;
-    }
-
-    public void setValor2(int valor2) {
-        this.valor2 = valor2;
     }
     
 }

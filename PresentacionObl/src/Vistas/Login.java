@@ -189,7 +189,4 @@ public class Login extends javax.swing.JFrame implements ILogin  {
     public void SetErrorMsj(String mensaje){
         this.lblErrorLabel.setText(mensaje);
     }
-    
-    
-    
 }

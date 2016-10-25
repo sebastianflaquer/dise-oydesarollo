@@ -10,12 +10,14 @@ import Usuarios.Usuario;
 import Vistas.Mesa;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  *
  * @author Mauro
  */
-public class ControladorJuego implements ActionListener {
+public class ControladorJuego implements ActionListener, Observer {
     private ILogin vistaLogin;
     private IMesa vistaMesa;
     private Partida partida;
@@ -30,28 +32,37 @@ public class ControladorJuego implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("LOGIN"))
         {
-            //proceos el login            
+            //VALIDAR Y CARGAR USUARIO            
             Usuario unUsu = new Usuario();
-            boolean esValido = unUsu.ValidarUsuario(vistaLogin.getUsuario(), vistaLogin.getContrasena());
-            if (esValido == true)
+            unUsu = unUsu.ValidarUsuario(vistaLogin.getUsuario(), vistaLogin.getContrasena());
+            //boolean esValido = unUsu.ValidarUsuario(vistaLogin.getUsuario(), vistaLogin.getContrasena());
+            
+            if(unUsu.getNombre() != null )
             {
-                unUsu.setNombre(vistaLogin.getUsuario());
-                vistaLogin.SetErrorMsj("vpe");
+                //unUsu.setNombre(vistaLogin.getUsuario());
+                //vistaLogin.SetErrorMsj("");
                 this.vistaLogin.setVisible(false);
                 
                 this.vistaMesa = new Mesa();
                 vistaMesa.setVisible(true);
-                vistaMesa.SetNombreUsuario(unUsu.getNombre());
+                vistaMesa.CargarDatosDelJugador(unUsu);
+                vistaMesa.CargarFichasDelJugador();
+                //vistaMesa.SetNombreUsuario(unUsu.getNomCompleto());
             }
             else
             {
-                vistaLogin.SetErrorMsj("Error!!");
+                vistaLogin.SetErrorMsj("Nombre de Usuario o Contraseña Incorrecto");
             }
         }        
         else if(e.getActionCommand().equals("AddFicha"))
         {
-            partida.AddFicha(partida.GetTurnoActual());
+            partida.AddFichaJugador(partida.GetTurnoActual());
         }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package Controladores;
+
+import Usuarios.Usuario;
+
 /**
  *
  * @author Mauro
@@ -19,5 +22,11 @@ public interface IMesa {
     public void SetNombreUsuario(String nombreUsuario);
     
     public void setVisible(boolean b);  
+    
+    //CARGAR DATOS DEL JUGADOR A LA MESA
+    public void CargarDatosDelJugador(Usuario unUsu);
+    
+    //CARGAR FICHAS DEL JUGADOR
+    public void CargarFichasDelJugador();
     
 }
