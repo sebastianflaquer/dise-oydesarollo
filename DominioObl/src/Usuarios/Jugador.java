@@ -14,6 +14,7 @@ public class Jugador implements ITipo {
     //ATRIBUTOS
     private double saldo;
     
+    
     //SETTERS
     public void setSaldo(double saldo) {
         this.saldo = saldo;

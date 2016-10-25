@@ -47,6 +47,8 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         LblNombre = new javax.swing.JLabel();
+        lblSaldo = new javax.swing.JLabel();
+        lblApuestaActual = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel5 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -82,8 +84,14 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
                         .addComponent(jButton1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblSaldo))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblApuestaActual)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -96,9 +104,13 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
                     .addComponent(jButton1)
                     .addComponent(LblNombre))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(lblSaldo))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(lblApuestaActual))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -109,8 +121,9 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         btnMasFicha.setText("+ 1");
+        btnMasFicha.setActionCommand("ADDFICHA");
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, btnMasFicha, org.jdesktop.beansbinding.ELProperty.create("AddFicha"), btnMasFicha, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, btnMasFicha, org.jdesktop.beansbinding.ELProperty.create("ADDFICHA"), btnMasFicha, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
         bindingGroup.addBinding(binding);
 
         jLabel4.setText("Mis Fichas:");
@@ -141,9 +154,9 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(btnMasFicha))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addComponent(fichasJugadorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -224,6 +237,8 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblApuestaActual;
+    private javax.swing.JLabel lblSaldo;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
@@ -262,7 +277,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         }
         
         //get saldo
-        //this.LblSaldo.setText(unUsu.getTipo());
+        //this.lblSaldo.setText(unUsu.);
         
         //get apuesta actual
         //this.LblApuestaActual.setText()        

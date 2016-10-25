@@ -23,7 +23,7 @@ public class Partida extends Observable{
     private Jugador jugador1;
     private Jugador jugador2;
     private String estado;    // "En Juego", "Finalizado" o "Sin Iniciar" 
-    private static double apuestaInicial;
+    private static double apuestaInicial = 100; //apuesta inicial 100
     private ArrayList<Mano> manos = new ArrayList<Mano>();
     //private ArrayList<Ficha> fichas = new ArrayList<Ficha>();
     
@@ -143,17 +143,16 @@ public class Partida extends Observable{
     //ROBAR UNA FICHA DEL MAZO
     public void AddFichaJugador(Mano m)
     {
-         Ficha nueva = m.ObtenerFichaRandom();
-         Jugador j= this.GetTurnoActual();
-         if(j.equals(this.jugador1))
-         {
-             m.getFichasJ1().add(nueva);
-         }
-         else
-         {
-             m.getFichasJ2().add(nueva);
-         }
-
+        Ficha nueva = m.ObtenerFichaRandom();
+        Jugador j= this.GetTurnoActual();
+        if(j.equals(this.jugador1))
+        {
+            m.getFichasJ1().add(nueva);
+        }
+        else
+        {
+            m.getFichasJ2().add(nueva);
+        }
     }
     
     //OBTIENE EL TURNO ACTUAL
@@ -180,6 +179,10 @@ public class Partida extends Observable{
         //FALTA ARMAR, HAY QUE RECORRER LA LISTA Y TRAER LA ULTIMA
         
         return unaM;
+    }
+
+    //ACTUALIZA TODOS LOS DATOS DE LAS MESAS
+    public void actualizarMesa() {        
     }
     
 

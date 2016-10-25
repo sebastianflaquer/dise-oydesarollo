@@ -61,9 +61,10 @@ public class ControladorJuego implements ActionListener, Observer {
                 vistaLogin.SetErrorMsj("Nombre de Usuario o Contraseña Incorrecto");
             }
         }        
-        else if(e.getActionCommand().equals("AddFicha"))
+        else if(e.getActionCommand().equals("ADDFICHA"))
         {
             partida.AddFichaJugador(partida.GetUltimaMano());
+            partida.actualizarMesa();
         }
     }
 

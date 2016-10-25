@@ -52,6 +52,8 @@ public class Sistema {
     //================================================================================
     //METODOS
     //================================================================================
+    
+    //ARGEGA UN USUARIO
     public void agregar(Usuario u) {
         if (u != null)
         {
@@ -59,6 +61,7 @@ public class Sistema {
         }
     }
     
+    //AGREGA UNA PARTIDA
     public void agregarPartida(Partida p)
     {
         if(p != null)
