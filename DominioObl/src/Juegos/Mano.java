@@ -132,4 +132,19 @@ public class Mano {
         return fichaRandom;
     }
     
+    
+    public void CargarValorFichas(){
+        
+//        //AGREGA LAS FICHAS DINAMICAMENTES
+//        for( int i = 0; i >= this.size(); i++){
+//            Ficha unaF = Ljug1.get(i);
+//            int val1 = unaF.getValor1();
+//            int val2 = unaF.getValor2();            
+//            this.fichasJugadorPanel.add(new JButton(Integer.toString(val1) + "-" + Integer.toString(val2)));
+//            validate();
+//        }
+    }
+    
+    
+    
 }
