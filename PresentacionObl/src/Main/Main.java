@@ -51,10 +51,6 @@ public class Main {
         vista.inicializar();
         vista.setControlador(cont);
         
-        //AGREGA LAS FICHAS DE CADA JUGADOR A LA MESA
-        cont.agregaFichasMesa();
-        
-        
     }
     
     //CARGAR USUARIOS
