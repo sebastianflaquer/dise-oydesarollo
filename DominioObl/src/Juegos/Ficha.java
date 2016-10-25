@@ -5,9 +5,6 @@
  */
 package Juegos;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 /**
  *
@@ -60,24 +57,6 @@ public class Ficha {
     //METODOS
     //================================================================================
     
-    //METODO RANDOM PARA OBTER ITEM DE UNA LISTA
-    static Random rand = new Random();    
-    static <T> T getRandomItem(List<T> list) {
-        return list.get(rand.nextInt(list.size()));
-    }
     
-    //OBTENER UNA FICHA RANDOM
-    static Ficha ObtenerFichaRandom(Partida p) {
-        //preguntar al profesor como hacer el random
-        
-        //CREO UNA MANO
-        //Mano unaM = new Mano();
-        //CREO LISTA CON LA LISTA DEL MAZO
-        ArrayList<Ficha> lista = p.GetUltimaMano().getFichasMazo();
-        //OBTIENE UNA FICHA RANDOM
-        Ficha fichaRandom = getRandomItem(lista);
-        
-        return fichaRandom;
-    }
     
 }

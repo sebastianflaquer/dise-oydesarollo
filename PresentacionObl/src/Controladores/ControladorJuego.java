@@ -46,7 +46,7 @@ public class ControladorJuego implements ActionListener, Observer {
                 this.vistaMesa = new Mesa();
                 vistaMesa.setVisible(true);
                 vistaMesa.CargarDatosDelJugador(unUsu);
-                vistaMesa.CargarFichasDelJugador();
+                //vistaMesa.CargarFichasDelJugador();
                 //vistaMesa.SetNombreUsuario(unUsu.getNomCompleto());
             }
             else
@@ -56,7 +56,7 @@ public class ControladorJuego implements ActionListener, Observer {
         }        
         else if(e.getActionCommand().equals("AddFicha"))
         {
-            partida.AddFichaJugador(partida.GetTurnoActual());
+            partida.AddFichaJugador(partida.GetUltimaMano());
         }
     }
 

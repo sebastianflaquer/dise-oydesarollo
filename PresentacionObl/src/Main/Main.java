@@ -62,8 +62,8 @@ public class Main {
         //p.setJugador2(jugador2);
         s.agregarPartida(p);
         //Sistema s = Sistema.GetInstancia();
-        
-        //AGREGA LAS FICHAS MEDIANTE UN FOR
+        p.InicialPartida();
+        //AGREGA LAS FICHAS AL MAZO
         int contador = 0;
         for(int l=0; l<= 6; l++){
             int r = l;

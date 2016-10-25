@@ -7,12 +7,7 @@ package Vistas;
 
 import Controladores.ControladorJuego;
 import Controladores.IMesa;
-import Juegos.Ficha;
-import Juegos.Mano;
-import Juegos.Partida;
 import Usuarios.Usuario;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JButton;
 
 /**
@@ -261,43 +256,44 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         //this.LblApuestaActual.setText()        
     }
 
-    @Override
-    public void CargarFichasDelJugador(){
-        
-        //CREA UNA NUEVA PARTIDA
-        Partida nuevaP = new Partida();
-        
-        //BUSCA LA ULTIMA MANO PARA OBETER LA LISTA DE FICHAS
-        ArrayList<Mano> ListaManos = nuevaP.getManos();
-        
-        //si ya exsiten manos acualiza la cantidad de fichas
-        if(ListaManos.get(ListaManos.size() -1) != null){
-            Mano manoActual = ListaManos.get(ListaManos.size() -1);
-        }else{
-            //si no hay manos, crea la primera y reparte las fichas
-            nuevaP.repartirFichasIniciales(nuevaP);
-        }
-        
-        //OBTIENE LA LISTA DE FICHAS DEL JUGADOR UNO
-        ArrayList<Ficha> Ljug1 = nuevaP.GetUltimaMano().getFichasJ1();
-        ArrayList<Ficha> Ljug2 = nuevaP.GetUltimaMano().getFichasJ2();
-        
-        //AGREGA LAS FICHAS DINAMICAMENTES
-        //ACA HAY QUE CARGAR LAS 7 FICHAS INICIALES DE CADA JUGADOR
-        for( int i = 0; i >= Ljug1.size(); i++){
-            Ficha unaF = Ljug1.get(i);
-            int val1 = unaF.getValor1();
-            int val2 = unaF.getValor2();            
-            this.fichasJugadorPanel.add(new JButton(Integer.toString(val1) + "-" + Integer.toString(val2)));
-            validate();
-        }
+    
+    
+    
+//    @Override
+//    public void CargarFichasDelJugador(){
+//        
+//        //CREA UNA NUEVA PARTIDA
+//        Partida nuevaP = new Partida();
+//        
+//        //BUSCA LA ULTIMA MANO PARA OBETER LA LISTA DE FICHAS
+//        ArrayList<Mano> ListaManos = nuevaP.getManos();
+//        
+//        //si ya exsiten manos acualiza la cantidad de fichas
+//        if(ListaManos.get(ListaManos.size() -1) != null){
+//            Mano manoActual = ListaManos.get(ListaManos.size() -1);
+//        }else{
+//            //si no hay manos, crea la primera y reparte las fichas
+//            nuevaP.repartirFichasIniciales(nuevaP);
+//        }
+//        
+//        //OBTIENE LA LISTA DE FICHAS DEL JUGADOR UNO
+//        ArrayList<Ficha> Ljug1 = nuevaP.GetUltimaMano().getFichasJ1();
+//        ArrayList<Ficha> Ljug2 = nuevaP.GetUltimaMano().getFichasJ2();
+//        
+//        //AGREGA LAS FICHAS DINAMICAMENTES
+//        //ACA HAY QUE CARGAR LAS 7 FICHAS INICIALES DE CADA JUGADOR
+//        for( int i = 0; i >= Ljug1.size(); i++){
+//            Ficha unaF = Ljug1.get(i);
+//            int val1 = unaF.getValor1();
+//            int val2 = unaF.getValor2();            
+//            this.fichasJugadorPanel.add(new JButton(Integer.toString(val1) + "-" + Integer.toString(val2)));
+//            validate();
+//        }
+//    }
+    
+    
         
     }
 
     
-    
-
-
- 
-    
-}
+   

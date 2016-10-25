@@ -120,7 +120,6 @@ public class Partida extends Observable{
         //cambiarestado        
         //crear mano y agregar a la lista
         Mano primeraMano = new Mano();
-        
         //repartir ficha a los jugadores
         primeraMano.repartirFichasAJugadores();
     }
@@ -140,11 +139,19 @@ public class Partida extends Observable{
     }
     
     //ROBAR UNA FICHA DEL MAZO
-    public void AddFichaJugador(Jugador j)
+    public void AddFichaJugador(Mano m)
     {
-         Ficha nueva = Ficha.ObtenerFichaRandom();
-         Mano actual = new Mano();
-         actual.getFichasJ1().add(nueva);
+         Ficha nueva = m.ObtenerFichaRandom();
+         Jugador j= this.GetTurnoActual();
+         if(j.equals(this.jugador1))
+         {
+             m.getFichasJ1().add(nueva);
+         }
+         else
+         {
+             m.getFichasJ2().add(nueva);
+         }
+
     }
     
     //OBTIENE EL TURNO ACTUAL
@@ -157,19 +164,12 @@ public class Partida extends Observable{
     public void agregarFicha(Ficha f) {
         if (f != null)
         {
-            fichas.add(f);
+            Mano m = new Mano();
+            m.getFichasMazo().add(f);
         }
     }
     
-    //CREA UNA NUEVA MANO Y REPARTE LAS FICHAS
-    public void repartirFichasIniciales(Partida p) {
-        
-        //Mano unaM = new Mano();
-        p.GetUltimaMano().repartirFichasAJugadores();
-        this.manos.add(p.GetUltimaMano());
-        
-    }
-    
+  
     //TRAE LA ULTIMA MANO
     public Mano GetUltimaMano()
     {
@@ -180,13 +180,6 @@ public class Partida extends Observable{
         return unaM;
     }
     
-    //INICIAR PARTIDA
-//    public void InicialPartida()
-//    {
-//        Mano primera = new Mano();
-//        primera.repartirFichasAJugadores();
-//        
-//    }
 
     
     

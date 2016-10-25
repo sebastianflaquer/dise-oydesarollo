@@ -5,8 +5,9 @@
  */
 package Juegos;
 
-import static Juegos.Ficha.ObtenerFichaRandom;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -82,13 +83,6 @@ public class Mano {
     //REPARTIR FICHAS A LOS JUGADORES
     
     
-    
-    
-    
-    
-    
-    
-    
     public void repartirFichasAJugadores(){
         
         //Cargo lista fichas jugador 1
@@ -118,5 +112,24 @@ public class Mano {
     }
 
     
+    
+    
+    
+    //METODO RANDOM PARA OBTER ITEM DE UNA LISTA
+    static Random rand = new Random();    
+    static <T> T getRandomItem(List<T> list) {
+        return list.get(rand.nextInt(list.size()));
+    }
+    
+    //OBTENER UNA FICHA RANDOM
+    public Ficha ObtenerFichaRandom() {
+        //preguntar al profesor como hacer el random
+        
+        //OBTIENE UNA FICHA RANDOM
+        Ficha fichaRandom;
+        fichaRandom = getRandomItem(this.fichasMazo);
+        
+        return fichaRandom;
+    }
     
 }
