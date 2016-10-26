@@ -55,9 +55,13 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         jPanel4 = new javax.swing.JPanel();
         btnMasFicha = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
         fichasJugadorPanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         lblFichasJ2 = new javax.swing.JLabel();
+        btnMasFicha2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        fichasJugador2Panel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         lblNombreJ2 = new javax.swing.JLabel();
@@ -135,7 +139,10 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         jLabel4.setText("Mis Fichas:");
 
         fichasJugadorPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        fichasJugadorPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEADING, 1, 1));
+        java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.LEFT);
+        flowLayout1.setAlignOnBaseline(true);
+        fichasJugadorPanel.setLayout(flowLayout1);
+        jScrollPane2.setViewportView(fichasJugadorPanel);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -143,15 +150,15 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(fichasJugadorPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(126, 126, 126))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnMasFicha)
-                        .addContainerGap())))
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 395, Short.MAX_VALUE)
+                .addComponent(btnMasFicha)
+                .addContainerGap())
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,14 +167,25 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(btnMasFicha))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(fichasJugadorPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(88, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                    .addContainerGap(39, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lblFichasJ2.setText("Fichas J2:");
+
+        btnMasFicha2.setText("+ 1");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, btnMasFicha2, org.jdesktop.beansbinding.ELProperty.create("ADDFICHA2"), btnMasFicha2, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
+
+        fichasJugador2Panel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jScrollPane1.setViewportView(fichasJugador2Panel);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -175,15 +193,24 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblFichasJ2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(lblFichasJ2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnMasFicha2))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblFichasJ2)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFichasJ2)
+                    .addComponent(btnMasFicha2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -297,7 +324,9 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LblNombre;
     private javax.swing.JButton btnMasFicha;
+    private javax.swing.JButton btnMasFicha2;
     private javax.swing.JPanel fichasJuegoPanel;
+    private javax.swing.JPanel fichasJugador2Panel;
     private javax.swing.JPanel fichasJugadorPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -311,6 +340,8 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPaneFichasJuego;
     private javax.swing.JLabel lblApuestaActual;
     private javax.swing.JLabel lblFichasJ2;
@@ -342,6 +373,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     public void setControlador(ControladorJuego c) {
         // this.jbtnLogin.addActionListener(c);
         this.btnMasFicha.addActionListener(c);
+        this.btnMasFicha2.addActionListener(c);
     }
 
     @Override
@@ -350,22 +382,33 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         //get nombre de usuario
         if(unUsu.getNomCompleto() != null){
             this.LblNombre.setText(unUsu.getNomCompleto());
+            this.lblSaldo.setText(Double.toString(unUsu.getTipo().getSaldo()));
         }else{
             this.LblNombre.setText("trajo null");
         }
         
+        //JUGADOR 2
+        this.lblNombreJ2.setText(unUsu.getNomCompleto());
+        this.lblSaldoJ2.setText(Double.toString(unUsu.getTipo().getSaldo()));
         
     
     }
-
+    
+    public void removeAllMesa(){
+        this.fichasJugadorPanel.removeAll();
+    }
+    public void removeAllMesa2(){
+        this.fichasJugador2Panel.removeAll();
+    }
     
     @Override
-    public void CargarFichasDelJugador(int val1, int val2){
-        //        
+    public void CargarFichasDelJugador(int val1, int val2, ControladorJuego c){
+        
         //ImageIcon icon = new ImageIcon(Integer.toString(val1) + "-" + Integer.toString(val2) + ".jpg");
         //btnTest.setIcon(icon);
         //Check this
         
+        ImageIcon image = new ImageIcon("D:/resources/"+val1+"-"+val2+".jpg");
         //ImageIcon image = new ImageIcon("D:/resources/1-0.jpg");
         //JButton button = new JButton();
         //button.setIcon(image);
@@ -377,7 +420,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         //one.setPreferredSize( new Dimension(78, 76));
         //one.addActionListener(myButtonHandler);
         
-        ImageIcon image = new ImageIcon("/images/"+val1+"-"+val2+".jpg");
+        //ImageIcon image = new ImageIcon("/images/"+val1+"-"+val2+".jpg");
         //ImageIcon image = new ImageIcon(this.getClass().getResource("/images/"+val1+"-"+val2+".jpg"));
         
         //ImageIcon image = new ImageIcon(getClass().getResource("/"+val1+"-"+val2+".jpg"));
@@ -386,11 +429,45 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         btn.setPreferredSize( new Dimension(74, 38));
         btn.setBackground(Color.white);
         btn.setContentAreaFilled(false);
+        btn.setActionCommand(val1+"-"+val2);
+        btn.addActionListener(c);
         //btn.addActionListener((ActionListener) this);
         this.fichasJugadorPanel.add(val1+"-"+val2,btn);
         validate();
+    }
+
+    @Override
+    public void CargarFichasDelJugador2(int val1, int val2, ControladorJuego c){
+        //        
+        //ImageIcon icon = new ImageIcon(Integer.toString(val1) + "-" + Integer.toString(val2) + ".jpg");
+        //btnTest.setIcon(icon);
+        //Check this
         
+        ImageIcon image = new ImageIcon("D:/resources/"+val1+"-"+val2+".jpg");
+        //ImageIcon image = new ImageIcon("D:/resources/1-0.jpg");
+        //JButton button = new JButton();
+        //button.setIcon(image);
+        //JPanel panel = new JPanel();
+        //panel.add(button);
+        //setContentPane(panel);      
         
+        //one = new JButton("one",imageForOne);
+        //one.setPreferredSize( new Dimension(78, 76));
+        //one.addActionListener(myButtonHandler);
+        
+        //ImageIcon image = new ImageIcon("/images/"+val1+"-"+val2+".jpg");
+        //ImageIcon image = new ImageIcon(this.getClass().getResource("/images/"+val1+"-"+val2+".jpg"));
+        
+        //ImageIcon image = new ImageIcon(getClass().getResource("/"+val1+"-"+val2+".jpg"));
+        
+        JButton btn = new JButton(image);
+        btn.setPreferredSize( new Dimension(74, 38));
+        btn.setBackground(Color.white);
+        btn.setContentAreaFilled(false);
+        btn.setActionCommand(val1+"-"+val2);
+        btn.addActionListener(c);
+        this.fichasJugador2Panel.add(val1+"-"+val2,btn);
+        validate();
     }    
 //      
     
@@ -408,6 +485,22 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
 //            
 //            
 //        }
+    
+    
+    @Override
+    public void CargarFichasAlTablero(int val1, int val2, ControladorJuego c)
+    {
+        ImageIcon image = new ImageIcon("D:/resources/"+val1+"-"+val2+".jpg");
+      
+        JButton btn = new JButton(image);
+        btn.setPreferredSize( new Dimension(74, 38));
+        btn.setBackground(Color.white);
+        btn.setContentAreaFilled(false);
+        btn.setActionCommand(val1+"-"+val2);
+        btn.addActionListener(c);
+        this.fichasJuegoPanel.add(val1+"-"+val2,btn);
+        validate();
+    }
     
     
     

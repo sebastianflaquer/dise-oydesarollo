@@ -51,7 +51,7 @@ public class Ficha {
         this.valor1 = valor1;
         this.valor2 = valor2;
     }
-    private Ficha(){}
+    public Ficha(){}
     
     //================================================================================
     //METODOS

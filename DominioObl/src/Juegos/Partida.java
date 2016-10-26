@@ -125,8 +125,7 @@ public class Partida extends Observable{
         //crear mano y agregar a la lista
         Mano primeraMano = GetUltimaMano();
         //repartir ficha a los jugadores
-        primeraMano.repartirFichasAJugadores();
-        
+        primeraMano.repartirFichasAJugadores();      
         
         
     }    
@@ -146,15 +145,38 @@ public class Partida extends Observable{
     public void AddFichaJugador(Mano m)
     {
         Ficha nueva = m.ObtenerFichaRandom();
-        Jugador j= this.GetTurnoActual();
-        if(j.equals(this.jugador1))
+        //Jugador j= this.GetTurnoActual();
+        //if(j.equals(this.jugador1))
+        //{
+        if(m.getFichasJ1().size() + m.getFichasJ2().size() < 28)
         {
             m.getFichasJ1().add(nueva);
         }
-        else
+        //}
+        //else
+        //{
+            //m.getFichasJ2().add(nueva);
+        //}
+    }
+    
+    
+    
+    //ROBAR UNA FICHA DEL MAZO
+    public void AddFichaJugador2(Mano m)
+    {
+        Ficha nueva = m.ObtenerFichaRandom();
+        //Jugador j= this.GetTurnoActual();
+        //if(j.equals(this.jugador1))
+        //{
+        if(m.getFichasJ1().size() + m.getFichasJ2().size() < 28)
         {
             m.getFichasJ2().add(nueva);
         }
+        //}
+        //else
+        //{
+            //m.getFichasJ2().add(nueva);
+        //}
     }
     
     //OBTIENE EL TURNO ACTUAL
@@ -203,6 +225,36 @@ public class Partida extends Observable{
 
         //si en ambos pregunta
         //si en ninguno tira error.
+        
+    }
+    
+    //AGREGAR FICHA A LA JUGADA,
+    //CREA MOVIMIENTO,
+    //SUMA A LA LISTA DE FICHAS EN MESA,
+    //ELIMINA DE L MANO, RECARGAR
+    public void agregarFichaAJugada(String nombreficha) {
+        
+        //HACE SPLIT PARA SEPARAR LOS VALORES       
+        String string = nombreficha;
+        String[] parts = string.split("-");
+        String val1 = parts[0];
+        String val2 = parts[1];
+        
+        Ficha unaF = new Ficha();
+        unaF.setValor1( Integer.parseInt(val1));
+        unaF.setValor1( Integer.parseInt(val2));   
+        
+        AddFichasJugadas(unaF);
+        
+        
+       
+        
+    }
+    
+    public void AddFichasJugadas(Ficha f)
+    {
+        Mano m = GetUltimaMano();
+        m.getFichasJugadas().add(f);
         
     }
 

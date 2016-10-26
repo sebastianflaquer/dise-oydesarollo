@@ -114,18 +114,15 @@ public class Mano {
     
     //OBTENER UNA FICHA RANDOM
     public Ficha ObtenerFichaRandom() {
-        //preguntar al profesor como hacer el random
-        
         //OBTIENE UNA FICHA RANDOM
         Ficha fichaRandom;
         fichaRandom = getRandomItem(this.fichasMazo);
-        
+        this.fichasMazo.remove(fichaRandom);
         return fichaRandom;
     }
     
     
     public void CargarValorFichas(){
-        
 //        //AGREGA LAS FICHAS DINAMICAMENTES
 //        for( int i = 0; i >= this.size(); i++){
 //            Ficha unaF = Ljug1.get(i);

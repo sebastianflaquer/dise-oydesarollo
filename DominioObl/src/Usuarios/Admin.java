@@ -22,6 +22,11 @@ public class Admin implements ITipo {
     public boolean puedoJugar() {
         return false;
     }
+
+    @Override
+    public double getSaldo() {
+        return -1;
+    }
     
    
     
