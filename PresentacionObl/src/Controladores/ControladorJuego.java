@@ -5,6 +5,7 @@
  */
 package Controladores;
 
+import Fachada.Sistema;
 import Juegos.Ficha;
 import Juegos.Partida;
 import Usuarios.Usuario;
@@ -48,6 +49,10 @@ public class ControladorJuego implements ActionListener, Observer {
                 
                 this.vistaMesa = new Mesa();
                 vistaMesa.setVisible(true);
+                
+                
+                
+                
                 vistaMesa.CargarDatosDelJugador(unUsu);
                 
                 //AGREGA LAS FICHAS DE CADA JUGADOR A LA MESA

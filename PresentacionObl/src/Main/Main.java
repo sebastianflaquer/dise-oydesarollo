@@ -47,6 +47,7 @@ public class Main {
 //      vista.setControlador(control);
 
         ILogin vista = (ILogin) new Login();
+
         ControladorJuego cont = new ControladorJuego(vista,p);
         vista.inicializar();
         vista.setControlador(cont);

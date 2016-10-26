@@ -23,4 +23,6 @@ public class Admin implements ITipo {
         return false;
     }
     
+   
+    
 }
