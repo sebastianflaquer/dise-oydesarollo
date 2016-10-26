@@ -149,19 +149,19 @@ public class Partida extends Observable{
     }
     
     //ROBAR UNA FICHA DEL MAZO
-    public void AddFichaJugador(Mano m){
-        Ficha nueva = m.ObtenerFichaRandom();
+    public void AddFichaJugador(Mano m){        
         if(m.getFichasJ1().size() + m.getFichasJ2().size() + m.getFichasJugadas().size() < 28)
         {
+            Ficha nueva = m.ObtenerFichaRandom();
             m.getFichasJ1().add(nueva);
         }
     }
     
     //ROBAR UNA FICHA DEL MAZO
     public void AddFichaJugador2(Mano m){
-        Ficha nueva = m.ObtenerFichaRandom();
         if(m.getFichasJ1().size() + m.getFichasJ2().size() + m.getFichasJugadas().size() < 28 )
         {
+            Ficha nueva = m.ObtenerFichaRandom();
             m.getFichasJ2().add(nueva);
         }
     }
@@ -206,12 +206,6 @@ public class Partida extends Observable{
         
     }
     
-    //AGREGA LA FICHA A LA LISTA DE JUGADAS
-    public void AddFichasJugadas(Ficha f){
-        Mano m = GetUltimaMano();
-        m.getFichasJugadas().add(f);
-    }
-    
     //ELIMINA LA FICHA JUGADA DE LA LISTA DEL JUGADOR
     public void RemoveListaJugador(Ficha f){
         Mano m = GetUltimaMano();
@@ -232,7 +226,49 @@ public class Partida extends Observable{
             }
             this.turnoActual = 1;
         }
+        
     }
+    
+    //AGREGA LA FICHA A LA LISTA DE JUGADAS
+    public void AddFichasJugadas(Ficha f){
+        Mano m = GetUltimaMano();
+        String lugar = validarSiPuedeDescartar(f,m);
+        
+        if(lugar == "start"){
+            m.getFichasJugadas().add(0,f);
+        }
+        else if(lugar == "end" || m.getFichasJugadas().isEmpty()){
+            m.getFichasJugadas().add(f);
+        }
+    }
+    
+    public String validarSiPuedeDescartar(Ficha f, Mano m)
+    {
+        String lugar = "";
+        
+        if(m.getFichasJugadas().size() > 0)
+        {
+            Ficha primera = m.getFichasJugadas().get(0);
+            Ficha ultima =  m.getFichasJugadas().get(m.getFichasJugadas().size()-1);
+            
+            if(primera.getValor1() == f.getValor1() || primera.getValor1() == f.getValor2())
+            {
+                lugar = "start";
+            }
+            else if(ultima.getValor2() == f.getValor1() || ultima.getValor1() == f.getValor2())
+            {
+                lugar = "end";
+            }
+            else
+            {
+                lugar = "no";
+            }
+        }
+        return lugar;
+    }
+        
+        
+    
 
 
     
