@@ -7,8 +7,6 @@ package Usuarios;
 
 import Fachada.Sistema;
 
-
-
 public class Usuario {
     
     //ATRIBUTOS
@@ -16,8 +14,7 @@ public class Usuario {
     private ITipo tipo;
     private String password;
     private String nomCompleto;
-    
-    
+      
     
     //GETTERS
     public String getNombre() {
@@ -60,9 +57,7 @@ public class Usuario {
         this.password = password;
         this.nomCompleto = nomCompleto;
     }
-    public Usuario() {
-        
-    }
+    public Usuario(){}
     
     // VALIDAR USUARIO
     public Usuario ValidarUsuario(String nombre, String password){
@@ -84,7 +79,4 @@ public class Usuario {
         }
         return unUsu;
     }
-    
-    
-    
 }

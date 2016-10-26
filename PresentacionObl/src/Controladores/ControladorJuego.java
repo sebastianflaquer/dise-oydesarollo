@@ -39,12 +39,9 @@ public class ControladorJuego implements ActionListener, Observer {
             //VALIDAR Y CARGAR USUARIO            
             Usuario unUsu = new Usuario();
             unUsu = unUsu.ValidarUsuario(vistaLogin.getUsuario(), vistaLogin.getContrasena());
-            //boolean esValido = unUsu.ValidarUsuario(vistaLogin.getUsuario(), vistaLogin.getContrasena());
             
             if(unUsu.getNombre() != null )
             {
-                //unUsu.setNombre(vistaLogin.getUsuario());
-                //vistaLogin.SetErrorMsj("");
                 this.vistaLogin.setVisible(false);
                 
                 this.vistaMesa = new Mesa();
@@ -114,17 +111,13 @@ public class ControladorJuego implements ActionListener, Observer {
         }
     }
     
-    public void agregaFichasTablero()
-    { 
+    public void agregaFichasTablero(){ 
         ArrayList<Ficha> listaFJ = partida.GetUltimaMano().getFichasJugadas();
         for(int i = 0; i< listaFJ.size(); i++){
             int val1 = listaFJ.get(i).getValor1();
             int val2 = listaFJ.get(i).getValor2();
             vistaMesa.CargarFichasAlTablero(val1, val2, this);
-    }
-    
-    
-    
+        }
     }
 
     @Override

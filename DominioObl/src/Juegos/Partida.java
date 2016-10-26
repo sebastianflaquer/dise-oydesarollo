@@ -29,12 +29,6 @@ public class Partida extends Observable{
     private ArrayList<Mano> manos = new ArrayList<Mano>();
     private int turnoActual;
     //private ArrayList<Ficha> fichas = new ArrayList<Ficha>();
-
-    
-
-    
-    
-    
     
     private static Partida instancia;
     public static Partida GetInstancia()
@@ -112,34 +106,27 @@ public class Partida extends Observable{
         this.jugador2 = null;
         this.estado = "Sin Iniciar";
         this.manos = new ArrayList<Mano>();
-        this.turnoActual = 1;
+        this.turnoActual = 0;
     }
     
     //================================================================================
     //METODOS
     //================================================================================
     
-    public void agregarMano(Mano m)
-    {
-        if(m != null)
-        {
+    public void agregarMano(Mano m){
+        if(m != null){
             this.manos.add(m);
         }
     }
     
-    public void cambiarTurno()
-    {
-        if(this.turnoActual == 1)
+    public void cambiarTurno(){
+        if(this.turnoActual == 1 || this.turnoActual == 0)
             this.turnoActual = 2;
-        else { this.turnoActual = 1;}
-            
-    }
-    
-    
+        else { this.turnoActual = 1;}            
+    }   
     
     //INICIAR PARTIDA
-    public void InicialPartida()
-    {
+    public void InicialPartida(){
         //cargar jugadores        
         //cambiarestado        
         //crear mano y agregar a la lista
@@ -162,47 +149,21 @@ public class Partida extends Observable{
     }
     
     //ROBAR UNA FICHA DEL MAZO
-    public void AddFichaJugador(Mano m)
-    {
+    public void AddFichaJugador(Mano m){
         Ficha nueva = m.ObtenerFichaRandom();
-        //Jugador j= this.GetTurnoActual();
-        //if(j.equals(this.jugador1))
-        //{
-        if(m.getFichasJ1().size() + m.getFichasJ2().size() < 28)
+        if(m.getFichasJ1().size() + m.getFichasJ2().size() + m.getFichasJugadas().size() < 28)
         {
             m.getFichasJ1().add(nueva);
         }
-        //}
-        //else
-        //{
-            //m.getFichasJ2().add(nueva);
-        //}
     }
     
-    
-    
     //ROBAR UNA FICHA DEL MAZO
-    public void AddFichaJugador2(Mano m)
-    {
+    public void AddFichaJugador2(Mano m){
         Ficha nueva = m.ObtenerFichaRandom();
-        //Jugador j= this.GetTurnoActual();
-        //if(j.equals(this.jugador1))
-        //{
-        if(m.getFichasJ1().size() + m.getFichasJ2().size() < 28)
+        if(m.getFichasJ1().size() + m.getFichasJ2().size() + m.getFichasJugadas().size() < 28 )
         {
             m.getFichasJ2().add(nueva);
         }
-        //}
-        //else
-        //{
-            //m.getFichasJ2().add(nueva);
-        //}
-    }
-    
-    //OBTIENE EL TURNO ACTUAL
-    public Jugador GetTurnoActual()
-    {
-        return this.getJugador1();
     }
     
     //AGREGA FICHAS A LA LISTA DE FICHAS
@@ -213,45 +174,15 @@ public class Partida extends Observable{
             m.getFichasMazo().add(f);
         }
     }
-    
   
     //TRAE LA ULTIMA MANO
-    public Mano GetUltimaMano()
-    {
+    public Mano GetUltimaMano(){
         Mano unaM = new Mano();
         unaM = this.manos.get(this.manos.size() -1);
-        //FALTA ARMAR, HAY QUE RECORRER LA LISTA Y TRAER LA ULTIMA
-        
         return unaM;
     }
-
-    //ACTUALIZA TODOS LOS DATOS DE LAS MESAS
-    public void actualizarMesa() {        
-    }
-
-    //ingresarMovimiento
-    public void ingresarMovimiento() {
-        //Validar si la ficha se puede poner en la lista de fichas jugadas
-        //validarMovimiento();    
-        
-    }
-
-    private void validarMovimiento(Ficha f) {
-        
-        //se fija en el listado de fichasen juego puede poner la ficha al principio, al final, en ambos lugares o en ninguno
-        //Si al principio o final lo agrega (llama a una funcion que la agrega)
-        //.actualizarFichasMazo();
-        
-
-        //si en ambos pregunta
-        //si en ninguno tira error.
-        
-    }
     
-    //AGREGAR FICHA A LA JUGADA,
-    //CREA MOVIMIENTO,
-    //SUMA A LA LISTA DE FICHAS EN MESA,
-    //ELIMINA DE LA MANO, RECARGAR
+    //AGREGA LA FICHA A LA JUGADA Y LA REMUEVE DEL LISTADO DEL JUGADOR
     public void agregarFichaAJugada(String nombreficha) {
         
         //HACE SPLIT PARA SEPARAR LOS VALORES       
@@ -275,18 +206,16 @@ public class Partida extends Observable{
         
     }
     
-    public void AddFichasJugadas(Ficha f)
-    {
+    //AGREGA LA FICHA A LA LISTA DE JUGADAS
+    public void AddFichasJugadas(Ficha f){
         Mano m = GetUltimaMano();
         m.getFichasJugadas().add(f);
-        
     }
     
-    public void RemoveListaJugador(Ficha f)
-    {
+    //ELIMINA LA FICHA JUGADA DE LA LISTA DEL JUGADOR
+    public void RemoveListaJugador(Ficha f){
         Mano m = GetUltimaMano();
-        if (this.turnoActual == 1)
-        {
+        if (this.turnoActual == 1 || this.turnoActual == 0){
             //ArrayList listaFichasJ1            
             for(int i = 0; i< m.getFichasJ1().size(); i++){
                 if(m.getFichasJ1().get(i).getId() == f.getId()){
@@ -294,9 +223,7 @@ public class Partida extends Observable{
                 }
             }
             this.turnoActual = 2;
-        }
-        else
-        {
+        }else{
             //ArrayList listaFichasJ1            
             for(int i = 0; i< m.getFichasJ2().size(); i++){
                 if(m.getFichasJ2().get(i).getId() == f.getId()){

@@ -27,24 +27,14 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
         
         cargarUsuarios();
         
         Sistema s = Sistema.GetInstancia();
-        //Partida p = Partida.GetInstancia();
         Partida p = new Partida();
-        //p.setJugador1(jugador1);
-        //p.setJugador2(jugador2);
         s.agregarPartida(p);
         
         cargarFichas(p);
-
-//      ILogin vista = (ILogin) new Login();
-//      ControladorSistema control = new ControladorSistema(vista);
-
-//      vista.inicializar();
-//      vista.setControlador(control);
 
         ILogin vista = (ILogin) new Login();
 
@@ -72,8 +62,7 @@ public class Main {
         p.agregarMano(m);
         
         //AGREGA LAS FICHAS AL MAZO
-        String conts = "";
-        
+        String conts = "";        
         for(int l=0; l<= 6; l++){
             int r = l;
             for(r = l; r <= 6; r++){
@@ -82,47 +71,8 @@ public class Main {
                 p.agregarFicha(new Ficha( intCont, l, r));
             }
         }
-        
+        //INICIA LA PARTIDA 
         p.InicialPartida();
         
-          //0
-//        p.agregarFicha(new Ficha( 1, 0, 0));
-//        p.agregarFicha(new Ficha( 1, 0, 1));
-//        p.agregarFicha(new Ficha( 1, 0, 2));
-//        p.agregarFicha(new Ficha( 1, 0, 3));
-//        p.agregarFicha(new Ficha( 1, 0, 4));
-//        p.agregarFicha(new Ficha( 1, 0, 5));
-//        p.agregarFicha(new Ficha( 1, 0, 6));
-          //1
-//        p.agregarFicha(new Ficha( 1, 1, 1));
-//        p.agregarFicha(new Ficha( 1, 1, 2));
-//        p.agregarFicha(new Ficha( 1, 1, 3));
-//        p.agregarFicha(new Ficha( 1, 1, 4));
-//        p.agregarFicha(new Ficha( 1, 1, 5));
-//        p.agregarFicha(new Ficha( 1, 1, 6));
-          //2
-//        p.agregarFicha(new Ficha( 1, 2, 2));
-//        p.agregarFicha(new Ficha( 1, 2, 3));
-//        p.agregarFicha(new Ficha( 1, 2, 4));
-//        p.agregarFicha(new Ficha( 1, 2, 5));
-//        p.agregarFicha(new Ficha( 1, 2, 6));
-          //3
-//        p.agregarFicha(new Ficha( 1, 3, 3));
-//        p.agregarFicha(new Ficha( 1, 3, 4));
-//        p.agregarFicha(new Ficha( 1, 3, 5));
-//        p.agregarFicha(new Ficha( 1, 3, 6));
-          //4
-//        p.agregarFicha(new Ficha( 1, 4, 4));
-//        p.agregarFicha(new Ficha( 1, 4, 5));
-//        p.agregarFicha(new Ficha( 1, 4, 6));
-          //5
-//        p.agregarFicha(new Ficha( 1, 5, 5));
-//        p.agregarFicha(new Ficha( 1, 5, 6));
-          //6 
-//        p.agregarFicha(new Ficha( 1, 6, 6));
-        
     }
-    
-    
-    
 }

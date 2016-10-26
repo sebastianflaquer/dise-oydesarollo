@@ -355,15 +355,11 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
 
     @Override
     public void inicializar() {
-        //Mesa uno = new Mesa();
-        //uno.jPanel1.setVisible(true);
-        //uno.initComponents();
         setVisible(true);
     }
 
     @Override
     public void SetErrorMsj(String mensaje) {
-        //this.lblErorMsj.setText(mensaje);
     }
     
     @Override
@@ -373,7 +369,6 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
 
     @Override
     public void setControlador(ControladorJuego c) {
-        // this.jbtnLogin.addActionListener(c);
         this.btnMasFicha.addActionListener(c);
         this.btnMasFicha2.addActionListener(c);
     }
@@ -392,30 +387,28 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         //JUGADOR 2
         this.lblNombreJ2.setText(unUsu.getNomCompleto());
         this.lblSaldoJ2.setText(Double.toString(unUsu.getTipo().getSaldo()));
-        
-    
     }
     
     @Override
+    //ELIMINA LOS BOTONES DE LA MESA 1
     public void removeAllMesa(){
         this.fichasJugadorPanel.removeAll();
     }
     @Override
+    //ELIMINA LOS BOTONES DE LA MESA 2
     public void removeAllMesa2(){
         this.fichasJugador2Panel.removeAll();
     }
     
     @Override
-    public void removeAllTablero()
-    {
+    //ELIMINA LOS BOTONES DEL TABLERO
+    public void removeAllTablero(){
         this.fichasJuegoPanel.removeAll(); 
     }
     
-    
-    
     @Override
-    public void CargarFichasDelJugador(int val1, int val2, ControladorJuego c){
-        
+    //CARGA LAS FICHAS DEL JUGAROR
+    public void CargarFichasDelJugador(int val1, int val2, ControladorJuego c){       
         
         ImageIcon image = new ImageIcon("D:/resources/"+val1+"-"+val2+".jpg");
         
@@ -425,34 +418,15 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         btn.setContentAreaFilled(false);
         btn.setActionCommand(val1+"-"+val2);
         btn.addActionListener(c);
-        //btn.addActionListener((ActionListener) this);
         this.fichasJugadorPanel.add(val1+"-"+val2,btn);
         validate();
     }
 
     @Override
+    //CARGA LAS FICHAS DEL JUGAROR
     public void CargarFichasDelJugador2(int val1, int val2, ControladorJuego c){
-        //        
-        //ImageIcon icon = new ImageIcon(Integer.toString(val1) + "-" + Integer.toString(val2) + ".jpg");
-        //btnTest.setIcon(icon);
-        //Check this
         
         ImageIcon image = new ImageIcon("D:/resources/"+val1+"-"+val2+".jpg");
-        //ImageIcon image = new ImageIcon("D:/resources/1-0.jpg");
-        //JButton button = new JButton();
-        //button.setIcon(image);
-        //JPanel panel = new JPanel();
-        //panel.add(button);
-        //setContentPane(panel);      
-        
-        //one = new JButton("one",imageForOne);
-        //one.setPreferredSize( new Dimension(78, 76));
-        //one.addActionListener(myButtonHandler);
-        
-        //ImageIcon image = new ImageIcon("/images/"+val1+"-"+val2+".jpg");
-        //ImageIcon image = new ImageIcon(this.getClass().getResource("/images/"+val1+"-"+val2+".jpg"));
-        
-        //ImageIcon image = new ImageIcon(getClass().getResource("/"+val1+"-"+val2+".jpg"));
         
         JButton btn = new JButton(image);
         btn.setPreferredSize( new Dimension(74, 38));
@@ -462,59 +436,31 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         btn.addActionListener(c);
         this.fichasJugador2Panel.add(val1+"-"+val2,btn);
         validate();
-    }    
-//      
-    
-
-    //OBTIENE LA LISTA DE FICHAS DEL JUGADOR UNO
-//        ArrayList<Ficha> Ljug1 = nuevaP.GetUltimaMano().getFichasJ1();
-//        ArrayList<Ficha> Ljug2 = nuevaP.GetUltimaMano().getFichasJ2();
-//        
-//        //AGREGA LAS FICHAS DINAMICAMENTES
-//        //ACA HAY QUE CARGAR LAS 7 FICHAS INICIALES DE CADA JUGADOR
-//        for( int i = 0; i >= Ljug1.size(); i++){
-//            Ficha unaF = Ljug1.get(i);
-//            int val1 = unaF.getValor1();
-//            int val2 = unaF.getValor2();            
-//            
-//            
-//        }
-    
+    }
     
     @Override
-    public void CargarFichasAlTablero(int val1, int val2, ControladorJuego c)
-    {
+    //CARGA FICHAS DEL TABLERO
+    public void CargarFichasAlTablero(int val1, int val2, ControladorJuego c){
         ImageIcon image = new ImageIcon("D:/resources/"+val1+"-"+val2+".jpg");
       
         JButton btn = new JButton(image);
         btn.setPreferredSize( new Dimension(74, 38));
         btn.setBackground(Color.white);
         btn.setContentAreaFilled(false);
-        btn.setActionCommand(val1+"-"+val2);
-        btn.addActionListener(c);
         this.fichasJuegoPanel.add(val1+"-"+val2,btn);
         validate();
     }
-    
-    
+        
     //SEGUN EL TURNO, DESHABILITO EL PANEL DEL JUGADOR
     @Override
-    public void deshabilitarPanelJugador (int turno)
-    {
-        if(turno == 1)
+    public void deshabilitarPanelJugador (int turno){
+        if(turno == 2)
         {
             this.fichasJugadorPanel.setVisible(false);
             this.fichasJugador2Panel.setVisible(true);
-        }
-        else
-        {
+        }else{
             this.fichasJugador2Panel.setVisible(false);
             this.fichasJugadorPanel.setVisible(true);
         }
     }
-    
-        
 }
-
-    
-   
