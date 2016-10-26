@@ -21,6 +21,7 @@ public class Jugador implements ITipo {
     }
     
     //GETTERS
+    @Override
     public double getSaldo() {
         return saldo;
     }

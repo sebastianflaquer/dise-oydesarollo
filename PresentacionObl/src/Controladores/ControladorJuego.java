@@ -54,7 +54,7 @@ public class ControladorJuego implements ActionListener, Observer {
                 
                 
                 vistaMesa.CargarDatosDelJugador(unUsu);
-                
+                vistaMesa.setControlador(this);
                 //AGREGA LAS FICHAS DE CADA JUGADOR A LA MESA
                 agregaFichasMesa();
                 
