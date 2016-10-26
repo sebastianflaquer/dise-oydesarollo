@@ -17,7 +17,7 @@ public class Sistema {
     //ATRIBUTOS
     //================================================================================
     private ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
-    private ArrayList<Partida> partidas = new ArrayList<Partida>();
+    private ArrayList<Partida> partidas = new ArrayList<Partida>();    
     
     private static Sistema instancia;
     

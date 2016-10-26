@@ -34,6 +34,8 @@ public class Main {
         Partida p = new Partida();
         s.agregarPartida(p);
         
+        //p.setJugador1(s.getUsuarios().get(1).getTipo().);
+        
         cargarFichas(p);
 
         ILogin vista = (ILogin) new Login();

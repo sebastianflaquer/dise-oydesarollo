@@ -28,7 +28,11 @@ public class Partida extends Observable{
     private static double apuestaInicial = 100; //apuesta inicial 100
     private ArrayList<Mano> manos = new ArrayList<Mano>();
     private int turnoActual;
+    private double apuestaActual;
     //private ArrayList<Ficha> fichas = new ArrayList<Ficha>();
+
+    
+   
     
     private static Partida instancia;
     public static Partida GetInstancia()
@@ -67,6 +71,9 @@ public class Partida extends Observable{
     public void setTurnoActual(int turnoActual) {
         this.turnoActual = turnoActual;
     }
+    public void setApuestaActual(double apuestaActual) {
+        this.apuestaActual = apuestaActual;
+    }
 
     //================================================================================
     //GETTERS
@@ -96,6 +103,10 @@ public class Partida extends Observable{
     public int getTurnoActual() {
         return turnoActual;
     }
+    public double getApuestaActual() {
+        return apuestaActual;
+    }
+
 
     //================================================================================
     //CONSTRUCTOR
@@ -302,25 +313,4 @@ public class Partida extends Observable{
         }
         return lugar;
     }
-        
-        
-    
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
 }

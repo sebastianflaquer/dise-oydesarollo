@@ -2,6 +2,9 @@ TAREAS:
 
 1- Definir Usuarios
 
+	
+
+
 2- Ingreso
 	A- Mismo jugador no puede ingresar 2 veces al mismo tiempo.
 	B- Si es Admin se despliega otro JPanel diferente al de Usuarios.

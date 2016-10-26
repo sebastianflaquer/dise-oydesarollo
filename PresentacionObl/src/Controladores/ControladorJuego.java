@@ -7,6 +7,7 @@ package Controladores;
 
 import Fachada.Sistema;
 import Juegos.Ficha;
+import Juegos.Mano;
 import Juegos.Partida;
 import Usuarios.Usuario;
 import Vistas.Mesa;
@@ -40,6 +41,7 @@ public class ControladorJuego implements ActionListener, Observer {
             Usuario unUsu = new Usuario();
             unUsu = unUsu.ValidarUsuario(vistaLogin.getUsuario(), vistaLogin.getContrasena());
             
+            
             if(unUsu.getNombre() != null )
             {
                 this.vistaLogin.setVisible(false);
@@ -49,6 +51,8 @@ public class ControladorJuego implements ActionListener, Observer {
                 vistaMesa.deshabilitarPanelJugador(partida.getTurnoActual());
                 
                 vistaMesa.CargarDatosDelJugador(unUsu);
+                
+                vistaMesa.SetApuestaActual(Double.toHexString(partida.getApuestaActual()));
                 vistaMesa.setControlador(this);
                 //AGREGA LAS FICHAS DE CADA JUGADOR A LA MESA
                 agregaFichasMesa();
@@ -66,29 +70,76 @@ public class ControladorJuego implements ActionListener, Observer {
         else if(e.getActionCommand().equals("ADDFICHA")){            
             partida.AddFichaJugador(partida.GetUltimaMano());
             vistaMesa.removeAllMesa();
+            
+            //ME GUARDO LA ULTIMA MANO PARA CREAR UNA NUEVA Y AGREGARLA A LA LISTA
+            Mano nueva = new Mano();
+            nueva.setFichasJ1(partida.GetUltimaMano().getFichasJ1());
+            nueva.setFichasJ2(partida.GetUltimaMano().getFichasJ2());
+            nueva.setFichasJugadas(partida.GetUltimaMano().getFichasJugadas());
+            nueva.setFichasMazo(partida.GetUltimaMano().getFichasMazo());
+            partida.getManos().add(nueva);
+            
+            //AGREGO FICHAS A LA MESA JUGADOR 1
             agregaFichasMesa();
         }
         else if(e.getActionCommand().equals("ADDFICHA2")){            
             partida.AddFichaJugador2(partida.GetUltimaMano());
             vistaMesa.removeAllMesa2();
+            
+            //ME GUARDO LA ULTIMA MANO PARA CREAR UNA NUEVA Y AGREGARLA A LA LISTA
+            Mano nueva = new Mano();
+            nueva.setFichasJ1(partida.GetUltimaMano().getFichasJ1());
+            nueva.setFichasJ2(partida.GetUltimaMano().getFichasJ2());
+            nueva.setFichasJugadas(partida.GetUltimaMano().getFichasJugadas());
+            nueva.setFichasMazo(partida.GetUltimaMano().getFichasMazo());
+            partida.getManos().add(nueva);
+            
+            //AGREGO FICHAS A LA MESA JUGADOR 2
             agregaFichasMesa2();
+        }
+        else if(e.getActionCommand().equals("SubirApuesta"))
+        {
+            if (vistaMesa.GettxtSubirApuesta() != 0)
+            {
+                if(this.partida.getJugador1().getSaldo() > vistaMesa.GettxtSubirApuesta()
+                         && this.partida.getJugador2().getSaldo() > vistaMesa.GettxtSubirApuesta() )
+                {
+                    this.partida.setApuestaActual(vistaMesa.GettxtSubirApuesta());
+                    vistaMesa.SetApuestaActual(Double.toString(vistaMesa.GettxtSubirApuesta()));
+                }
+            }
         }
         //BOTONFICHA
         else if(e.getActionCommand().equals(e.getActionCommand())){            
             //AGREGAR FICHA A FICHAS JUGADAS
             //partida.ingresarMovimiento(e);
             String nombreficha = e.getActionCommand();
+            
+            //ME GUARDO LA ULTIMA MANO PARA CREAR UNA NUEVA Y AGREGARLA A LA LISTA
+            Mano nueva = new Mano();
+            nueva.setFichasJ1(partida.GetUltimaMano().getFichasJ1());
+            nueva.setFichasJ2(partida.GetUltimaMano().getFichasJ2());
+            nueva.setFichasJugadas(partida.GetUltimaMano().getFichasJugadas());
+            nueva.setFichasMazo(partida.GetUltimaMano().getFichasMazo());
+            
+            partida.getManos().add(nueva);
+            
             partida.agregarFichaAJugada(nombreficha);
             vistaMesa.removeAllTablero();
+            
+            //AGREGO FUCHAS A LA MESA DE JUEGO
             agregaFichasTablero();
             
+            
+            //ACTUALIZO
             vistaMesa.deshabilitarPanelJugador(partida.getTurnoActual());
             vistaMesa.removeAllMesa();
             agregaFichasMesa();
             
             vistaMesa.removeAllMesa2();
             agregaFichasMesa2();
-        }        
+        }
+        
     }
 
     //ACTUALIZA LAS FICHAS DE LA MESA DE LOS JUGADORES
@@ -99,8 +150,9 @@ public class ControladorJuego implements ActionListener, Observer {
             int val2 = lfichas.get(i).getValor2();
             vistaMesa.CargarFichasDelJugador(val1, val2, this);
         }
-    }    
+    } 
     
+    //AGREGAR FICHAS A MESA 2
     public void agregaFichasMesa2(){        
         //PARA EL JUGADOR 2
         ArrayList<Ficha> lfichas2 = partida.GetUltimaMano().getFichasJ2();        
@@ -111,6 +163,7 @@ public class ControladorJuego implements ActionListener, Observer {
         }
     }
     
+    //AGREGAR FICHAS A TABLERO
     public void agregaFichasTablero(){ 
         ArrayList<Ficha> listaFJ = partida.GetUltimaMano().getFichasJugadas();
         for(int i = 0; i< listaFJ.size(); i++){

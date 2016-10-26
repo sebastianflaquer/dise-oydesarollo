@@ -12,7 +12,7 @@ package Usuarios;
 public class Jugador implements ITipo {
 
     //ATRIBUTOS
-    private double saldo;
+    private double saldo = 100;
     
     
     //SETTERS

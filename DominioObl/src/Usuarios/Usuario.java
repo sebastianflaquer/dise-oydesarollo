@@ -6,6 +6,7 @@
 package Usuarios;
 
 import Fachada.Sistema;
+import java.util.logging.Logger;
 
 public class Usuario {
     
@@ -14,7 +15,8 @@ public class Usuario {
     private ITipo tipo;
     private String password;
     private String nomCompleto;
-      
+    private boolean logeado = false;
+
     
     //GETTERS
     public String getNombre() {
@@ -31,6 +33,9 @@ public class Usuario {
 
     public String getNomCompleto() {
         return nomCompleto;
+    }
+    public boolean isLogeado() {
+        return logeado;
     }
     
     //SETTERS
@@ -49,6 +54,9 @@ public class Usuario {
     public void setNomCompleto(String nomCompleto) {
         this.nomCompleto = nomCompleto;
     }
+    public void setLogeado(boolean logeado) {
+        this.logeado = logeado;
+    }
         
     //CONSTRUCTOR
     public Usuario(String nombre, ITipo tipo, String password, String nomCompleto) {
@@ -65,12 +73,14 @@ public class Usuario {
         Usuario unUsu = new Usuario();
         boolean ret = false;        
         int i=0;
+        
         while(i < Sistema.GetInstancia().getUsuarios().size() && ret==false)
         {
-            if(Sistema.GetInstancia().getUsuarios().get(i).nombre.equals(nombre) && Sistema.GetInstancia().getUsuarios().get(i).password.equals(password)){
+            if(Sistema.GetInstancia().getUsuarios().get(i).nombre.equals(nombre) && Sistema.GetInstancia().getUsuarios().get(i).password.equals(password) && Sistema.GetInstancia().getUsuarios().get(i).isLogeado() == false){
                 ret = true;
                 unUsu.setNombre(nombre);
                 unUsu.setPassword(password);
+                unUsu.setLogeado(true);
                 unUsu.nomCompleto = Sistema.GetInstancia().getUsuarios().get(i).nomCompleto;
                 unUsu.tipo = Sistema.GetInstancia().getUsuarios().get(i).tipo;
             }else{
