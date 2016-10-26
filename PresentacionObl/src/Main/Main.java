@@ -72,12 +72,14 @@ public class Main {
         p.agregarMano(m);
         
         //AGREGA LAS FICHAS AL MAZO
-        int contador = 0;
+        String conts = "";
+        
         for(int l=0; l<= 6; l++){
             int r = l;
-            for(r = l; r <= 6; r++){                
-                p.agregarFicha(new Ficha( contador, l, r));                
-                contador ++;
+            for(r = l; r <= 6; r++){
+                conts = Integer.toString(l) + Integer.toString(r); 
+                int intCont = Integer.parseInt(conts);
+                p.agregarFicha(new Ficha( intCont, l, r));
             }
         }
         

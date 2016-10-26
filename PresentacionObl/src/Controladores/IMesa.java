@@ -6,6 +6,7 @@
 package Controladores;
 
 import Usuarios.Usuario;
+import javax.swing.JPanel;
 
 /**
  *
@@ -33,7 +34,11 @@ public interface IMesa {
     public void removeAllMesa();
     public void removeAllMesa2();
     
+    public void removeAllTablero();
+    
     public void CargarFichasAlTablero(int val1, int val2, ControladorJuego c);
+    
+    public void deshabilitarPanelJugador (int turno);
     
     
 }

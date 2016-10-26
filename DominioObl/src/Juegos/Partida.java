@@ -27,7 +27,12 @@ public class Partida extends Observable{
     private String estado;    // "En Juego", "Finalizado" o "Sin Iniciar" 
     private static double apuestaInicial = 100; //apuesta inicial 100
     private ArrayList<Mano> manos = new ArrayList<Mano>();
+    private int turnoActual;
     //private ArrayList<Ficha> fichas = new ArrayList<Ficha>();
+
+    
+
+    
     
     
     
@@ -65,6 +70,9 @@ public class Partida extends Observable{
     public void setManos(ArrayList<Mano> manos) {
         this.manos = manos;
     }
+    public void setTurnoActual(int turnoActual) {
+        this.turnoActual = turnoActual;
+    }
 
     //================================================================================
     //GETTERS
@@ -91,6 +99,9 @@ public class Partida extends Observable{
     public ArrayList<Mano> getManos() {
         return manos;
     }
+    public int getTurnoActual() {
+        return turnoActual;
+    }
 
     //================================================================================
     //CONSTRUCTOR
@@ -101,6 +112,7 @@ public class Partida extends Observable{
         this.jugador2 = null;
         this.estado = "Sin Iniciar";
         this.manos = new ArrayList<Mano>();
+        this.turnoActual = 1;
     }
     
     //================================================================================
@@ -113,6 +125,14 @@ public class Partida extends Observable{
         {
             this.manos.add(m);
         }
+    }
+    
+    public void cambiarTurno()
+    {
+        if(this.turnoActual == 1)
+            this.turnoActual = 2;
+        else { this.turnoActual = 1;}
+            
     }
     
     
@@ -231,7 +251,7 @@ public class Partida extends Observable{
     //AGREGAR FICHA A LA JUGADA,
     //CREA MOVIMIENTO,
     //SUMA A LA LISTA DE FICHAS EN MESA,
-    //ELIMINA DE L MANO, RECARGAR
+    //ELIMINA DE LA MANO, RECARGAR
     public void agregarFichaAJugada(String nombreficha) {
         
         //HACE SPLIT PARA SEPARAR LOS VALORES       
@@ -241,13 +261,17 @@ public class Partida extends Observable{
         String val2 = parts[1];
         
         Ficha unaF = new Ficha();
+        
+        String conts = "";
+        conts = val1 + val2; 
+        int intCont = Integer.parseInt(conts);
+        
+        unaF.setId(intCont);
         unaF.setValor1( Integer.parseInt(val1));
-        unaF.setValor1( Integer.parseInt(val2));   
+        unaF.setValor2( Integer.parseInt(val2));   
         
         AddFichasJugadas(unaF);
-        
-        
-       
+        RemoveListaJugador(unaF);
         
     }
     
@@ -256,6 +280,31 @@ public class Partida extends Observable{
         Mano m = GetUltimaMano();
         m.getFichasJugadas().add(f);
         
+    }
+    
+    public void RemoveListaJugador(Ficha f)
+    {
+        Mano m = GetUltimaMano();
+        if (this.turnoActual == 1)
+        {
+            //ArrayList listaFichasJ1            
+            for(int i = 0; i< m.getFichasJ1().size(); i++){
+                if(m.getFichasJ1().get(i).getId() == f.getId()){
+                    m.getFichasJ1().remove(i);
+                }
+            }
+            this.turnoActual = 2;
+        }
+        else
+        {
+            //ArrayList listaFichasJ1            
+            for(int i = 0; i< m.getFichasJ2().size(); i++){
+                if(m.getFichasJ2().get(i).getId() == f.getId()){
+                    m.getFichasJ2().remove(i);
+                }
+            }
+            this.turnoActual = 1;
+        }
     }
 
 

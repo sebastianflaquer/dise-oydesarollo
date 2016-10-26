@@ -48,7 +48,8 @@ public class ControladorJuego implements ActionListener, Observer {
                 this.vistaLogin.setVisible(false);
                 
                 this.vistaMesa = new Mesa();
-                vistaMesa.setVisible(true);                
+                vistaMesa.setVisible(true);    
+                vistaMesa.deshabilitarPanelJugador(partida.getTurnoActual());
                 
                 vistaMesa.CargarDatosDelJugador(unUsu);
                 vistaMesa.setControlador(this);
@@ -81,8 +82,15 @@ public class ControladorJuego implements ActionListener, Observer {
             //partida.ingresarMovimiento(e);
             String nombreficha = e.getActionCommand();
             partida.agregarFichaAJugada(nombreficha);
+            vistaMesa.removeAllTablero();
             agregaFichasTablero();
             
+            vistaMesa.deshabilitarPanelJugador(partida.getTurnoActual());
+            vistaMesa.removeAllMesa();
+            agregaFichasMesa();
+            
+            vistaMesa.removeAllMesa2();
+            agregaFichasMesa2();
         }        
     }
 

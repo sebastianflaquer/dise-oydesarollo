@@ -11,12 +11,14 @@ import Juegos.Mano;
 import Usuarios.Jugador;
 import Usuarios.Usuario;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  *
@@ -394,36 +396,28 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     
     }
     
+    @Override
     public void removeAllMesa(){
         this.fichasJugadorPanel.removeAll();
     }
+    @Override
     public void removeAllMesa2(){
         this.fichasJugador2Panel.removeAll();
     }
     
     @Override
+    public void removeAllTablero()
+    {
+        this.fichasJuegoPanel.removeAll(); 
+    }
+    
+    
+    
+    @Override
     public void CargarFichasDelJugador(int val1, int val2, ControladorJuego c){
         
-        //ImageIcon icon = new ImageIcon(Integer.toString(val1) + "-" + Integer.toString(val2) + ".jpg");
-        //btnTest.setIcon(icon);
-        //Check this
         
         ImageIcon image = new ImageIcon("D:/resources/"+val1+"-"+val2+".jpg");
-        //ImageIcon image = new ImageIcon("D:/resources/1-0.jpg");
-        //JButton button = new JButton();
-        //button.setIcon(image);
-        //JPanel panel = new JPanel();
-        //panel.add(button);
-        //setContentPane(panel);      
-        
-        //one = new JButton("one",imageForOne);
-        //one.setPreferredSize( new Dimension(78, 76));
-        //one.addActionListener(myButtonHandler);
-        
-        //ImageIcon image = new ImageIcon("/images/"+val1+"-"+val2+".jpg");
-        //ImageIcon image = new ImageIcon(this.getClass().getResource("/images/"+val1+"-"+val2+".jpg"));
-        
-        //ImageIcon image = new ImageIcon(getClass().getResource("/"+val1+"-"+val2+".jpg"));
         
         JButton btn = new JButton(image);
         btn.setPreferredSize( new Dimension(74, 38));
@@ -503,6 +497,21 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     }
     
     
+    //SEGUN EL TURNO, DESHABILITO EL PANEL DEL JUGADOR
+    @Override
+    public void deshabilitarPanelJugador (int turno)
+    {
+        if(turno == 1)
+        {
+            this.fichasJugadorPanel.setVisible(false);
+            this.fichasJugador2Panel.setVisible(true);
+        }
+        else
+        {
+            this.fichasJugador2Panel.setVisible(false);
+            this.fichasJugadorPanel.setVisible(true);
+        }
+    }
     
         
 }
