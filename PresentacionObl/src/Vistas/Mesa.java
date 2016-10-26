@@ -304,6 +304,8 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         ImageIcon image = new ImageIcon("/images/"+val1+"-"+val2+".jpg");
         //ImageIcon image = new ImageIcon(this.getClass().getResource("/images/"+val1+"-"+val2+".jpg"));
         
+        //ImageIcon image = new ImageIcon(getClass().getResource("/"+val1+"-"+val2+".jpg"));
+        
         JButton btn = new JButton(image);
         btn.setPreferredSize( new Dimension(74, 38));
         btn.setBackground(Color.white);

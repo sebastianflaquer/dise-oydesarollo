@@ -13,4 +13,8 @@ public interface ITipo {
     
     public boolean puedoJugar();
     
+    public double getSaldo();
+    
+    
+    
 }

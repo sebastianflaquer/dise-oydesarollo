@@ -49,7 +49,7 @@ public class ControladorJuego implements ActionListener, Observer {
                 this.vistaMesa = new Mesa();
                 vistaMesa.setVisible(true);
                 vistaMesa.CargarDatosDelJugador(unUsu);
-                
+                vistaMesa.setControlador(this);
                 //AGREGA LAS FICHAS DE CADA JUGADOR A LA MESA
                 agregaFichasMesa();
                 
