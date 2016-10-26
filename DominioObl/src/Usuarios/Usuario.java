@@ -67,6 +67,17 @@ public class Usuario {
     }
     public Usuario(){}
     
+    //VALIDAR EL SALDO PARA INGRESAR A LA PARTIDA
+    public boolean ValidarSaldo(double saldoU, double saldoP)
+    {
+        boolean ret = false;
+        if (saldoU >= saldoP)
+        {
+            ret = true;
+        }
+        return ret;
+    }
+    
     // VALIDAR USUARIO
     public Usuario ValidarUsuario(String nombre, String password){
         

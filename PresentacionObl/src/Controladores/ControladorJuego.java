@@ -41,30 +41,40 @@ public class ControladorJuego implements ActionListener, Observer {
             Usuario unUsu = new Usuario();
             unUsu = unUsu.ValidarUsuario(vistaLogin.getUsuario(), vistaLogin.getContrasena());
             
-            
-            if(unUsu.getNombre() != null )
+            if(unUsu.ValidarSaldo(unUsu.getTipo().getSaldo(), this.partida.getApuestaActual()))
             {
-                this.vistaLogin.setVisible(false);
+                if(unUsu.getNombre() != null )
+                {
+                    this.vistaLogin.setVisible(false);
                 
-                this.vistaMesa = new Mesa();
-                vistaMesa.setVisible(true);    
-                vistaMesa.deshabilitarPanelJugador(partida.getTurnoActual());
-                
-                vistaMesa.CargarDatosDelJugador(unUsu);
-                
-                vistaMesa.SetApuestaActual(Double.toHexString(partida.getApuestaActual()));
-                vistaMesa.setControlador(this);
-                //AGREGA LAS FICHAS DE CADA JUGADOR A LA MESA
-                agregaFichasMesa();
-                agregaFichasMesa2();
-                
-                //vistaMesa.CargarFichasDelJugador();
-                //vistaMesa.SetNombreUsuario(unUsu.getNomCompleto());
+                    this.vistaMesa = new Mesa();
+                    vistaMesa.setVisible(true);    
+                    vistaMesa.deshabilitarPanelJugador(partida.getTurnoActual());
+
+                    vistaMesa.CargarDatosDelJugador(unUsu);
+
+                    vistaMesa.SetApuestaActual(Double.toHexString(partida.getApuestaActual()));
+                    vistaMesa.setControlador(this);
+                    //AGREGA LAS FICHAS DE CADA JUGADOR A LA MESA
+                    agregaFichasMesa();
+                    agregaFichasMesa2();
+
+                    //vistaMesa.CargarFichasDelJugador();
+                    //vistaMesa.SetNombreUsuario(unUsu.getNomCompleto());
+                }
+                else
+                {
+                    vistaLogin.SetErrorMsj("Nombre de Usuario o Contraseña Incorrecto");
+                }
+            
             }
             else
             {
-                vistaLogin.SetErrorMsj("Nombre de Usuario o Contraseña Incorrecto");
+                vistaLogin.SetErrorMsj("Saldo Insuficiente");
             }
+            
+            
+            
         }        
         //ADDFICHA
         else if(e.getActionCommand().equals("ADDFICHA")){            
