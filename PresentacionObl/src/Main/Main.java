@@ -72,7 +72,6 @@ public class Main {
             }
         }
         //INICIA LA PARTIDA 
-        p.InicialPartida();
-        
+        p.InicialPartida();        
     }
 }

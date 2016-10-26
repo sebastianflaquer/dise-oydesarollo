@@ -201,9 +201,10 @@ public class Partida extends Observable{
         unaF.setValor1( Integer.parseInt(val1));
         unaF.setValor2( Integer.parseInt(val2));   
         
-        AddFichasJugadas(unaF);
-        RemoveListaJugador(unaF);
-        
+        boolean agrego = AddFichasJugadas(unaF);
+        if(agrego){
+            RemoveListaJugador(unaF);
+        }
     }
     
     //ELIMINA LA FICHA JUGADA DE LA LISTA DEL JUGADOR
@@ -230,34 +231,69 @@ public class Partida extends Observable{
     }
     
     //AGREGA LA FICHA A LA LISTA DE JUGADAS
-    public void AddFichasJugadas(Ficha f){
+    public boolean AddFichasJugadas(Ficha f){
+        boolean retorno = false; 
         Mano m = GetUltimaMano();
         String lugar = validarSiPuedeDescartar(f,m);
         
-        if(lugar == "start"){
+        if(lugar == "start1"){
+            //hay que darla vuelta
+            daVueltaLaFicha(f);
             m.getFichasJugadas().add(0,f);
+            retorno = true;            
         }
-        else if(lugar == "end" || m.getFichasJugadas().isEmpty()){
+        else if(lugar == "start2"){
+            m.getFichasJugadas().add(0,f);
+            retorno = true;
+        }
+        else if(lugar == "end1"){            
             m.getFichasJugadas().add(f);
+            retorno = true;
         }
+        else if(lugar == "end2"){
+            //hay que darla vuelta
+            daVueltaLaFicha(f);
+            m.getFichasJugadas().add(f);
+            retorno = true;
+        }
+        else if(m.getFichasJugadas().isEmpty()){
+            m.getFichasJugadas().add(f);
+            retorno = true;
+        }
+        return retorno;
     }
     
-    public String validarSiPuedeDescartar(Ficha f, Mano m)
-    {
-        String lugar = "";
+    //DA VUELTA LAS FICHAS
+    public Ficha daVueltaLaFicha(Ficha f){
+        int aux = f.getValor1();
+        f.setValor1(f.getValor2());
+        f.setValor2(aux);
         
-        if(m.getFichasJugadas().size() > 0)
-        {
+        return f;
+    }
+    
+    //VALIDA SI EL JUGADOR PUEDE PONER UNA FICHA
+    public String validarSiPuedeDescartar(Ficha f, Mano m){
+        String lugar = "";
+        if(m.getFichasJugadas().size() > 0){            
             Ficha primera = m.getFichasJugadas().get(0);
             Ficha ultima =  m.getFichasJugadas().get(m.getFichasJugadas().size()-1);
             
-            if(primera.getValor1() == f.getValor1() || primera.getValor1() == f.getValor2())
+            if(primera.getValor1() == f.getValor1())
             {
-                lugar = "start";
+                lugar = "start1";
             }
-            else if(ultima.getValor2() == f.getValor1() || ultima.getValor1() == f.getValor2())
+            else if(primera.getValor1() == f.getValor2())
             {
-                lugar = "end";
+                lugar = "start2";
+            }
+            else if(ultima.getValor2() == f.getValor1())
+            {
+                lugar = "end1";
+            }
+            else if(ultima.getValor2() == f.getValor2())
+            {
+                lugar = "end2";
             }
             else
             {
