@@ -31,9 +31,6 @@ public class Partida extends Observable{
     private double apuestaActual;
     //private ArrayList<Ficha> fichas = new ArrayList<Ficha>();
 
-    
-   
-    
     private static Partida instancia;
     public static Partida GetInstancia()
     {
@@ -118,18 +115,21 @@ public class Partida extends Observable{
         this.estado = "Sin Iniciar";
         this.manos = new ArrayList<Mano>();
         this.turnoActual = 0;
+        this.apuestaActual = Partida.apuestaInicial;
     }
     
     //================================================================================
     //METODOS
     //================================================================================
     
+    //AGREGAR MANO
     public void agregarMano(Mano m){
         if(m != null){
             this.manos.add(m);
         }
     }
     
+    //CAMBIAR TURNO
     public void cambiarTurno(){
         if(this.turnoActual == 1 || this.turnoActual == 0)
             this.turnoActual = 2;
@@ -146,10 +146,11 @@ public class Partida extends Observable{
         primeraMano.repartirFichasAJugadores();      
         
         
-    }    
+    }   
+    
+    //SUMAR SALDO
     public void SumarSaldos(){}
-    
-    
+        
     //VALIDAR SALDO
     public boolean ValidarSaldo( Jugador jugador){        
         boolean ret = false;        
@@ -194,8 +195,8 @@ public class Partida extends Observable{
     }
     
     //AGREGA LA FICHA A LA JUGADA Y LA REMUEVE DEL LISTADO DEL JUGADOR
-    public void agregarFichaAJugada(String nombreficha) {
-        
+    public String agregarFichaAJugada(String nombreficha) {
+        String retorno = "";
         //HACE SPLIT PARA SEPARAR LOS VALORES       
         String string = nombreficha;
         String[] parts = string.split("-");
@@ -213,9 +214,18 @@ public class Partida extends Observable{
         unaF.setValor2( Integer.parseInt(val2));   
         
         boolean agrego = AddFichasJugadas(unaF);
-        if(agrego){
+        if(agrego){            
             RemoveListaJugador(unaF);
+            if(chequeaGanador(unaF) == "Jugador 1"){
+                retorno = "jugador1";
+            }else if(chequeaGanador(unaF) == "Jugador 2"){
+                retorno = "jugador2";
+            }
+            else{
+                retorno = "no";
+            }
         }
+        return retorno;
     }
     
     //ELIMINA LA FICHA JUGADA DE LA LISTA DEL JUGADOR
@@ -238,7 +248,22 @@ public class Partida extends Observable{
             }
             this.turnoActual = 1;
         }
-        
+    }
+    
+    //CHEQUEA GANADOR
+    public String chequeaGanador(Ficha unaF){
+        String ganador = "no";
+        Mano m = GetUltimaMano();    
+        if(this.turnoActual == 2){
+            if(m.getFichasJ1().size() == 0){
+                ganador = "Jugador 1";
+            }
+        }else{
+            if(m.getFichasJ2().size() == 0){
+                ganador = "Jugador 2";
+            }
+        } 
+        return ganador;
     }
     
     //AGREGA LA FICHA A LA LISTA DE JUGADAS
@@ -313,4 +338,6 @@ public class Partida extends Observable{
         }
         return lugar;
     }
+    
+    
 }

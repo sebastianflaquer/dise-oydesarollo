@@ -41,12 +41,11 @@ public class ControladorJuego implements ActionListener, Observer {
             Usuario unUsu = new Usuario();
             unUsu = unUsu.ValidarUsuario(vistaLogin.getUsuario(), vistaLogin.getContrasena());
             
-            if(unUsu.ValidarSaldo(unUsu.getTipo().getSaldo(), this.partida.getApuestaActual()))
+            if(unUsu.getNombre() != null )
             {
-                if(unUsu.getNombre() != null )
-                {
-                    this.vistaLogin.setVisible(false);
                 
+                if(unUsu.ValidarSaldo(unUsu.getTipo().getSaldo(), this.partida.getApuestaActual())){
+                    this.vistaLogin.setVisible(false);
                     this.vistaMesa = new Mesa();
                     vistaMesa.setVisible(true);    
                     vistaMesa.deshabilitarPanelJugador(partida.getTurnoActual());
@@ -64,17 +63,13 @@ public class ControladorJuego implements ActionListener, Observer {
                 }
                 else
                 {
-                    vistaLogin.SetErrorMsj("Nombre de Usuario o Contraseña Incorrecto");
+                    vistaLogin.SetErrorMsj("Saldo Insuficiente");
                 }
-            
             }
             else
             {
-                vistaLogin.SetErrorMsj("Saldo Insuficiente");
+                vistaLogin.SetErrorMsj("Nombre de Usuario o Contraseña Incorrecto");
             }
-            
-            
-            
         }        
         //ADDFICHA
         else if(e.getActionCommand().equals("ADDFICHA")){            
@@ -134,20 +129,28 @@ public class ControladorJuego implements ActionListener, Observer {
             
             partida.getManos().add(nueva);
             
-            partida.agregarFichaAJugada(nombreficha);
-            vistaMesa.removeAllTablero();
             
-            //AGREGO FUCHAS A LA MESA DE JUEGO
-            agregaFichasTablero();
-            
-            
-            //ACTUALIZO
-            vistaMesa.deshabilitarPanelJugador(partida.getTurnoActual());
-            vistaMesa.removeAllMesa();
-            agregaFichasMesa();
-            
-            vistaMesa.removeAllMesa2();
-            agregaFichasMesa2();
+            String aux = partida.agregarFichaAJugada(nombreficha);
+            //SI NO HAY UN GANADOR
+            if(aux == "no"){
+                vistaMesa.removeAllTablero();            
+                //AGREGO FUCHAS A LA MESA DE JUEGO
+                agregaFichasTablero();                
+                //ACTUALIZO
+                vistaMesa.deshabilitarPanelJugador(partida.getTurnoActual());
+                vistaMesa.removeAllMesa();
+                agregaFichasMesa();
+                vistaMesa.removeAllMesa2();
+                agregaFichasMesa2();            
+            }
+            //SI HAY UN GANADOR
+            else{
+                if(aux == "jugador1"){
+                    vistaMesa.ocultarPanelesGanador("Gana Jugador 1");
+                }else if(aux == "jugador2"){
+                    vistaMesa.ocultarPanelesGanador("Gana Jugador 2");
+                }
+            }
         }
         
     }

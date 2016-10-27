@@ -51,7 +51,7 @@ public class Main {
         Sistema s = Sistema.GetInstancia();
 
         s.agregar(new Usuario("juan", (ITipo) new Jugador(1000), "pass" ,"Juan perez"));
-        s.agregar(new Usuario("ana", (ITipo) new Jugador(2500), "pass","Ana Gonzalez"));
+        s.agregar(new Usuario("ana", (ITipo) new Jugador(90), "pass","Ana Gonzalez"));
         s.agregar(new Usuario("admin", (ITipo) new Admin(), "pass","Pedro Hernandez"));
     }
     

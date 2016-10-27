@@ -41,6 +41,8 @@ public interface IMesa {
     public void CargarFichasAlTablero(int val1, int val2, ControladorJuego c);
     
     public void deshabilitarPanelJugador (int turno);
+
+    public void ocultarPanelesGanador(String jugador);
     
     
 }
