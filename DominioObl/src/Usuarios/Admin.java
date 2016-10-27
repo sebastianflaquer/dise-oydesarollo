@@ -10,12 +10,8 @@ package Usuarios;
 public class Admin implements ITipo {
 
     
-    //ATRIBUTOS
-    
-    
     //CONSTRUCTOR
     public Admin() {
-        
     }
     
     @Override

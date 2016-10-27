@@ -6,7 +6,6 @@
 package Usuarios;
 
 import Fachada.Sistema;
-import java.util.logging.Logger;
 
 public class Usuario {
     

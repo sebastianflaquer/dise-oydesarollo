@@ -5,10 +5,8 @@
  */
 package Juegos;
 
-/**
- *
- * @author Laura
- */
+
+
 public class RecogerFicha extends TipoMov{
     
     //ATRIBUTOS

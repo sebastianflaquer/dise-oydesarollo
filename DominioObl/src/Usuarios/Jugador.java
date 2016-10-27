@@ -5,10 +5,8 @@
  */
 package Usuarios;
 
-/**
- *
- * @author Laura
- */
+
+
 public class Jugador implements ITipo {
 
     //ATRIBUTOS

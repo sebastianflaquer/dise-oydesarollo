@@ -11,10 +11,8 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Observable;
 
-/**
- *
- * @author Laura
- */
+
+
 public class Partida extends Observable{
     
     //================================================================================
@@ -29,16 +27,8 @@ public class Partida extends Observable{
     private ArrayList<Mano> manos = new ArrayList<Mano>();
     private int turnoActual;
     private double apuestaActual;
-    //private ArrayList<Ficha> fichas = new ArrayList<Ficha>();
 
-    private static Partida instancia;
-    public static Partida GetInstancia()
-    {
-        if (instancia == null) 
-            instancia = new Partida();       
-        
-        return instancia;
-    }
+
 
     //================================================================================
     //SETTERS
@@ -189,7 +179,7 @@ public class Partida extends Observable{
   
     //TRAE LA ULTIMA MANO
     public Mano GetUltimaMano(){
-        Mano unaM = new Mano();
+        Mano unaM;
         unaM = this.manos.get(this.manos.size() -1);
         return unaM;
     }

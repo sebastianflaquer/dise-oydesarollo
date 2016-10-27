@@ -8,15 +8,9 @@ package Juegos;
 import java.util.Calendar;
 import Usuarios.Jugador;
 
-/**
- *
- * @author Laura
- */
+
 public class Movimiento {
 
-    
-
-    
     
     //ATRIBUTOS
     private static int ultId=0;
