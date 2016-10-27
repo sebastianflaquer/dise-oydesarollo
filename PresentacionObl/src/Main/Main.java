@@ -50,8 +50,9 @@ public class Main {
     private static void cargarUsuarios() {
         Sistema s = Sistema.GetInstancia();
 
-        s.agregar(new Usuario("juan", (ITipo) new Jugador(1000), "pass" ,"Juan perez"));
+        s.agregar(new Usuario("juan", (ITipo) new Jugador(1000), "pass" ,"Juan Perez"));
         s.agregar(new Usuario("ana", (ITipo) new Jugador(90), "pass","Ana Gonzalez"));
+        s.agregar(new Usuario("luis", (ITipo) new Jugador(900), "pass","Luis Rivero"));
         s.agregar(new Usuario("admin", (ITipo) new Admin(), "pass","Pedro Hernandez"));
     }
     
