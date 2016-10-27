@@ -6,9 +6,15 @@
 package Controladores;
 
 import Fachada.Sistema;
+import Juegos.Apuesta;
+import Juegos.ColocarFicha;
 import Juegos.Ficha;
 import Juegos.Mano;
+import Juegos.Movimiento;
 import Juegos.Partida;
+import Juegos.RecogerFicha;
+import Juegos.TipoMov;
+import Usuarios.Jugador;
 import Usuarios.Usuario;
 import Vistas.Mesa;
 import java.awt.event.ActionEvent;
@@ -52,7 +58,7 @@ public class ControladorJuego implements ActionListener, Observer {
 
                     vistaMesa.CargarDatosDelJugador(unUsu);
 
-                    vistaMesa.SetApuestaActual(Double.toHexString(partida.getApuestaActual()));
+                    vistaMesa.SetApuestaActual(Double.toString(partida.getApuestaActual()));
                     vistaMesa.setControlador(this);
                     //AGREGA LAS FICHAS DE CADA JUGADOR A LA MESA
                     agregaFichasMesa();
@@ -76,12 +82,10 @@ public class ControladorJuego implements ActionListener, Observer {
             partida.AddFichaJugador(partida.GetUltimaMano());
             vistaMesa.removeAllMesa();
             
-            //ME GUARDO LA ULTIMA MANO PARA CREAR UNA NUEVA Y AGREGARLA A LA LISTA
-            Mano nueva = new Mano();
-            nueva.setFichasJ1(partida.GetUltimaMano().getFichasJ1());
-            nueva.setFichasJ2(partida.GetUltimaMano().getFichasJ2());
-            nueva.setFichasJugadas(partida.GetUltimaMano().getFichasJugadas());
-            nueva.setFichasMazo(partida.GetUltimaMano().getFichasMazo());
+            //ME GUARDO LA ULTIMA MANO, CREO UNA NUEVA Y LA AGREGO A LA LISTA SETEANDOLE EL TIPO DE MOVIMIENTO
+            Mano nueva = partida.GetUltimaMano();
+            nueva.setMovimiento(new Movimiento(new RecogerFicha(),new Jugador(200)));   //DEBO CARGAR EL JUGADOR DEL TURNO
+
             partida.getManos().add(nueva);
             
             //AGREGO FICHAS A LA MESA JUGADOR 1
@@ -91,12 +95,10 @@ public class ControladorJuego implements ActionListener, Observer {
             partida.AddFichaJugador2(partida.GetUltimaMano());
             vistaMesa.removeAllMesa2();
             
-            //ME GUARDO LA ULTIMA MANO PARA CREAR UNA NUEVA Y AGREGARLA A LA LISTA
-            Mano nueva = new Mano();
-            nueva.setFichasJ1(partida.GetUltimaMano().getFichasJ1());
-            nueva.setFichasJ2(partida.GetUltimaMano().getFichasJ2());
-            nueva.setFichasJugadas(partida.GetUltimaMano().getFichasJugadas());
-            nueva.setFichasMazo(partida.GetUltimaMano().getFichasMazo());
+            //ME GUARDO LA ULTIMA MANO, CREO UNA NUEVA Y LA AGREGO A LA LISTA SETEANDOLE EL TIPO DE MOVIMIENTO
+            Mano nueva = partida.GetUltimaMano();
+            nueva.setMovimiento(new Movimiento(new RecogerFicha(),new Jugador(200)));   //DEBO CARGAR EL JUGADOR DEL TURNO
+
             partida.getManos().add(nueva);
             
             //AGREGO FICHAS A LA MESA JUGADOR 2
@@ -109,6 +111,12 @@ public class ControladorJuego implements ActionListener, Observer {
                 if(this.partida.getJugador1().getSaldo() > vistaMesa.GettxtSubirApuesta()
                          && this.partida.getJugador2().getSaldo() > vistaMesa.GettxtSubirApuesta() )
                 {
+                     //ME GUARDO LA ULTIMA MANO, CREO UNA NUEVA Y LA AGREGO A LA LISTA SETEANDOLE EL TIPO DE MOVIMIENTO
+                    Mano nueva = partida.GetUltimaMano();
+                    nueva.setMovimiento(new Movimiento(new Apuesta(vistaMesa.GettxtSubirApuesta()),new Jugador(200)));   //DEBO CARGAR EL JUGADOR DEL TURNO
+
+                    partida.getManos().add(nueva);
+                    //SETEO EL NUEVO VALOR EN LA MESA
                     this.partida.setApuestaActual(vistaMesa.GettxtSubirApuesta());
                     vistaMesa.SetApuestaActual(Double.toString(vistaMesa.GettxtSubirApuesta()));
                 }
@@ -120,13 +128,10 @@ public class ControladorJuego implements ActionListener, Observer {
             //partida.ingresarMovimiento(e);
             String nombreficha = e.getActionCommand();
             
-            //ME GUARDO LA ULTIMA MANO PARA CREAR UNA NUEVA Y AGREGARLA A LA LISTA
-            Mano nueva = new Mano();
-            nueva.setFichasJ1(partida.GetUltimaMano().getFichasJ1());
-            nueva.setFichasJ2(partida.GetUltimaMano().getFichasJ2());
-            nueva.setFichasJugadas(partida.GetUltimaMano().getFichasJugadas());
-            nueva.setFichasMazo(partida.GetUltimaMano().getFichasMazo());
-            
+            //ME GUARDO LA ULTIMA MANO, CREO UNA NUEVA Y LA AGREGO A LA LISTA SETEANDOLE EL TIPO DE MOVIMIENTO
+            Mano nueva = partida.GetUltimaMano();
+            nueva.setMovimiento(new Movimiento(new ColocarFicha(),new Jugador(200)));  //DEBO CARGAR EL JUGADOR DEL TURNO
+
             partida.getManos().add(nueva);
             
             

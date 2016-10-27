@@ -13,14 +13,22 @@ import Usuarios.Jugador;
  * @author Laura
  */
 public class Movimiento {
+
+    
+
+    
     
     //ATRIBUTOS
+    private static int ultId=0;
     private int id;
     private TipoMov tipoMov;
     private Calendar fechaHora;  //REVISAR
     private Jugador jugador;
     
     //SETTERS
+    public static void setUltId(int ultId) {
+        Movimiento.ultId = ultId;
+    }
     public void setId(int id) {
         this.id = id;
     }
@@ -38,6 +46,9 @@ public class Movimiento {
     }
     
     //GETTERS
+    public static int getUltId() {
+        return ultId;
+    }
     public int getId() {
         return id;
     }
@@ -56,11 +67,11 @@ public class Movimiento {
     
     
     //CONSTRUCOTR
-    public Movimiento(int id, TipoMov tipoMov, Calendar fechaHora, Jugador jugador) {
-        this.id = id;
-        this.tipoMov = tipoMov;
-        this.fechaHora = fechaHora;
-        this.jugador = jugador;
+    public Movimiento(TipoMov m, Jugador j) {
+        this.id = ++Movimiento.ultId;
+        this.tipoMov = m;
+        this.fechaHora = Calendar.getInstance();
+        this.jugador = j;
     }
     
     

@@ -35,9 +35,7 @@ public class ColocarFicha extends TipoMov {
     }
 
     //CONSTRUCOTR
-    public ColocarFicha(Ficha ficha, String lado) {
-        this.ficha = ficha;
-        this.lado = lado;
+    public ColocarFicha() {
     }
     
     
