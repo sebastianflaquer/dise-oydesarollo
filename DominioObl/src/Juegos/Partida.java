@@ -7,6 +7,7 @@ package Juegos;
 
 import Fachada.Sistema;
 import Usuarios.Jugador;
+import Usuarios.Usuario;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Observable;
@@ -20,8 +21,8 @@ public class Partida extends Observable{
     //================================================================================
     private static int ultId=0;
     private int id;
-    private Jugador jugador1;
-    private Jugador jugador2;
+    private Usuario jugador1;
+    private Usuario jugador2;
     private String estado;    // "En Juego", "Finalizado" o "Sin Iniciar" 
     private static double apuestaInicial = 100; //apuesta inicial 100
     private ArrayList<Mano> manos = new ArrayList<Mano>();
@@ -40,10 +41,10 @@ public class Partida extends Observable{
     public void setId(int id) {
         this.id = id;
     }
-    public void setJugador1(Jugador jugador1) {
+    public void setJugador1(Usuario jugador1) {
         this.jugador1 = jugador1;
     }
-    public void setJugador2(Jugador jugador2) {
+    public void setJugador2(Usuario jugador2) {
         this.jugador2 = jugador2;
     }
     public void setEstado(String estado) {
@@ -72,10 +73,10 @@ public class Partida extends Observable{
     public int getId() {
         return id;
     }
-    public Jugador getJugador1() {
+    public Usuario getJugador1() {
         return jugador1;
     }
-    public Jugador getJugador2() {
+    public Usuario getJugador2() {
         return jugador2;
     }
     public String getEstado() {
@@ -179,8 +180,19 @@ public class Partida extends Observable{
   
     //TRAE LA ULTIMA MANO
     public Mano GetUltimaMano(){
-        Mano unaM;
-        unaM = this.manos.get(this.manos.size() -1);
+        Mano unaM = new Mano();
+        unaM.setFichasJ1(this.manos.get(this.manos.size() -1).getFichasJ1());
+        unaM.setFichasJ2(this.manos.get(this.manos.size() -1).getFichasJ2());
+        unaM.setFichasJugadas(this.manos.get(this.manos.size() -1).getFichasJugadas());
+        unaM.setFichasMazo(this.manos.get(this.manos.size() -1).getFichasMazo());
+        //unaM = this.manos.get(this.manos.size() -1);
+        
+//        Mano otraM = new Mano();
+//        otraM.setFichasJ1(unaM.getFichasJ1());
+//        otraM.setFichasJ2(unaM.getFichasJ2());
+//        otraM.setFichasJugadas(unaM.getFichasJugadas());
+//        otraM.setFichasMazo(unaM.getFichasMazo());
+        
         return unaM;
     }
     

@@ -45,7 +45,7 @@ public class Sistema {
     public ArrayList<Usuario> getUsuarios() {
         return usuarios;
     }
-    public List<Partida> getPartidas() {
+    public ArrayList<Partida> getPartidas() {
         return partidas;
     }
     

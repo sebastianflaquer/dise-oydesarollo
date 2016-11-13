@@ -17,6 +17,7 @@ import Juegos.TipoMov;
 import Usuarios.Jugador;
 import Usuarios.Usuario;
 import Vistas.Mesa;
+import Vistas.MesaAdmin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -31,13 +32,12 @@ public class ControladorJuego implements ActionListener, Observer {
     private ILogin vistaLogin;
     private IMesa vistaMesa;
     private Partida partida;
-
+    private IMesaAdmin mesaAdmin;
     
     public ControladorJuego(ILogin vistaLog, Partida p) {
         this.vistaLogin = vistaLog;
         this.partida = p;
     }
-    
     
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -47,29 +47,41 @@ public class ControladorJuego implements ActionListener, Observer {
             Usuario unUsu = new Usuario();
             unUsu = unUsu.ValidarUsuario(vistaLogin.getUsuario(), vistaLogin.getContrasena());
             
+            //SI EXISTE EL USUARIO
             if(unUsu.getNombre() != null )
             {
-                
-                if(unUsu.ValidarSaldo(unUsu.getTipo().getSaldo(), this.partida.getApuestaActual())){
-                    this.vistaLogin.setVisible(false);
-                    this.vistaMesa = new Mesa();
-                    vistaMesa.setVisible(true);    
-                    vistaMesa.deshabilitarPanelJugador(partida.getTurnoActual());
-
-                    vistaMesa.CargarDatosDelJugador(unUsu);
-
-                    vistaMesa.SetApuestaActual(Double.toString(partida.getApuestaActual()));
-                    vistaMesa.setControlador(this);
-                    //AGREGA LAS FICHAS DE CADA JUGADOR A LA MESA
-                    agregaFichasMesa();
-                    agregaFichasMesa2();
-
-                    //vistaMesa.CargarFichasDelJugador();
-                    //vistaMesa.SetNombreUsuario(unUsu.getNomCompleto());
+                //SI ES JUGADOR
+                if (unUsu.getTipo().puedoJugar())
+                {
+                    if(unUsu.ValidarSaldo(unUsu.getTipo().getSaldo(), this.partida.getApuestaActual())){
+                        
+                        //partida.setJugador1(unUsu);
+                        
+                        this.vistaLogin.setVisible(false);
+                        this.vistaMesa = new Mesa();
+                        vistaMesa.setVisible(true);    
+                        vistaMesa.deshabilitarPanelJugador(partida.getTurnoActual());
+                        vistaMesa.CargarDatosDelJugador(unUsu);
+                        vistaMesa.SetApuestaActual(Double.toString(partida.getApuestaActual()));
+                        vistaMesa.setControlador(this);
+                        //AGREGA LAS FICHAS DE CADA JUGADOR A LA MESA
+                        agregaFichasMesa();
+                        agregaFichasMesa2();
+                        //vistaMesa.CargarFichasDelJugador();
+                        //vistaMesa.SetNombreUsuario(unUsu.getNomCompleto());
+                    }
+                    else
+                    {
+                        vistaLogin.SetErrorMsj("Saldo Insuficiente");
+                    }
                 }
+                //SI ES ADMINISTRADOR
                 else
                 {
-                    vistaLogin.SetErrorMsj("Saldo Insuficiente");
+                    this.vistaLogin.setVisible(false);
+                    this.mesaAdmin = new MesaAdmin();
+                    this.mesaAdmin.inicializar();
+                    mesaAdmin.cargarDatosAdmin(unUsu);
                 }
             }
             else
@@ -108,8 +120,8 @@ public class ControladorJuego implements ActionListener, Observer {
         {
             if (vistaMesa.GettxtSubirApuesta() != 0)
             {
-                if(this.partida.getJugador1().getSaldo() > vistaMesa.GettxtSubirApuesta()
-                         && this.partida.getJugador2().getSaldo() > vistaMesa.GettxtSubirApuesta() )
+                if(this.partida.getJugador1().getTipo().getSaldo() > vistaMesa.GettxtSubirApuesta()
+                         && this.partida.getJugador2().getTipo().getSaldo() > vistaMesa.GettxtSubirApuesta() )
                 {
                      //ME GUARDO LA ULTIMA MANO, CREO UNA NUEVA Y LA AGREGO A LA LISTA SETEANDOLE EL TIPO DE MOVIMIENTO
                     Mano nueva = partida.GetUltimaMano();

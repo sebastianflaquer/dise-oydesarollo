@@ -10,12 +10,15 @@ import Controladores.ILogin;
 import Fachada.Sistema;
 import Juegos.Ficha;
 import Juegos.Mano;
+import Juegos.Movimiento;
 import Juegos.Partida;
+import Juegos.RecogerFicha;
 import Usuarios.Admin;
 import Usuarios.ITipo;
 import Usuarios.Jugador;
 import Usuarios.Usuario;
 import Vistas.Login;
+import java.util.ArrayList;
 
 /**
  *
@@ -37,6 +40,7 @@ public class Main {
         //p.setJugador1(s.getUsuarios().get(1).getTipo().);
         
         cargarFichas(p);
+        cargarPartidasDePrueba();
 
         ILogin vista = (ILogin) new Login();
 
@@ -76,5 +80,23 @@ public class Main {
         }
         //INICIA LA PARTIDA 
         p.InicialPartida();        
+    }
+    
+    
+    private static void cargarPartidasDePrueba() {
+        Sistema s = Sistema.GetInstancia();
+        
+        Partida unaP = new Partida();
+        ArrayList<Mano> nueva = new ArrayList<Mano>();
+        Mano m = new Mano();
+        m.setMovimiento(new Movimiento(new RecogerFicha(),new Jugador(200)));
+        nueva.add(m);
+        unaP.setManos(nueva);
+        Partida otraP = new Partida();
+        otraP.setManos(new ArrayList<Mano>());
+
+        s.agregarPartida(unaP);
+        s.agregarPartida(otraP);
+
     }
 }
