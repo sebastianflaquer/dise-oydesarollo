@@ -16,6 +16,8 @@ public class Mano {
     //================================================================================
     //ATRIBUTOS
     //================================================================================
+    private static int ultId=0;
+    private int id;
     private ArrayList<Ficha> fichasJ1 = new ArrayList<Ficha>();    
     private ArrayList<Ficha> fichasJ2 = new ArrayList<Ficha>();
     private ArrayList<Ficha> fichasMazo = new ArrayList<Ficha>();
@@ -25,6 +27,12 @@ public class Mano {
     //================================================================================
     //SETTERS
     //================================================================================
+    public static void setUltId(int ultId) {
+        Mano.ultId = ultId;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
     public void setFichasJ1(ArrayList<Ficha> fichasJ1) {
         this.fichasJ1 = fichasJ1;
     }
@@ -44,6 +52,12 @@ public class Mano {
     //================================================================================
     //GETTERS
     //================================================================================
+    public static int getUltId() {
+        return ultId;
+    }
+    public int getId() {
+        return id;
+    }
     public ArrayList<Ficha> getFichasJ1() {
         return fichasJ1;
     }
@@ -64,7 +78,7 @@ public class Mano {
     //CONSTRUCTOR
     //================================================================================
     public Mano() {
-      
+      this.id = ++Mano.ultId;
     }
        
     //================================================================================

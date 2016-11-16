@@ -91,9 +91,10 @@ public class Main {
         Mano m = new Mano();
         m.setMovimiento(new Movimiento(new RecogerFicha(),new Jugador(200)));
         nueva.add(m);
+        nueva.add(m);
         unaP.setManos(nueva);
         Partida otraP = new Partida();
-        otraP.setManos(new ArrayList<Mano>());
+        otraP.setManos(nueva);
 
         s.agregarPartida(unaP);
         s.agregarPartida(otraP);

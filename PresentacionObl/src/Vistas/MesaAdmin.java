@@ -6,11 +6,14 @@
 
 package Vistas;
 
+import Controladores.ControladorJuego;
 import Controladores.IMesaAdmin;
 import Fachada.Sistema;
+import Juegos.Partida;
 import Usuarios.Usuario;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -40,16 +43,14 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
         btnSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        ListaManos = new javax.swing.JPanel();
+        ListaManos = new javax.swing.JList<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         listPartidas = new javax.swing.JList();
-        VerManos = new javax.swing.JButton();
-        lblprueba1 = new javax.swing.JLabel();
-        lblprueba2 = new javax.swing.JLabel();
+        btnVerManos = new javax.swing.JButton();
+        lblPartidas = new javax.swing.JLabel();
+        lblManos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        NomAdmin.setText("Nombre: ");
 
         btnSalir.setText("Salir");
 
@@ -70,32 +71,26 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
         MenuAdminLayout.setVerticalGroup(
             MenuAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MenuAdminLayout.createSequentialGroup()
-                .addComponent(btnSalir)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(MenuAdminLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(MenuAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NomAdmin)
-                    .addComponent(jLabel1))
+                .addGroup(MenuAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSalir)
+                    .addGroup(MenuAdminLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(MenuAdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(NomAdmin)
+                            .addComponent(jLabel1))))
                 .addGap(0, 25, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout ListaManosLayout = new javax.swing.GroupLayout(ListaManos);
-        ListaManos.setLayout(ListaManosLayout);
-        ListaManosLayout.setHorizontalGroup(
-            ListaManosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        ListaManosLayout.setVerticalGroup(
-            ListaManosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 426, Short.MAX_VALUE)
         );
 
         jScrollPane2.setViewportView(ListaManos);
 
         jScrollPane3.setViewportView(listPartidas);
 
-        VerManos.setText(">");
+        btnVerManos.setText(">");
+        btnVerManos.setActionCommand("VERMANOS");
+
+        lblPartidas.setText("Partidas:");
+
+        lblManos.setText("Manos:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -106,37 +101,39 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(VerManos, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblPartidas))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblprueba2)
-                            .addComponent(lblprueba1))))
-                .addGap(38, 38, 38)
-                .addComponent(jScrollPane2))
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnVerManos)))
+                .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblManos)
+                        .addContainerGap())
+                    .addComponent(jScrollPane2)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(MenuAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPartidas)
+                    .addComponent(lblManos))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
-                                .addComponent(lblprueba1)
-                                .addGap(26, 26, 26)
-                                .addComponent(lblprueba2)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(168, 168, 168)
-                        .addComponent(VerManos)
+                        .addGap(148, 148, 148)
+                        .addComponent(btnVerManos)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -196,17 +193,17 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel ListaManos;
+    private javax.swing.JList<String> ListaManos;
     private javax.swing.JPanel MenuAdmin;
     private javax.swing.JLabel NomAdmin;
-    private javax.swing.JButton VerManos;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JButton btnVerManos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblprueba1;
-    private javax.swing.JLabel lblprueba2;
+    private javax.swing.JLabel lblManos;
+    private javax.swing.JLabel lblPartidas;
     private javax.swing.JList listPartidas;
     // End of variables declaration//GEN-END:variables
 
@@ -221,6 +218,12 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
         setVisible(false);
     }
     
+    @Override
+    public void setControlador(ControladorJuego c) {
+        this.btnVerManos.addActionListener(c);
+    }
+    
+    @Override
     public void cargarDatosAdmin(Usuario admin)
     {
         this.NomAdmin.setText(admin.getNomCompleto());
@@ -228,27 +231,42 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
     
     public void cargarPartidas()
     {
-        for(int i = 0; i < Sistema.GetInstancia().getPartidas().size(); i++)
-        {
-            
-            JList<String> listPartidas = new JList<String>(new DefaultListModel<String>());
-            //
-            int id = Sistema.GetInstancia().getPartidas().get(i).getId();
-            String str = Integer.toString(id);            
-            ((DefaultListModel)listPartidas.getModel()).addElement(str);
-            
-            this.lblprueba1.setText(str);
-            this.lblprueba2.setText(str);
-            //this.listPartidas.add;            
-            //this.listPartidas.add(str);
-            
-            
-            
-        }
+        this.listPartidas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION );
+        this.listPartidas.setModel(modelList());
+    }
     
+    //LISTA DE PARTIDAS
+    private DefaultListModel modelList(){
+        DefaultListModel<String> model = new DefaultListModel<>();
+        for(int i = 0; i < Sistema.GetInstancia().getPartidas().size(); i++)
+            {
+                int id = Sistema.GetInstancia().getPartidas().get(i).getId();
+                String str = Integer.toString(id); 
+                model.addElement("Partida ID: " + str);
+            }          
+        return model;
     }
     
     
+    @Override
+    public void CargarManosDePartida()
+    {
+        this.ListaManos.setModel(modelListManos());
+    }
+    
+    
+    //LISTA DE MANOS
+    private DefaultListModel modelListManos(){
+        int idPartidaSel = this.listPartidas.getSelectedIndex();
+        DefaultListModel<String> model = new DefaultListModel<>();
+        for(int i = 0; i < Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().size(); i++)
+            {
+                int id = Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getId();
+                String str = Integer.toString(id); 
+                model.addElement(str);
+            }          
+        return model;
+    }
 
 }
 
