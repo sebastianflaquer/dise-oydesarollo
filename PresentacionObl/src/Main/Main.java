@@ -8,6 +8,7 @@ package Main;
 import Controladores.ControladorJuego;
 import Controladores.ILogin;
 import Fachada.Sistema;
+import Juegos.Apuesta;
 import Juegos.Ficha;
 import Juegos.Mano;
 import Juegos.Movimiento;
@@ -89,7 +90,7 @@ public class Main {
         Partida unaP = new Partida();
         ArrayList<Mano> nueva = new ArrayList<Mano>();
         Mano m = new Mano();
-        m.setMovimiento(new Movimiento(new RecogerFicha(),new Jugador(200)));
+        m.setMovimiento(new Movimiento(new Apuesta(1500),new Jugador(200)));
         nueva.add(m);
         nueva.add(m);
         unaP.setManos(nueva);

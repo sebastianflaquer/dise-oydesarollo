@@ -7,7 +7,7 @@ package Juegos;
 
 
 
-public class RecogerFicha extends TipoMov{
+public class RecogerFicha implements ITipoMovimiento{
     
     //ATRIBUTOS
     private Ficha ficha;
@@ -28,4 +28,17 @@ public class RecogerFicha extends TipoMov{
     }
     public RecogerFicha() {
     }
+    
+    @Override
+    public String nombreTipo(){
+        String retorno = "Recoger Ficha";
+        return retorno;
+    };
+    
+    @Override
+    public double montoApuesta(){
+        return -1;
+    }
+    
+    
 }

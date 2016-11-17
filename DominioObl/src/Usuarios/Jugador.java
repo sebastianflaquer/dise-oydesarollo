@@ -34,6 +34,8 @@ public class Jugador implements ITipo {
         return true;
     }
     
+    
+    
    
     
     

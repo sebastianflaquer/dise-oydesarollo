@@ -13,7 +13,9 @@ import Juegos.Partida;
 import Usuarios.Usuario;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -36,19 +38,20 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jPanel1 = new javax.swing.JPanel();
         MenuAdmin = new javax.swing.JPanel();
         NomAdmin = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        ListaManos = new javax.swing.JList<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         listPartidas = new javax.swing.JList();
         btnVerManos = new javax.swing.JButton();
         lblPartidas = new javax.swing.JLabel();
         lblManos = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,7 +68,7 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(NomAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 430, Short.MAX_VALUE)
                 .addComponent(btnSalir))
         );
         MenuAdminLayout.setVerticalGroup(
@@ -81,16 +84,29 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
                 .addGap(0, 25, Short.MAX_VALUE))
         );
 
-        jScrollPane2.setViewportView(ListaManos);
-
         jScrollPane3.setViewportView(listPartidas);
 
         btnVerManos.setText(">");
-        btnVerManos.setActionCommand("VERMANOS");
+
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, btnVerManos, org.jdesktop.beansbinding.ELProperty.create("VERMANOS"), btnVerManos, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
+        bindingGroup.addBinding(binding);
 
         lblPartidas.setText("Partidas:");
 
         lblManos.setText("Manos:");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -98,21 +114,19 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(MenuAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblPartidas))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnVerManos)))
-                .addGap(34, 34, 34)
+                        .addComponent(btnVerManos))
+                    .addComponent(lblPartidas))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblManos)
                         .addContainerGap())
-                    .addComponent(jScrollPane2)))
+                    .addComponent(jScrollPane1)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,17 +138,14 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
                     .addComponent(lblManos))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(148, 148, 148)
+                        .addComponent(btnVerManos))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(btnVerManos)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -153,6 +164,8 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -193,18 +206,19 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList<String> ListaManos;
     private javax.swing.JPanel MenuAdmin;
     private javax.swing.JLabel NomAdmin;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnVerManos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblManos;
     private javax.swing.JLabel lblPartidas;
     private javax.swing.JList listPartidas;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -233,6 +247,7 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
     {
         this.listPartidas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION );
         this.listPartidas.setModel(modelList());
+        this.jTable1.setModel(modelTableManos());
     }
     
     //LISTA DE PARTIDAS
@@ -247,25 +262,55 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
         return model;
     }
     
-    
+    //AGREGA A LA LISTA EL MODELO
     @Override
     public void CargarManosDePartida()
     {
-        this.ListaManos.setModel(modelListManos());
+        this.jTable1.setModel(modelListManos());        
     }
     
+    private DefaultTableModel modelTableManos(){
+        DefaultTableModel modelTable = new DefaultTableModel();
+        modelTable.addColumn("Id");
+        modelTable.addColumn("F J1");
+        modelTable.addColumn("F J2");
+        modelTable.addColumn("F Mesa");
+        modelTable.addColumn("F Jugadas");
+        modelTable.addColumn("Tipo Mov");
+        return modelTable;
+    }
     
-    //LISTA DE MANOS
-    private DefaultListModel modelListManos(){
+    //MODELO LISTA DE MANOS
+    private DefaultTableModel modelListManos(){
         int idPartidaSel = this.listPartidas.getSelectedIndex();
-        DefaultListModel<String> model = new DefaultListModel<>();
+        DefaultTableModel modelTable = modelTableManos();
         for(int i = 0; i < Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().size(); i++)
             {
                 int id = Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getId();
-                String str = Integer.toString(id); 
-                model.addElement(str);
+                int fj1= Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getFichasJ1().size();
+                int fj2= Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getFichasJ2().size();
+                int fm = Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getFichasMazo().size();
+                int fj = Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getFichasJugadas().size();
+                String TipoMano = Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getMovimiento().getTipoMov().nombreTipo();
+                //SI ES APUESTA TAMBIEN MUESTRA EL MONTO DE ELLA
+                if(TipoMano == "Apuesta"){
+                    double apuesta = Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getMovimiento().getTipoMov().montoApuesta();
+                    TipoMano += ": $" +Double.toString(apuesta);
+                }
+                
+                //AGREGA LA ROW A LA TABLA
+                modelTable.addRow(
+                    new Object[]{
+                        Integer.toString(id), 
+                        Integer.toString(fj1), 
+                        Integer.toString(fj2), 
+                        Integer.toString(fm), 
+                        Integer.toString(fj),
+                        TipoMano,
+                    }
+                );
             }          
-        return model;
+        return modelTable;
     }
 
 }

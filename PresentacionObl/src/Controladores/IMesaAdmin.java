@@ -15,8 +15,8 @@ import Usuarios.Usuario;
 public interface IMesaAdmin {
     
     public void setVisible(boolean b);
-    public void inicializar();
     void setControlador(ControladorJuego  c); 
+    public void inicializar();    
     public void terminar();
     public void cargarDatosAdmin(Usuario admin);
     public void CargarManosDePartida();

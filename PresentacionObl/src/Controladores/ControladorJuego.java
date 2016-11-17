@@ -13,7 +13,7 @@ import Juegos.Mano;
 import Juegos.Movimiento;
 import Juegos.Partida;
 import Juegos.RecogerFicha;
-import Juegos.TipoMov;
+import Juegos.ITipoMovimiento;
 import Usuarios.Jugador;
 import Usuarios.Usuario;
 import Vistas.Mesa;
@@ -81,6 +81,7 @@ public class ControladorJuego implements ActionListener, Observer {
                     this.vistaLogin.setVisible(false);
                     this.mesaAdmin = new MesaAdmin();
                     this.mesaAdmin.inicializar();
+                    mesaAdmin.setControlador(this);
                     mesaAdmin.cargarDatosAdmin(unUsu);
                 }
             }
@@ -89,6 +90,12 @@ public class ControladorJuego implements ActionListener, Observer {
                 vistaLogin.SetErrorMsj("Nombre de Usuario o Contraseña Incorrecto");
             }
         }
+        
+        //VER MANOS DE LA PARTIDA (MODO ADMIN)
+        else if(e.getActionCommand().equals("SALIR")){
+            mesaAdmin.CargarManosDePartida();
+        }
+        
         //VER MANOS DE LA PARTIDA (MODO ADMIN)
         else if(e.getActionCommand().equals("VERMANOS")){
             mesaAdmin.CargarManosDePartida();

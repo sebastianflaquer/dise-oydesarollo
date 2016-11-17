@@ -9,7 +9,7 @@ package Juegos;
  *
  * @author Laura
  */
-public class ColocarFicha extends TipoMov {
+public class ColocarFicha implements ITipoMovimiento{
 
     //ATRIBUTOS
     private Ficha ficha;
@@ -38,6 +38,16 @@ public class ColocarFicha extends TipoMov {
     public ColocarFicha() {
     }
     
+    @Override
+    public String nombreTipo(){
+        String retorno = "Colocar Ficha";
+        return retorno;
+    };
+    
+    @Override
+    public double montoApuesta(){
+        return -1;
+    }
     
     
 }

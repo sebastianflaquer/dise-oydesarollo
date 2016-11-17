@@ -15,7 +15,7 @@ public class Movimiento {
     //ATRIBUTOS
     private static int ultId=0;
     private int id;
-    private TipoMov tipoMov;
+    private ITipoMovimiento tipoMov;
     private Calendar fechaHora;  //REVISAR
     private Jugador jugador;
     
@@ -27,7 +27,7 @@ public class Movimiento {
         this.id = id;
     }
 
-    public void setTipoMov(TipoMov tipoMov) {
+    public void setTipoMov(ITipoMovimiento tipoMov) {
         this.tipoMov = tipoMov;
     }
 
@@ -47,7 +47,7 @@ public class Movimiento {
         return id;
     }
 
-    public TipoMov getTipoMov() {
+    public ITipoMovimiento getTipoMov() {
         return tipoMov;
     }
 
@@ -61,7 +61,7 @@ public class Movimiento {
     
     
     //CONSTRUCOTR
-    public Movimiento(TipoMov m, Jugador j) {
+    public Movimiento(ITipoMovimiento m, Jugador j) {
         this.id = ++Movimiento.ultId;
         this.tipoMov = m;
         this.fechaHora = Calendar.getInstance();

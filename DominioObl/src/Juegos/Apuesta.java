@@ -9,7 +9,7 @@ package Juegos;
  *
  * @author Laura
  */
-public class Apuesta extends TipoMov {
+public class Apuesta implements ITipoMovimiento {
     
     //ATRIBUTOS
     private double monto;
@@ -25,12 +25,20 @@ public class Apuesta extends TipoMov {
         return monto;
     }
     
-
     //CONSTRUCTOR
     public Apuesta(double monto) {
         this.monto = monto;
     }
     
+    @Override
+    public String nombreTipo(){
+        String retorno = "Apuesta";
+        return retorno;
+    };
     
+    @Override
+    public double montoApuesta(){
+        return monto;
+    }
     
 }
