@@ -132,7 +132,8 @@ public class Partida extends Observable{
         //cargar jugadores        
         //cambiarestado        
         //crear mano y agregar a la lista
-        Mano primeraMano = GetUltimaMano();
+        //Mano primeraMano = GetUltimaMano();
+        Mano primeraMano = TraeUltimaMano();
         //repartir ficha a los jugadores
         primeraMano.repartirFichasAJugadores();      
         
@@ -173,12 +174,12 @@ public class Partida extends Observable{
     public void agregarFicha(Ficha f) {
         if (f != null)
         {
-            Mano m = GetUltimaMano();
+            Mano m = this.manos.get(this.manos.size() -1);
             m.getFichasMazo().add(f);
         }
     }
   
-    //TRAE LA ULTIMA MANO
+    //COPIA Y TRAE LA ULTIMA MANO
     public Mano GetUltimaMano(){
         Mano unaM = new Mano();
         unaM.setFichasJ1(this.manos.get(this.manos.size() -1).getFichasJ1());
@@ -191,10 +192,18 @@ public class Partida extends Observable{
 //        otraM.setFichasJ1(unaM.getFichasJ1());
 //        otraM.setFichasJ2(unaM.getFichasJ2());
 //        otraM.setFichasJugadas(unaM.getFichasJugadas());
-//        otraM.setFichasMazo(unaM.getFichasMazo());
-        
+//        otraM.setFichasMazo(unaM.getFichasMazo());        
         return unaM;
     }
+    
+    //SOLO TRAE LA ULTIMA MANO
+    public Mano TraeUltimaMano(){
+        Mano unaM = this.manos.get(this.manos.size()-1);        
+        return unaM;
+    }
+    
+    
+    
     
     //AGREGA LA FICHA A LA JUGADA Y LA REMUEVE DEL LISTADO DEL JUGADOR
     public String agregarFichaAJugada(String nombreficha) {
