@@ -339,4 +339,7 @@ public class Partida extends Observable{
     }
     
     
+    
+    
+    
 }

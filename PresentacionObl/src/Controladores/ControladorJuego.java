@@ -28,7 +28,8 @@ import java.util.Observer;
  *
  * @author Mauro
  */
-public class ControladorJuego implements ActionListener, Observer {
+public class ControladorJuego implements ActionListener, Observer {    
+    
     private ILogin vistaLogin;
     private IMesa vistaMesa;
     private Partida partida;
@@ -218,8 +219,9 @@ public class ControladorJuego implements ActionListener, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.print("paso por aca");
     }
+    
 }
     
   

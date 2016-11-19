@@ -509,9 +509,13 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         if(turno == 2)
         {
             this.fichasJugadorPanel.setVisible(false);
+            this.btnMasFicha2.setVisible(true);
+            this.btnMasFicha.setVisible(false);
             this.fichasJugador2Panel.setVisible(true);
         }else{
             this.fichasJugador2Panel.setVisible(false);
+            this.btnMasFicha2.setVisible(false);
+            this.btnMasFicha.setVisible(true);            
             this.fichasJugadorPanel.setVisible(true);
         }
     }
