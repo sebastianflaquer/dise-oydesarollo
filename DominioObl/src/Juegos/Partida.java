@@ -132,7 +132,7 @@ public class Partida extends Observable{
         //cargar jugadores        
         //cambiarestado        
         //crear mano y agregar a la lista
-        Mano primeraMano = GetUltimaMano();
+        Mano primeraMano = TraeUltimaMano();
         //repartir ficha a los jugadores
         primeraMano.repartirFichasAJugadores();      
         
@@ -173,7 +173,7 @@ public class Partida extends Observable{
     public void agregarFicha(Ficha f) {
         if (f != null)
         {
-            Mano m = GetUltimaMano();
+            Mano m = TraeUltimaMano();
             m.getFichasMazo().add(f);
         }
     }
@@ -185,15 +185,12 @@ public class Partida extends Observable{
         unaM.setFichasJ2(this.manos.get(this.manos.size() -1).getFichasJ2());
         unaM.setFichasJugadas(this.manos.get(this.manos.size() -1).getFichasJugadas());
         unaM.setFichasMazo(this.manos.get(this.manos.size() -1).getFichasMazo());
-        //unaM = this.manos.get(this.manos.size() -1);
-        
-//        Mano otraM = new Mano();
-//        otraM.setFichasJ1(unaM.getFichasJ1());
-//        otraM.setFichasJ2(unaM.getFichasJ2());
-//        otraM.setFichasJugadas(unaM.getFichasJugadas());
-//        otraM.setFichasMazo(unaM.getFichasMazo());
-        
         return unaM;
+    }
+    
+    public Mano TraeUltimaMano()
+    {
+        return this.manos.get(this.manos.size() -1);
     }
     
     //AGREGA LA FICHA A LA JUGADA Y LA REMUEVE DEL LISTADO DEL JUGADOR
@@ -232,7 +229,7 @@ public class Partida extends Observable{
     
     //ELIMINA LA FICHA JUGADA DE LA LISTA DEL JUGADOR
     public void RemoveListaJugador(Ficha f){
-        Mano m = GetUltimaMano();
+        Mano m = TraeUltimaMano();
         if (this.turnoActual == 1 || this.turnoActual == 0){
             //ArrayList listaFichasJ1            
             for(int i = 0; i< m.getFichasJ1().size(); i++){
@@ -255,7 +252,7 @@ public class Partida extends Observable{
     //CHEQUEA GANADOR
     public String chequeaGanador(Ficha unaF){
         String ganador = "no";
-        Mano m = GetUltimaMano();    
+        Mano m = TraeUltimaMano();    
         if(this.turnoActual == 2){
             if(m.getFichasJ1().size() == 0){
                 ganador = "Jugador 1";
@@ -271,7 +268,7 @@ public class Partida extends Observable{
     //AGREGA LA FICHA A LA LISTA DE JUGADAS
     public boolean AddFichasJugadas(Ficha f){
         boolean retorno = false; 
-        Mano m = GetUltimaMano();
+        Mano m = TraeUltimaMano();
         String lugar = validarSiPuedeDescartar(f,m);
         
         if(lugar == "start1"){

@@ -102,11 +102,11 @@ public class ControladorJuego implements ActionListener, Observer {
         }
         //ADDFICHA
         else if(e.getActionCommand().equals("ADDFICHA")){            
-            partida.AddFichaJugador(partida.GetUltimaMano());
+            partida.AddFichaJugador(partida.TraeUltimaMano());
             vistaMesa.removeAllMesa();
             
             //ME GUARDO LA ULTIMA MANO, CREO UNA NUEVA Y LA AGREGO A LA LISTA SETEANDOLE EL TIPO DE MOVIMIENTO
-            Mano nueva = partida.GetUltimaMano();
+            Mano nueva = partida.TraeUltimaMano();
             nueva.setMovimiento(new Movimiento(new RecogerFicha(),new Jugador(200)));   //DEBO CARGAR EL JUGADOR DEL TURNO
 
             partida.getManos().add(nueva);
@@ -115,11 +115,11 @@ public class ControladorJuego implements ActionListener, Observer {
             agregaFichasMesa();
         }
         else if(e.getActionCommand().equals("ADDFICHA2")){            
-            partida.AddFichaJugador2(partida.GetUltimaMano());
+            partida.AddFichaJugador2(partida.TraeUltimaMano());
             vistaMesa.removeAllMesa2();
             
             //ME GUARDO LA ULTIMA MANO, CREO UNA NUEVA Y LA AGREGO A LA LISTA SETEANDOLE EL TIPO DE MOVIMIENTO
-            Mano nueva = partida.GetUltimaMano();
+            Mano nueva = partida.TraeUltimaMano();
             nueva.setMovimiento(new Movimiento(new RecogerFicha(),new Jugador(200)));   //DEBO CARGAR EL JUGADOR DEL TURNO
 
             partida.getManos().add(nueva);
@@ -135,7 +135,7 @@ public class ControladorJuego implements ActionListener, Observer {
                          && this.partida.getJugador2().getTipo().getSaldo() > vistaMesa.GettxtSubirApuesta() )
                 {
                      //ME GUARDO LA ULTIMA MANO, CREO UNA NUEVA Y LA AGREGO A LA LISTA SETEANDOLE EL TIPO DE MOVIMIENTO
-                    Mano nueva = partida.GetUltimaMano();
+                    Mano nueva = partida.TraeUltimaMano();
                     nueva.setMovimiento(new Movimiento(new Apuesta(vistaMesa.GettxtSubirApuesta()),new Jugador(200)));   //DEBO CARGAR EL JUGADOR DEL TURNO
 
                     partida.getManos().add(nueva);
@@ -152,7 +152,7 @@ public class ControladorJuego implements ActionListener, Observer {
             String nombreficha = e.getActionCommand();
             
             //ME GUARDO LA ULTIMA MANO, CREO UNA NUEVA Y LA AGREGO A LA LISTA SETEANDOLE EL TIPO DE MOVIMIENTO
-            Mano nueva = partida.GetUltimaMano();
+            Mano nueva = partida.TraeUltimaMano();
             nueva.setMovimiento(new Movimiento(new ColocarFicha(),new Jugador(200)));  //DEBO CARGAR EL JUGADOR DEL TURNO
 
             partida.getManos().add(nueva);

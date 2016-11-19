@@ -18,10 +18,10 @@ public class Mano {
     //================================================================================
     private static int ultId=0;
     private int id;
-    private ArrayList<Ficha> fichasJ1 = new ArrayList<Ficha>();    
-    private ArrayList<Ficha> fichasJ2 = new ArrayList<Ficha>();
-    private ArrayList<Ficha> fichasMazo = new ArrayList<Ficha>();
-    private ArrayList<Ficha> fichasJugadas = new ArrayList<Ficha>();
+    private ArrayList<Ficha> fichasJ1;    
+    private ArrayList<Ficha> fichasJ2;
+    private ArrayList<Ficha> fichasMazo;
+    private ArrayList<Ficha> fichasJugadas;
     private Movimiento movimiento;
     
     //================================================================================
@@ -34,16 +34,16 @@ public class Mano {
         this.id = id;
     }
     public void setFichasJ1(ArrayList<Ficha> fichasJ1) {
-        this.fichasJ1 = fichasJ1;
+        this.fichasJ1.addAll(fichasJ1);
     }
     public void setFichasJ2(ArrayList<Ficha> fichasJ2) {
-        this.fichasJ2 = fichasJ2;
+        this.fichasJ2.addAll(fichasJ2);
     }
     public void setFichasMazo(ArrayList<Ficha> fichasMazo) {
-        this.fichasMazo = fichasMazo;
+        this.fichasMazo.addAll(fichasMazo);
     }
     public void setFichasJugadas(ArrayList<Ficha> fichasJugadas) {
-        this.fichasJugadas = fichasJugadas;
+        this.fichasJugadas.addAll(fichasJugadas);
     }    
     public void setMovimiento(Movimiento movimiento) {
         this.movimiento = movimiento;
@@ -79,6 +79,11 @@ public class Mano {
     //================================================================================
     public Mano() {
       this.id = ++Mano.ultId;
+      this.fichasJ1 = new ArrayList<Ficha>();
+      this.fichasJ2 = new ArrayList<Ficha>();
+      this.fichasMazo = new ArrayList<Ficha>();
+      this.fichasJugadas  = new ArrayList<Ficha>();
+      
     }
        
     //================================================================================
