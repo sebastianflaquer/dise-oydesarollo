@@ -185,7 +185,8 @@ public class ControladorJuego implements ActionListener, Observer {
 
     //ACTUALIZA LAS FICHAS DE LA MESA DE LOS JUGADORES
     public void agregaFichasMesa(){        
-        ArrayList<Ficha> lfichas = partida.GetUltimaMano().getFichasJ1();        
+        //ArrayList<Ficha> lfichas = partida.GetUltimaMano().getFichasJ1();        
+        ArrayList<Ficha> lfichas = partida.TraeUltimaMano().getFichasJ1();
         for(int i = 0; i< lfichas.size(); i++){
             int val1 = lfichas.get(i).getValor1();
             int val2 = lfichas.get(i).getValor2();
@@ -196,7 +197,8 @@ public class ControladorJuego implements ActionListener, Observer {
     //AGREGAR FICHAS A MESA 2
     public void agregaFichasMesa2(){        
         //PARA EL JUGADOR 2
-        ArrayList<Ficha> lfichas2 = partida.GetUltimaMano().getFichasJ2();        
+        //ArrayList<Ficha> lfichas2 = partida.GetUltimaMano().getFichasJ2();
+        ArrayList<Ficha> lfichas2 = partida.TraeUltimaMano().getFichasJ2();        
         for(int i = 0; i< lfichas2.size(); i++){
             int val1 = lfichas2.get(i).getValor1();
             int val2 = lfichas2.get(i).getValor2();
@@ -206,7 +208,7 @@ public class ControladorJuego implements ActionListener, Observer {
     
     //AGREGAR FICHAS A TABLERO
     public void agregaFichasTablero(){ 
-        ArrayList<Ficha> listaFJ = partida.GetUltimaMano().getFichasJugadas();
+        ArrayList<Ficha> listaFJ = partida.TraeUltimaMano().getFichasJugadas();
         for(int i = 0; i< listaFJ.size(); i++){
             int val1 = listaFJ.get(i).getValor1();
             int val2 = listaFJ.get(i).getValor2();
