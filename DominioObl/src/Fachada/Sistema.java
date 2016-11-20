@@ -70,4 +70,23 @@ public class Sistema {
         }
     }
     
+    //CHEQUEA LUGAR LIBRE
+    public Partida chequeaLugarEnPartida(Usuario unUsu){
+        boolean ret = false;
+        Partida p = null;
+        int i = 0;
+        while(i < this.partidas.size() && ret == false){
+            if(this.partidas.get(i).getJugador1() == null){
+                ret = true;
+                this.partidas.get(i).setJugador1(unUsu);
+                p = this.partidas.get(i);
+            }else{
+                ret = true;
+                this.partidas.get(i).setJugador2(unUsu);
+                p = this.partidas.get(i);
+            }
+        }
+        return p;
+    }
+    
 }

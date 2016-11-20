@@ -435,10 +435,6 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         }else{
             this.LblNombre.setText("trajo null");
         }
-        
-        //JUGADOR 2
-        this.lblNombreJ2.setText(unUsu.getNomCompleto());
-        this.lblSaldoJ2.setText(Double.toString(unUsu.getTipo().getSaldo()));
     }
     
     @Override

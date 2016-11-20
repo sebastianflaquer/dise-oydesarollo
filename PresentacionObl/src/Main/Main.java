@@ -35,18 +35,12 @@ public class Main {
     public static void main(String[] args) {
         
         cargarUsuarios();
-        
-        Sistema s = Sistema.GetInstancia();
-        Partida p = new Partida();
-        s.agregarPartida(p);
-        
-        cargarFichas(p);
-        cargarPartidasDePrueba();
+        //cargarPartidasDePrueba();
         
         Iinicio vistaIni = (Iinicio) new Inicio();
-        ControladorJuego cont = new ControladorJuego(vistaIni,p);
-        vistaIni.inicializar();
+        ControladorJuego cont = new ControladorJuego(vistaIni);
         vistaIni.setControlador(cont);
+        vistaIni.inicializar();        
 
 //      ILogin vista = (ILogin) new Login();
 //      ControladorJuego cont = new ControladorJuego(vista,p);
@@ -67,28 +61,28 @@ public class Main {
     }
     
     //CARGA LAS FICHAS A LA PARTIDA
-    private static void cargarFichas(Partida p) {
-        
-        //Sistema s = Sistema.GetInstancia();
-        //CREA LA PRIMER MANO Y LA AGREGA EN LA LISTA
-        Mano m = new Mano();
-        //SE TOMA COMO QUE EL PRIMER MOVIMIENTO ES "RECOGER FICHA" 
-        m.setMovimiento(new Movimiento(new RecogerFicha(),new Jugador(200)));
-        p.agregarMano(m);
-        
-        //AGREGA LAS FICHAS AL MAZO
-        String conts = "";        
-        for(int l=0; l<= 6; l++){
-            int r = l;
-            for(r = l; r <= 6; r++){
-                conts = Integer.toString(l) + Integer.toString(r); 
-                int intCont = Integer.parseInt(conts);
-                p.agregarFicha(new Ficha( intCont, l, r));
-            }
-        }
-        //INICIA LA PARTIDA 
-        p.InicialPartida();        
-    }
+//    private static void cargarFichas(Partida p) {
+//        
+//        //Sistema s = Sistema.GetInstancia();
+//        //CREA LA PRIMER MANO Y LA AGREGA EN LA LISTA
+//        Mano m = new Mano();
+//        //SE TOMA COMO QUE EL PRIMER MOVIMIENTO ES "RECOGER FICHA" 
+//        m.setMovimiento(new Movimiento(new RecogerFicha(),new Jugador(200)));
+//        p.agregarMano(m);
+//        
+//        //AGREGA LAS FICHAS AL MAZO
+//        String conts = "";        
+//        for(int l=0; l<= 6; l++){
+//            int r = l;
+//            for(r = l; r <= 6; r++){
+//                conts = Integer.toString(l) + Integer.toString(r); 
+//                int intCont = Integer.parseInt(conts);
+//                p.agregarFicha(new Ficha( intCont, l, r));
+//            }
+//        }
+//        //INICIA LA PARTIDA 
+//        p.InicialPartida();        
+//    }
     
     
     private static void cargarPartidasDePrueba() {

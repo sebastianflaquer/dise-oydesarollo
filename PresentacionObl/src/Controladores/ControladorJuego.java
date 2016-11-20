@@ -36,11 +36,27 @@ public class ControladorJuego implements ActionListener, Observer {
     private Partida partida;
     private IMesaAdmin mesaAdmin;
     private Iinicio vistaInicio;
+       
     
-    public ControladorJuego(Iinicio vistaIni, Partida p) {
+    public ControladorJuego(Iinicio vistaIni) {
         this.vistaInicio = vistaIni;
-        this.partida = p;
+        //this.partida = Partida.GetInstancia();
     }
+    
+    public ControladorJuego(IMesa vistaM) {
+        this.vistaMesa = vistaM;
+        //this.partida = Partida.GetInstancia();
+    }
+    
+    
+//        Sistema s = Sistema.GetInstancia();
+//        Partida p = new Partida();
+//        s.agregarPartida(p);        
+//        p.cargarFichas();
+    
+    
+    
+    
     
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -61,25 +77,51 @@ public class ControladorJuego implements ActionListener, Observer {
             unUsu = unUsu.ValidarUsuario(vistaLogin.getUsuario(), vistaLogin.getContrasena());
             
             //SI EXISTE EL USUARIO
-            if(unUsu.getNombre() != null )
-            {
+            if(unUsu.getNombre() != null ){
                 //SI ES JUGADOR
                 if (unUsu.getTipo().puedoJugar())
                 {
-                    if(unUsu.ValidarSaldo(unUsu.getTipo().getSaldo(), this.partida.getApuestaActual())){
+                    Partida P = new Partida();
+                    if(unUsu.ValidarSaldo(unUsu.getTipo().getSaldo(), P.getApuestaActual())){
                         
-                        //partida.setJugador1(unUsu);
-                        
+                        //partida.setJugador1(unUsu);                        
                         this.vistaLogin.setVisible(false);
                         this.vistaMesa = new Mesa();
-                        vistaMesa.setVisible(true);    
-                        vistaMesa.deshabilitarPanelJugador(partida.getTurnoActual());
-                        vistaMesa.CargarDatosDelJugador(unUsu);
-                        vistaMesa.SetApuestaActual(Double.toString(partida.getApuestaActual()));
-                        vistaMesa.setControlador(this);
+                        
+                        vistaMesa.setVisible(true);
+                        ControladorJuego contU = new ControladorJuego(vistaMesa);
+                        vistaMesa.setControlador(contU);
+                        
+                        Sistema s = Sistema.GetInstancia();
+                        Partida P2 = s.chequeaLugarEnPartida(unUsu);                      
+                        if(P2 == null){
+                            P.setJugador1(unUsu);
+                            P.setEstado("Esperando Jugador");
+                            s.agregarPartida(P);
+                            vistaMesa.CargarDatosDelJugador(unUsu);
+                        }else{
+                            if(P2.getJugador2() == null){
+                                P.setEstado("Esperando Jugador");
+                                vistaMesa.CargarDatosDelJugador(unUsu);
+                            }else{
+                                P.setJugador2(unUsu);
+                                P.setEstado("En Juego");
+                                P.InicialPartida();
+                            }
+                        }
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        //vistaMesa.deshabilitarPanelJugador(partida.getTurnoActual());
+                        //vistaMesa.CargarDatosDelJugador(unUsu);
+                        //vistaMesa.SetApuestaActual(Double.toString(partida.getApuestaActual()));
                         //AGREGA LAS FICHAS DE CADA JUGADOR A LA MESA
-                        agregaFichasMesa();
-                        agregaFichasMesa2();
+                        //agregaFichasMesa();
+                        //agregaFichasMesa2();
                         //vistaMesa.CargarFichasDelJugador();
                         //vistaMesa.SetNombreUsuario(unUsu.getNomCompleto());
                     }

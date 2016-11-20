@@ -16,6 +16,11 @@ import java.util.Observable;
 
 public class Partida extends Observable{
     
+    
+    
+    
+    
+    
     //================================================================================
     //ATRIBUTOS
     //================================================================================
@@ -23,11 +28,23 @@ public class Partida extends Observable{
     private int id;
     private Usuario jugador1;
     private Usuario jugador2;
-    private String estado;    // "En Juego", "Finalizado" o "Sin Iniciar" 
+    private String estado;    // "En Juego", "Finalizado" o "Sin Iniciar" o "Esperando Jugador"
     private static double apuestaInicial = 100; //apuesta inicial 100
     private ArrayList<Mano> manos = new ArrayList<Mano>();
     private int turnoActual;
     private double apuestaActual;
+    
+    private static Partida instancia;
+    
+    
+    
+    public static Partida GetInstancia()
+    {
+        if (instancia == null) 
+            instancia = new Partida();       
+        
+        return instancia;
+    }
 
 
 
@@ -134,10 +151,32 @@ public class Partida extends Observable{
         //crear mano y agregar a la lista
         Mano primeraMano = TraeUltimaMano();
         //repartir ficha a los jugadores
-        primeraMano.repartirFichasAJugadores();      
+        primeraMano.repartirFichasAJugadores();
+    }
+    
+    //CARGA LAS FICHAS A LA PARTIDA
+    public void cargarFichas(){        
+        //Sistema s = Sistema.GetInstancia();
+        //CREA LA PRIMER MANO Y LA AGREGA EN LA LISTA
+        Mano m = new Mano();
+        //SE TOMA COMO QUE EL PRIMER MOVIMIENTO ES "RECOGER FICHA" 
+        m.setMovimiento(new Movimiento(new RecogerFicha(),new Jugador(200)));
+        agregarMano(m);
         
-        
-    }   
+        //AGREGA LAS FICHAS AL MAZO
+        String conts = "";        
+        for(int l=0; l<= 6; l++){
+            int r = l;
+            for(r = l; r <= 6; r++){
+                conts = Integer.toString(l) + Integer.toString(r); 
+                int intCont = Integer.parseInt(conts);
+                this.agregarFicha(new Ficha( intCont, l, r));
+            }
+        }
+        //INICIA LA PARTIDA 
+        this.InicialPartida();        
+    }
+    
     
     //SUMAR SALDO
     public void SumarSaldos(){}
