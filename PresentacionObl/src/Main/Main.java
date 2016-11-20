@@ -72,6 +72,8 @@ public class Main {
         //Sistema s = Sistema.GetInstancia();
         //CREA LA PRIMER MANO Y LA AGREGA EN LA LISTA
         Mano m = new Mano();
+        //SE TOMA COMO QUE EL PRIMER MOVIMIENTO ES "RECOGER FICHA" 
+        m.setMovimiento(new Movimiento(new RecogerFicha(),new Jugador(200)));
         p.agregarMano(m);
         
         //AGREGA LAS FICHAS AL MAZO
