@@ -16,6 +16,7 @@ import Juegos.RecogerFicha;
 import Juegos.ITipoMovimiento;
 import Usuarios.Jugador;
 import Usuarios.Usuario;
+import Vistas.Login;
 import Vistas.Mesa;
 import Vistas.MesaAdmin;
 import java.awt.event.ActionEvent;
@@ -34,16 +35,27 @@ public class ControladorJuego implements ActionListener, Observer {
     private IMesa vistaMesa;
     private Partida partida;
     private IMesaAdmin mesaAdmin;
+    private Iinicio vistaInicio;
     
-    public ControladorJuego(ILogin vistaLog, Partida p) {
-        this.vistaLogin = vistaLog;
+    public ControladorJuego(Iinicio vistaIni, Partida p) {
+        this.vistaInicio = vistaIni;
         this.partida = p;
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
+        //CREA UN NEW LOGIN
+        if(e.getActionCommand().equals("NEW")){
+            
+            this.vistaLogin = (ILogin) new Login();
+            vistaLogin.inicializar();
+            vistaLogin.setControlador(this);
+        
+            //aca vamos a hacer todo el nuevo login
+            System.out.print("hola");
+        }
         //LOGIN
-        if(e.getActionCommand().equals("LOGIN")){
+        else if(e.getActionCommand().equals("LOGIN")){
             //VALIDAR Y CARGAR USUARIO            
             Usuario unUsu = new Usuario();
             unUsu = unUsu.ValidarUsuario(vistaLogin.getUsuario(), vistaLogin.getContrasena());

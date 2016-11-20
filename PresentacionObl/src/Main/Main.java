@@ -7,6 +7,7 @@ package Main;
 
 import Controladores.ControladorJuego;
 import Controladores.ILogin;
+import Controladores.Iinicio;
 import Fachada.Sistema;
 import Juegos.Apuesta;
 import Juegos.Ficha;
@@ -18,6 +19,7 @@ import Usuarios.Admin;
 import Usuarios.ITipo;
 import Usuarios.Jugador;
 import Usuarios.Usuario;
+import Vistas.Inicio;
 import Vistas.Login;
 import java.util.ArrayList;
 
@@ -38,16 +40,19 @@ public class Main {
         Partida p = new Partida();
         s.agregarPartida(p);
         
-        //p.setJugador1(s.getUsuarios().get(1).getTipo().);
-        
         cargarFichas(p);
         cargarPartidasDePrueba();
+        
+        Iinicio vistaIni = (Iinicio) new Inicio();
+        ControladorJuego cont = new ControladorJuego(vistaIni,p);
+        vistaIni.inicializar();
+        vistaIni.setControlador(cont);
 
-        ILogin vista = (ILogin) new Login();
-
-        ControladorJuego cont = new ControladorJuego(vista,p);
-        vista.inicializar();
-        vista.setControlador(cont);
+//      ILogin vista = (ILogin) new Login();
+//      ControladorJuego cont = new ControladorJuego(vista,p);
+//      vista.inicializar();
+//      vista.setControlador(cont);
+//      p.setJugador1(s.getUsuarios().get(1).getTipo().);
         
     }
     
