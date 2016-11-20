@@ -98,8 +98,7 @@ public class Mano {
             Ficha unaF = ObtenerFichaRandom();
             fichasJ1.add(unaF);
             actualizarFichasMazo(unaF);
-        }
-        
+        }        
         //Cargo lista fichas jugador 2
         for(int i2 = 0; i2<7; i2++){
             Ficha unaF = ObtenerFichaRandom();

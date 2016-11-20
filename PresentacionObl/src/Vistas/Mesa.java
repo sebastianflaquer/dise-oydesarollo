@@ -47,28 +47,18 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         jPanel5 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        btnAumentarApuesta = new javax.swing.JButton();
         LblNombre = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         lblSaldo = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         lblApuestaActual = new javax.swing.JLabel();
         txtAumentarApuesta = new javax.swing.JTextField();
+        btnAumentarApuesta = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         btnMasFicha = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         fichasJugadorPanel = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        lblFichasJ2 = new javax.swing.JLabel();
-        btnMasFicha2 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        fichasJugador2Panel = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        lblNombreJ2 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        lblSaldoJ2 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPaneFichasJuego = new javax.swing.JScrollPane();
         fichasJuegoPanel = new javax.swing.JPanel();
@@ -129,7 +119,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(35, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(btnAumentarApuesta)
@@ -191,81 +181,6 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        lblFichasJ2.setText("Fichas J2:");
-
-        btnMasFicha2.setText("+ 1");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, btnMasFicha2, org.jdesktop.beansbinding.ELProperty.create("ADDFICHA2"), btnMasFicha2, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
-        bindingGroup.addBinding(binding);
-
-        fichasJugador2Panel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-        jScrollPane1.setViewportView(fichasJugador2Panel);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(lblFichasJ2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 399, Short.MAX_VALUE)
-                        .addComponent(btnMasFicha2))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblFichasJ2)
-                    .addComponent(btnMasFicha2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
-        );
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel5.setText("Nombre J2:");
-
-        jLabel6.setText("Saldo J2:");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblNombreJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblSaldoJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(lblNombreJ2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(lblSaldoJ2))
-                .addContainerGap(30, Short.MAX_VALUE))
-        );
-
         fichasJuegoPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         fichasJuegoPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPaneFichasJuego.setViewportView(fichasJuegoPanel);
@@ -277,20 +192,17 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPaneFichasJuego)
-                .addContainerGap())
-            .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(237, 237, 237)
                 .addComponent(lblGanador)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(283, Short.MAX_VALUE))
+            .addComponent(jScrollPaneFichasJuego)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPaneFichasJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(jScrollPaneFichasJuego, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblGanador))
         );
 
@@ -303,21 +215,15 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -369,32 +275,22 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     private javax.swing.JLabel LblNombre;
     private javax.swing.JButton btnAumentarApuesta;
     private javax.swing.JButton btnMasFicha;
-    private javax.swing.JButton btnMasFicha2;
     private javax.swing.JPanel fichasJuegoPanel;
-    private javax.swing.JPanel fichasJugador2Panel;
     private javax.swing.JPanel fichasJugadorPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JOptionPane jOptionPane1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPaneFichasJuego;
     private javax.swing.JLabel lblApuestaActual;
-    private javax.swing.JLabel lblFichasJ2;
     private javax.swing.JLabel lblGanador;
-    private javax.swing.JLabel lblNombreJ2;
     private javax.swing.JLabel lblSaldo;
-    private javax.swing.JLabel lblSaldoJ2;
     private javax.swing.JTextField txtAumentarApuesta;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
@@ -421,7 +317,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     @Override
     public void setControlador(ControladorJuego c) {
         this.btnMasFicha.addActionListener(c);
-        this.btnMasFicha2.addActionListener(c);
+        //this.btnMasFicha2.addActionListener(c);
         this.btnAumentarApuesta.addActionListener(c);
     }
 
@@ -442,11 +338,11 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     public void removeAllMesa(){
         this.fichasJugadorPanel.removeAll();
     }
-    @Override
-    //ELIMINA LOS BOTONES DE LA MESA 2
-    public void removeAllMesa2(){
-        this.fichasJugador2Panel.removeAll();
-    }
+//    @Override
+//    //ELIMINA LOS BOTONES DE LA MESA 2
+//    public void removeAllMesa2(){
+//        this.fichasJugador2Panel.removeAll();
+//    }
     
     @Override
     //ELIMINA LOS BOTONES DEL TABLERO
@@ -470,21 +366,21 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         validate();
     }
 
-    @Override
-    //CARGA LAS FICHAS DEL JUGAROR
-    public void CargarFichasDelJugador2(int val1, int val2, ControladorJuego c){
-        
-        ImageIcon image = new ImageIcon("D:/resources/"+val1+"-"+val2+".jpg");
-        
-        JButton btn = new JButton(image);
-        btn.setPreferredSize( new Dimension(74, 38));
-        btn.setBackground(Color.white);
-        btn.setContentAreaFilled(false);
-        btn.setActionCommand(val1+"-"+val2);
-        btn.addActionListener(c);
-        this.fichasJugador2Panel.add(val1+"-"+val2,btn);
-        validate();
-    }
+//    @Override
+//    //CARGA LAS FICHAS DEL JUGAROR
+//    public void CargarFichasDelJugador2(int val1, int val2, ControladorJuego c){
+//        
+//        ImageIcon image = new ImageIcon("D:/resources/"+val1+"-"+val2+".jpg");
+//        
+//        JButton btn = new JButton(image);
+//        btn.setPreferredSize( new Dimension(74, 38));
+//        btn.setBackground(Color.white);
+//        btn.setContentAreaFilled(false);
+//        btn.setActionCommand(val1+"-"+val2);
+//        btn.addActionListener(c);
+//        this.fichasJugador2Panel.add(val1+"-"+val2,btn);
+//        validate();
+//    }
     
     @Override
     //CARGA FICHAS DEL TABLERO
@@ -500,33 +396,33 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     }
         
     //SEGUN EL TURNO, DESHABILITO EL PANEL DEL JUGADOR
-    @Override
-    public void deshabilitarPanelJugador (int turno){
-        if(turno == 2)
-        {
-            this.fichasJugadorPanel.setVisible(false);
-            this.btnMasFicha2.setVisible(true);
-            this.btnMasFicha.setVisible(false);
-            this.fichasJugador2Panel.setVisible(true);
-        }else{
-            this.fichasJugador2Panel.setVisible(false);
-            this.btnMasFicha2.setVisible(false);
-            this.btnMasFicha.setVisible(true);            
-            this.fichasJugadorPanel.setVisible(true);
-        }
-    }
+//    @Override
+//    public void deshabilitarPanelJugador (int turno){
+//        if(turno == 2)
+//        {
+//            this.fichasJugadorPanel.setVisible(false);
+//            this.btnMasFicha2.setVisible(true);
+//            this.btnMasFicha.setVisible(false);
+//            this.fichasJugador2Panel.setVisible(true);
+//        }else{
+//            this.fichasJugador2Panel.setVisible(false);
+//            this.btnMasFicha2.setVisible(false);
+//            this.btnMasFicha.setVisible(true);            
+//            this.fichasJugadorPanel.setVisible(true);
+//        }
+//    }
 
     @Override
     public void SetApuestaActual(String mensaje) {
         this.lblApuestaActual.setText(mensaje);
     }
     
-    @Override
-    public void ocultarPanelesGanador(String jugador){
-        this.fichasJuegoPanel.setVisible(false);
-        this.fichasJugador2Panel.setVisible(false);
-        this.lblGanador.setText(jugador);
-    }
+//    @Override
+//    public void ocultarPanelesGanador(String jugador){
+//        this.fichasJuegoPanel.setVisible(false);
+//        this.fichasJugador2Panel.setVisible(false);
+//        this.lblGanador.setText(jugador);
+//    }
     
     
 }

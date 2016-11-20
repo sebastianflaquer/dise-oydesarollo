@@ -16,11 +16,6 @@ import java.util.Observable;
 
 public class Partida extends Observable{
     
-    
-    
-    
-    
-    
     //================================================================================
     //ATRIBUTOS
     //================================================================================
@@ -36,8 +31,6 @@ public class Partida extends Observable{
     
     private static Partida instancia;
     
-    
-    
     public static Partida GetInstancia()
     {
         if (instancia == null) 
@@ -45,8 +38,6 @@ public class Partida extends Observable{
         
         return instancia;
     }
-
-
 
     //================================================================================
     //SETTERS
@@ -141,17 +132,26 @@ public class Partida extends Observable{
     public void cambiarTurno(){
         if(this.turnoActual == 1 || this.turnoActual == 0)
             this.turnoActual = 2;
-        else { this.turnoActual = 1;}            
+        else { this.turnoActual = 1;}   
     }   
     
     //INICIAR PARTIDA
     public void InicialPartida(){
-        //cargar jugadores        
-        //cambiarestado        
+        
+        //CARGA LAS FICHAS
+        cargarFichas();
         //crear mano y agregar a la lista
         Mano primeraMano = TraeUltimaMano();
-        //repartir ficha a los jugadores
+        //Agrega las fichas a cada jugajor
         primeraMano.repartirFichasAJugadores();
+        
+        this.setChanged();
+        this.notifyObservers("llega");
+        //agregaFichasMesa();
+        //cargar jugadores
+        //cambiarestado
+        //repartir ficha a los jugadores
+        
     }
     
     //CARGA LAS FICHAS A LA PARTIDA
@@ -173,8 +173,6 @@ public class Partida extends Observable{
                 this.agregarFicha(new Ficha( intCont, l, r));
             }
         }
-        //INICIA LA PARTIDA 
-        this.InicialPartida();        
     }
     
     

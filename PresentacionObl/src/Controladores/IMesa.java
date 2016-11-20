@@ -30,19 +30,19 @@ public interface IMesa {
     public void CargarDatosDelJugador(Usuario unUsu);
     public void CargarFichasDelJugador(int val1, int val2, ControladorJuego c);    
     //PARA EL SEGUNDO JUGADOR
-    public void CargarFichasDelJugador2(int val1, int val2, ControladorJuego c);
+//    public void CargarFichasDelJugador2(int val1, int val2, ControladorJuego c);
     
     //REMOVE ALL MESA
     public void removeAllMesa();
-    public void removeAllMesa2();
+//    public void removeAllMesa2();
     
     public void removeAllTablero();
     
     public void CargarFichasAlTablero(int val1, int val2, ControladorJuego c);
     
-    public void deshabilitarPanelJugador (int turno);
+//    public void deshabilitarPanelJugador (int turno);
 
-    public void ocultarPanelesGanador(String jugador);
+//    public void ocultarPanelesGanador(String jugador);
     
     
 }

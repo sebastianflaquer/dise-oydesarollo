@@ -80,10 +80,12 @@ public class Sistema {
                 ret = true;
                 this.partidas.get(i).setJugador1(unUsu);
                 p = this.partidas.get(i);
+                unUsu.getTipo().setNumeroJug(1);
             }else{
                 ret = true;
                 this.partidas.get(i).setJugador2(unUsu);
                 p = this.partidas.get(i);
+                unUsu.getTipo().setNumeroJug(2);
             }
         }
         return p;

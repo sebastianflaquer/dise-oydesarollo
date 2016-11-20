@@ -48,14 +48,10 @@ public class ControladorJuego implements ActionListener, Observer {
         //this.partida = Partida.GetInstancia();
     }
     
-    
 //        Sistema s = Sistema.GetInstancia();
 //        Partida p = new Partida();
 //        s.agregarPartida(p);        
 //        p.cargarFichas();
-    
-    
-    
     
     
     @Override
@@ -66,9 +62,6 @@ public class ControladorJuego implements ActionListener, Observer {
             this.vistaLogin = (ILogin) new Login();
             vistaLogin.inicializar();
             vistaLogin.setControlador(this);
-        
-            //aca vamos a hacer todo el nuevo login
-            System.out.print("hola");
         }
         //LOGIN
         else if(e.getActionCommand().equals("LOGIN")){
@@ -96,31 +89,32 @@ public class ControladorJuego implements ActionListener, Observer {
                         Partida P2 = s.chequeaLugarEnPartida(unUsu);                      
                         if(P2 == null){
                             P.setJugador1(unUsu);
+                            unUsu.getTipo().setNumeroJug(1);
+                            P.addObserver(contU);
                             P.setEstado("Esperando Jugador");
                             s.agregarPartida(P);
                             vistaMesa.CargarDatosDelJugador(unUsu);
                         }else{
                             if(P2.getJugador2() == null){
-                                P.setEstado("Esperando Jugador");
+                                P2.setEstado("Esperando Jugador");
                                 vistaMesa.CargarDatosDelJugador(unUsu);
                             }else{
-                                P.setJugador2(unUsu);
-                                P.setEstado("En Juego");
-                                P.InicialPartida();
+                                //P.setJugador2(unUsu);
+                                P2.setEstado("En Juego");
+                                vistaMesa.CargarDatosDelJugador(unUsu);
+                                P2.addObserver(contU);
+                                P2.InicialPartida();
+                                this.partida = P2;
+                                //CARGA LA APUESTA ACTUAL
+                                vistaMesa.SetApuestaActual(Double.toString(P2.getApuestaActual()));
+                                agregaFichasMesa(P2);
+                                
                             }
                         }
                         
-                        
-                        
-                        
-                        
-                        
-                        
-                        //vistaMesa.deshabilitarPanelJugador(partida.getTurnoActual());
-                        //vistaMesa.CargarDatosDelJugador(unUsu);
                         //vistaMesa.SetApuestaActual(Double.toString(partida.getApuestaActual()));
                         //AGREGA LAS FICHAS DE CADA JUGADOR A LA MESA
-                        //agregaFichasMesa();
+                        
                         //agregaFichasMesa2();
                         //vistaMesa.CargarFichasDelJugador();
                         //vistaMesa.SetNombreUsuario(unUsu.getNomCompleto());
@@ -167,21 +161,21 @@ public class ControladorJuego implements ActionListener, Observer {
             partida.getManos().add(nueva);
             
             //AGREGO FICHAS A LA MESA JUGADOR 1
-            agregaFichasMesa();
+            agregaFichasMesa(partida);
         }
-        else if(e.getActionCommand().equals("ADDFICHA2")){            
-            partida.AddFichaJugador2(partida.TraeUltimaMano());
-            vistaMesa.removeAllMesa2();
-            
-            //ME GUARDO LA ULTIMA MANO, CREO UNA NUEVA Y LA AGREGO A LA LISTA SETEANDOLE EL TIPO DE MOVIMIENTO
-            Mano nueva = partida.GetUltimaMano();
-            nueva.setMovimiento(new Movimiento(new RecogerFicha(),new Jugador(200)));   //DEBO CARGAR EL JUGADOR DEL TURNO
-
-            partida.getManos().add(nueva);
-            
-            //AGREGO FICHAS A LA MESA JUGADOR 2
-            agregaFichasMesa2();
-        }
+//        else if(e.getActionCommand().equals("ADDFICHA2")){            
+//            partida.AddFichaJugador2(partida.TraeUltimaMano());
+//            //vistaMesa.removeAllMesa2();
+//            
+//            //ME GUARDO LA ULTIMA MANO, CREO UNA NUEVA Y LA AGREGO A LA LISTA SETEANDOLE EL TIPO DE MOVIMIENTO
+//            Mano nueva = partida.GetUltimaMano();
+//            nueva.setMovimiento(new Movimiento(new RecogerFicha(),new Jugador(200)));   //DEBO CARGAR EL JUGADOR DEL TURNO
+//
+//            partida.getManos().add(nueva);
+//            
+//            //AGREGO FICHAS A LA MESA JUGADOR 2
+//            agregaFichasMesa2();
+//        }
         else if(e.getActionCommand().equals("SubirApuesta"))
         {
             if (vistaMesa.GettxtSubirApuesta() != 0)
@@ -220,18 +214,18 @@ public class ControladorJuego implements ActionListener, Observer {
                 //AGREGO FUCHAS A LA MESA DE JUEGO
                 agregaFichasTablero();                
                 //ACTUALIZO
-                vistaMesa.deshabilitarPanelJugador(partida.getTurnoActual());
+//                vistaMesa.deshabilitarPanelJugador(partida.getTurnoActual());
                 vistaMesa.removeAllMesa();
-                agregaFichasMesa();
-                vistaMesa.removeAllMesa2();
-                agregaFichasMesa2();            
+                agregaFichasMesa(partida);
+//              vistaMesa.removeAllMesa2();
+                //agregaFichasMesa2(this.partida);            
             }
             //SI HAY UN GANADOR
             else{
                 if(aux == "jugador1"){
-                    vistaMesa.ocultarPanelesGanador("Gana Jugador 1");
+//                    vistaMesa.ocultarPanelesGanador("Gana Jugador 1");
                 }else if(aux == "jugador2"){
-                    vistaMesa.ocultarPanelesGanador("Gana Jugador 2");
+//                    vistaMesa.ocultarPanelesGanador("Gana Jugador 2");
                 }
             }
         }
@@ -239,9 +233,9 @@ public class ControladorJuego implements ActionListener, Observer {
     }
 
     //ACTUALIZA LAS FICHAS DE LA MESA DE LOS JUGADORES
-    public void agregaFichasMesa(){        
-        //ArrayList<Ficha> lfichas = partida.GetUltimaMano().getFichasJ1();        
-        ArrayList<Ficha> lfichas = partida.TraeUltimaMano().getFichasJ1();
+    public void agregaFichasMesa(Partida p){        
+        //ArrayList<Ficha> lfichas = partida.GetUltimaMano().getFichasJ1();
+        ArrayList<Ficha> lfichas = p.TraeUltimaMano().getFichasJ1();
         for(int i = 0; i< lfichas.size(); i++){
             int val1 = lfichas.get(i).getValor1();
             int val2 = lfichas.get(i).getValor2();
@@ -250,16 +244,16 @@ public class ControladorJuego implements ActionListener, Observer {
     } 
     
     //AGREGAR FICHAS A MESA 2
-    public void agregaFichasMesa2(){        
-        //PARA EL JUGADOR 2
-        //ArrayList<Ficha> lfichas2 = partida.GetUltimaMano().getFichasJ2();
-        ArrayList<Ficha> lfichas2 = partida.TraeUltimaMano().getFichasJ2();        
-        for(int i = 0; i< lfichas2.size(); i++){
-            int val1 = lfichas2.get(i).getValor1();
-            int val2 = lfichas2.get(i).getValor2();
-            vistaMesa.CargarFichasDelJugador2(val1, val2, this);
-        }
-    }
+    //public void agregaFichasMesa2(){        
+//        //PARA EL JUGADOR 2
+//        //ArrayList<Ficha> lfichas2 = partida.GetUltimaMano().getFichasJ2();
+//        ArrayList<Ficha> lfichas2 = partida.TraeUltimaMano().getFichasJ2();        
+//        for(int i = 0; i< lfichas2.size(); i++){
+//            int val1 = lfichas2.get(i).getValor1();
+//            int val2 = lfichas2.get(i).getValor2();
+////            vistaMesa.CargarFichasDelJugador2(val1, val2, this);
+//        }
+//    }
     
     //AGREGAR FICHAS A TABLERO
     public void agregaFichasTablero(){ 
@@ -274,6 +268,12 @@ public class ControladorJuego implements ActionListener, Observer {
     @Override
     public void update(Observable o, Object arg) {
         System.out.print("paso por aca");
+        
+        agregaFichasMesa(partida);
+        //Actualizar fichas del mazo
+        //actualizar fichas de cada jugador
+        //actualizar fichas del tablero
+        
     }
     
 }

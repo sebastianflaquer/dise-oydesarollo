@@ -24,6 +24,11 @@ public class Admin implements ITipo {
         return -1;
     }
     
-   
+    @Override
+    public int getNumeroJug(){
+        return -1;
+    }
+    
+    public void setNumeroJug(int numeroJug){}
     
 }
