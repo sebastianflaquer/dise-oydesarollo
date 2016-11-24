@@ -107,8 +107,7 @@ public class ControladorJuego implements ActionListener, Observer {
                                 this.partida = P2;
                                 //CARGA LA APUESTA ACTUAL
                                 vistaMesa.SetApuestaActual(Double.toString(P2.getApuestaActual()));
-                                agregaFichasMesa(P2);
-                                
+                                agregaFichasMesa(P2);                                
                             }
                         }
                         

@@ -146,7 +146,7 @@ public class Partida extends Observable{
         primeraMano.repartirFichasAJugadores();
         
         this.setChanged();
-        this.notifyObservers("llega");
+        this.notifyObservers(primeraMano);
         //agregaFichasMesa();
         //cargar jugadores
         //cambiarestado
