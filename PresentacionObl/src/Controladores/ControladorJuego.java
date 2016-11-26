@@ -166,18 +166,17 @@ public class ControladorJuego implements ActionListener, Observer {
             partida.getManos().add(nueva);
             
             //AGREGO FICHAS A LA MESA JUGADOR 1
-            agregaFichasMesa(partida, this);
+            //agregaFichasMesa(partida, this);
         }
         
         //SUBIR APUESTA
-        else if(e.getActionCommand().equals("SubirApuesta"))
-        {
-            if (vistaMesa.GettxtSubirApuesta() != 0)
-            {
-                if(this.partida.getJugador1().getTipo().getSaldo() > vistaMesa.GettxtSubirApuesta()
-                         && this.partida.getJugador2().getTipo().getSaldo() > vistaMesa.GettxtSubirApuesta() )
-                {
-                     //ME GUARDO LA ULTIMA MANO, CREO UNA NUEVA Y LA AGREGO A LA LISTA SETEANDOLE EL TIPO DE MOVIMIENTO
+        else if(e.getActionCommand().equals("SubirApuesta")){
+            
+            if (vistaMesa.GettxtSubirApuesta() != 0){
+                if(this.partida.getJugador1().getTipo().getSaldo() > vistaMesa.GettxtSubirApuesta() && 
+                   this.partida.getJugador2().getTipo().getSaldo() > vistaMesa.GettxtSubirApuesta()){
+                    
+                    //ME GUARDO LA ULTIMA MANO, CREO UNA NUEVA Y LA AGREGO A LA LISTA SETEANDOLE EL TIPO DE MOVIMIENTO
                     Mano nueva = partida.GetUltimaMano();
                     nueva.setMovimiento(new Movimiento(new Apuesta(vistaMesa.GettxtSubirApuesta()),new Jugador(200)));   //DEBO CARGAR EL JUGADOR DEL TURNO
 
@@ -189,17 +188,16 @@ public class ControladorJuego implements ActionListener, Observer {
             }
         }
         //BOTONFICHA
-        else if(e.getActionCommand().equals(e.getActionCommand())){            
+        else if(e.getActionCommand().equals(e.getActionCommand())){
             //AGREGAR FICHA A FICHAS JUGADAS
             //partida.ingresarMovimiento(e);
             String nombreficha = e.getActionCommand();
             
             //ME GUARDO LA ULTIMA MANO, CREO UNA NUEVA Y LA AGREGO A LA LISTA SETEANDOLE EL TIPO DE MOVIMIENTO
-            Mano nueva = partida.GetUltimaMano();
+            Mano nueva = this.partida.GetUltimaMano();
             nueva.setMovimiento(new Movimiento(new ColocarFicha(),new Jugador(200)));  //DEBO CARGAR EL JUGADOR DEL TURNO
 
             partida.getManos().add(nueva);
-            
             
             String aux = partida.agregarFichaAJugada(nombreficha);
             //SI NO HAY UN GANADOR
@@ -210,7 +208,7 @@ public class ControladorJuego implements ActionListener, Observer {
                 //ACTUALIZO
 //                vistaMesa.deshabilitarPanelJugador(partida.getTurnoActual());
                 vistaMesa.removeAllMesa();
-                agregaFichasMesa(partida, this);
+                agregaFichasMesa(partida, this.usu.getNombre());
 //              vistaMesa.removeAllMesa2();
                 //agregaFichasMesa2(this.partida);            
             }
@@ -265,9 +263,9 @@ public class ControladorJuego implements ActionListener, Observer {
         if(arg.toString().equalsIgnoreCase("AgregarFichasMesa")){
             agregaFichasMesa((Partida) o, this.usu.getNombre());
         }
-        else if(){
-        
-        }
+//        else if(){
+//        
+//        }
         else{
             System.out.print("Ultimo Else.");
         }

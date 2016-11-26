@@ -151,8 +151,7 @@ public class Partida extends Observable{
         //agregaFichasMesa();
         //cargar jugadores
         //cambiarestado
-        //repartir ficha a los jugadores
-        
+        //repartir ficha a los jugadores        
     }
     
     //CARGA LAS FICHAS A LA PARTIDA
