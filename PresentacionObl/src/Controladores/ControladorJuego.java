@@ -36,6 +36,7 @@ public class ControladorJuego implements ActionListener, Observer {
     private Partida partida;
     private IMesaAdmin mesaAdmin;
     private Iinicio vistaInicio;
+    private Usuario usu;
        
     
     public ControladorJuego(Iinicio vistaIni) {
@@ -77,6 +78,7 @@ public class ControladorJuego implements ActionListener, Observer {
                     Partida P = new Partida();
                     if(unUsu.ValidarSaldo(unUsu.getTipo().getSaldo(), P.getApuestaActual())){
                         
+                        
                         //partida.setJugador1(unUsu);                        
                         this.vistaLogin.setVisible(false);
                         this.vistaMesa = new Mesa();
@@ -84,6 +86,7 @@ public class ControladorJuego implements ActionListener, Observer {
                         vistaMesa.setVisible(true);
                         ControladorJuego contU = new ControladorJuego(vistaMesa);
                         vistaMesa.setControlador(contU);
+                        contU.usu = unUsu;
                         
                         Sistema s = Sistema.GetInstancia();
                         Partida P2 = s.chequeaLugarEnPartida(unUsu);                      
@@ -107,8 +110,8 @@ public class ControladorJuego implements ActionListener, Observer {
                                 this.partida = P2;
                                 //CARGA LA APUESTA ACTUAL
                                 vistaMesa.SetApuestaActual(Double.toString(P2.getApuestaActual()));
-                                agregaFichasMesa(P2);
-                                
+                                //ACA NO VA PORQUE ES UN EVENTO PARA LOS 3 CONTOLADORES
+                                //agregaFichasMesa(P2, contU);
                             }
                         }
                         
@@ -161,7 +164,7 @@ public class ControladorJuego implements ActionListener, Observer {
             partida.getManos().add(nueva);
             
             //AGREGO FICHAS A LA MESA JUGADOR 1
-            agregaFichasMesa(partida);
+            agregaFichasMesa(partida, this);
         }
 //        else if(e.getActionCommand().equals("ADDFICHA2")){            
 //            partida.AddFichaJugador2(partida.TraeUltimaMano());
@@ -216,7 +219,7 @@ public class ControladorJuego implements ActionListener, Observer {
                 //ACTUALIZO
 //                vistaMesa.deshabilitarPanelJugador(partida.getTurnoActual());
                 vistaMesa.removeAllMesa();
-                agregaFichasMesa(partida);
+                agregaFichasMesa(partida, this);
 //              vistaMesa.removeAllMesa2();
                 //agregaFichasMesa2(this.partida);            
             }
@@ -233,15 +236,27 @@ public class ControladorJuego implements ActionListener, Observer {
     }
 
     //ACTUALIZA LAS FICHAS DE LA MESA DE LOS JUGADORES
-    public void agregaFichasMesa(Partida p){        
-        //ArrayList<Ficha> lfichas = partida.GetUltimaMano().getFichasJ1();
-        ArrayList<Ficha> lfichas = p.TraeUltimaMano().getFichasJ1();
-        for(int i = 0; i< lfichas.size(); i++){
-            int val1 = lfichas.get(i).getValor1();
-            int val2 = lfichas.get(i).getValor2();
-            vistaMesa.CargarFichasDelJugador(val1, val2, this);
+    public void agregaFichasMesa(Partida p, ControladorJuego cont){
+            if (cont.usu.getNombre().equalsIgnoreCase(p.getJugador1().getNombre()))
+            {
+                ArrayList<Ficha> lfichas = p.TraeUltimaMano().getFichasJ1();
+                    for(int i = 0; i< lfichas.size(); i++){
+                    int val1 = lfichas.get(i).getValor1();
+                    int val2 = lfichas.get(i).getValor2();
+                    vistaMesa.CargarFichasDelJugador(val1, val2, this);
+                }                
+            }
+            else
+                {
+                ArrayList<Ficha> lfichas2 = p.TraeUltimaMano().getFichasJ2();
+                for(int i = 0; i< lfichas2.size(); i++){
+                    int val1 = lfichas2.get(i).getValor1();
+                    int val2 = lfichas2.get(i).getValor2();
+                    vistaMesa.CargarFichasDelJugador(val1, val2, this);
+                }
+            }
+        
         }
-    } 
     
     //AGREGAR FICHAS A MESA 2
     //public void agregaFichasMesa2(){        
@@ -269,7 +284,7 @@ public class ControladorJuego implements ActionListener, Observer {
     public void update(Observable o, Object arg) {
         System.out.print("paso por aca");
         
-        agregaFichasMesa(partida);
+        //agregaFichasMesa(partida);
         //Actualizar fichas del mazo
         //actualizar fichas de cada jugador
         //actualizar fichas del tablero
