@@ -138,9 +138,11 @@ public class Partida extends Observable{
     
     //CAMBIAR TURNO
     public void cambiarTurno(){
-        if(this.turnoActual == 1 || this.turnoActual == 0)
-            this.turnoActual = 2;
-        else { this.turnoActual = 1;}   
+        if(this.turnoActualJugador == this.jugador1){
+            this.setTurnoActualJugador(this.jugador2);
+        }else{
+            this.setTurnoActualJugador(this.jugador1);
+        }
     }   
     
     //INICIAR PARTIDA
@@ -267,23 +269,38 @@ public class Partida extends Observable{
     //ELIMINA LA FICHA JUGADA DE LA LISTA DEL JUGADOR
     public void RemoveListaJugador(Ficha f){
         Mano m = TraeUltimaMano();
-        if (this.turnoActual == 1 || this.turnoActual == 0){
-            //ArrayList listaFichasJ1            
+        if(this.turnoActualJugador == this.jugador1){
             for(int i = 0; i< m.getFichasJ1().size(); i++){
                 if(m.getFichasJ1().get(i).getId() == f.getId()){
                     m.getFichasJ1().remove(i);
                 }
             }
-            this.turnoActual = 2;
-        }else{
-            //ArrayList listaFichasJ1            
+            this.setTurnoActualJugador(this.jugador2);            
+        }else if(this.turnoActualJugador == this.jugador2){
             for(int i = 0; i< m.getFichasJ2().size(); i++){
                 if(m.getFichasJ2().get(i).getId() == f.getId()){
                     m.getFichasJ2().remove(i);
                 }
             }
-            this.turnoActual = 1;
+            this.setTurnoActualJugador(this.jugador1);
         }
+//        if (this.turnoActual == 1 || this.turnoActual == 0){
+//            //ArrayList listaFichasJ1            
+//            for(int i = 0; i< m.getFichasJ1().size(); i++){
+//                if(m.getFichasJ1().get(i).getId() == f.getId()){
+//                    m.getFichasJ1().remove(i);
+//                }
+//            }
+//            this.turnoActual = 2;
+//        }else{
+//            //ArrayList listaFichasJ1            
+//            for(int i = 0; i< m.getFichasJ2().size(); i++){
+//                if(m.getFichasJ2().get(i).getId() == f.getId()){
+//                    m.getFichasJ2().remove(i);
+//                }
+//            }
+//            this.turnoActual = 1;
+//        }
     }
     
     //CHEQUEA GANADOR

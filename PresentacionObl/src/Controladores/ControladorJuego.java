@@ -253,19 +253,24 @@ public class ControladorJuego implements ActionListener, Observer {
                 vistaMesa.CargarFichasDelJugador(val1, val2, this);
             }
         }
-        
         //OCULTA Y MUESTRA LOS PANELES DE LOS 2 JUGADORES
-        vistaMesa.deshabilitarPanelJugador(partida.getTurnoActualJugador(), this.usu);
+        //vistaMesa.deshabilitarPanelJugador(partida.getTurnoActualJugador(), this.usu);
     }
     
     public void BotonFicha(Partida p, String nombreficha){        
         //ELIMINA LAS FICHAS DEL DE JUEGO
         vistaMesa.removeAllTablero();
+        
         //ELIMINA FICHAS DEL JUGADOR
         vistaMesa.removeAllMesa();
+        //1 - AGREGA LAS FICHAS A FICHA JUGADA
+        //2 - MUESTRA LAS FICHAS JUGADAS EN EL PANEL
+        agregaFichasTablero();
+        //3 - SACA LAS FICHAS DEL LA MESA DEL JUGADOR
         agregaFichasMesa(p,this.usu.getNombre());
         
         //AGREGO FUCHAS A LA MESA DE JUEGO        
+        
         //ACTUALIZO        
         //AGREGA LAS FICHAS A LA MESA
               
@@ -275,17 +280,12 @@ public class ControladorJuego implements ActionListener, Observer {
 //    public void CargarTurnoActual(){
 //        int turnoactual = this.partida.getTurnoActual();        
 //        if(turnoactual == 1){
+    
 //            this.usu = this.partida.getJugador1();
 //        }else if(turnoactual == 2){
 //            this.usu = this.partida.getJugador1();
 //       }
-//   }
-    
-    public void manejaTurno(){
-        //HABILITA PANELES DEL TURNO ACTUAL Y CONTROLA
-        
-    
-    }   
+//  }  
 
     @Override
     public void update(Observable o, Object arg) {        
