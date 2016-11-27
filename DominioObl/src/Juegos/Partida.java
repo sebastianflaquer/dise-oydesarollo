@@ -145,14 +145,14 @@ public class Partida extends Observable{
         //Agrega las fichas a cada jugajor
         primeraMano.repartirFichasAJugadores();
         
-        this.setChanged();
-        this.notifyObservers("AgregarFichasMesa");
+        NotificarAccion("AgregarFichasMesa","");
         
         //agregaFichasMesa();
         //cargar jugadores
         //cambiarestado
         //repartir ficha a los jugadores        
     }
+    
     
     //CARGA LAS FICHAS A LA PARTIDA
     public void cargarFichas(){        
@@ -197,15 +197,6 @@ public class Partida extends Observable{
         }
     }
     
-    //ROBAR UNA FICHA DEL MAZO
-    public void AddFichaJugador2(Mano m){
-        if(m.getFichasJ1().size() + m.getFichasJ2().size() + m.getFichasJugadas().size() < 28 )
-        {
-            Ficha nueva = m.ObtenerFichaRandom();
-            m.getFichasJ2().add(nueva);
-        }
-    }
-    
     //AGREGA FICHAS A LA LISTA DE FICHAS
     public void agregarFicha(Ficha f) {
         if (f != null)
@@ -239,6 +230,7 @@ public class Partida extends Observable{
         String val1 = parts[0];
         String val2 = parts[1];
         
+        //CREA UNA NUEVA FICHA
         Ficha unaF = new Ficha();
         
         String conts = "";
@@ -373,6 +365,17 @@ public class Partida extends Observable{
             }
         }
         return lugar;
+    }
+    
+    //NOTIFICAR ACCION
+    public void NotificarAccion(String accion, String valor)
+    {
+        Mensaje aux = new Mensaje();
+        aux.setAccion(accion);
+        aux.setValor(valor);
+        
+        this.setChanged();
+        this.notifyObservers(aux);
     }
     
     

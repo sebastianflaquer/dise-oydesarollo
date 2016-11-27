@@ -334,7 +334,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     }
     
     @Override
-    //ELIMINA LOS BOTONES DE LA MESA 1
+    //ELIMINA LOS BOTONES DE LA MESA
     public void removeAllMesa(){
         this.fichasJugadorPanel.removeAll();
     }
@@ -365,22 +365,6 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         this.fichasJugadorPanel.add(val1+"-"+val2,btn);
         validate();
     }
-
-//    @Override
-//    //CARGA LAS FICHAS DEL JUGAROR
-//    public void CargarFichasDelJugador2(int val1, int val2, ControladorJuego c){
-//        
-//        ImageIcon image = new ImageIcon("D:/resources/"+val1+"-"+val2+".jpg");
-//        
-//        JButton btn = new JButton(image);
-//        btn.setPreferredSize( new Dimension(74, 38));
-//        btn.setBackground(Color.white);
-//        btn.setContentAreaFilled(false);
-//        btn.setActionCommand(val1+"-"+val2);
-//        btn.addActionListener(c);
-//        this.fichasJugador2Panel.add(val1+"-"+val2,btn);
-//        validate();
-//    }
     
     @Override
     //CARGA FICHAS DEL TABLERO
