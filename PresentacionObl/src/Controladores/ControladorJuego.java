@@ -254,7 +254,7 @@ public class ControladorJuego implements ActionListener, Observer {
             }
         }
         //OCULTA Y MUESTRA LOS PANELES DE LOS 2 JUGADORES
-        //vistaMesa.deshabilitarPanelJugador(partida.getTurnoActualJugador(), this.usu);
+        vistaMesa.deshabilitarPanelJugador(partida.getTurnoActualJugador(), this.usu);
     }
     
     public void BotonFicha(Partida p, String nombreficha){        
