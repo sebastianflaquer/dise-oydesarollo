@@ -87,13 +87,14 @@ public class ControladorJuego implements ActionListener, Observer {
                         vistaMesa.setVisible(true);
                         ControladorJuego contU = new ControladorJuego(vistaMesa);
                         vistaMesa.setControlador(contU);
-                        contU.usu = unUsu;
+                        contU.usu = unUsu;    
                         
                         Sistema s = Sistema.GetInstancia();
                         Partida P2 = s.chequeaLugarEnPartida(unUsu);                      
                         if(P2 == null){
                             P.setJugador1(unUsu);
-                            unUsu.getTipo().setNumeroJug(1);
+                            P.setTurnoActualJugador(unUsu);
+                            //unUsu.getTipo().setNumeroJug(1);
                             P.addObserver(contU);
                             P.setEstado("Esperando Jugador");
                             this.partida = P;
@@ -111,7 +112,7 @@ public class ControladorJuego implements ActionListener, Observer {
                                 P2.addObserver(contU);
                                 contU.partida = this.partida;
                                 int d = P2.countObservers();
-                                P2.InicialPartida();
+                                P2.InicialPartida();                                
                                 //CARGA LA APUESTA ACTUAL
                                 vistaMesa.SetApuestaActual(Double.toString(P2.getApuestaActual()));
                                 //ACA NO VA PORQUE ES UN EVENTO PARA LOS 3 CONTOLADORES                                
@@ -119,8 +120,7 @@ public class ControladorJuego implements ActionListener, Observer {
                         }
                         
                         //vistaMesa.SetApuestaActual(Double.toString(partida.getApuestaActual()));
-                        //AGREGA LAS FICHAS DE CADA JUGADOR A LA MESA
-                        
+                        //AGREGA LAS FICHAS DE CADA JUGADOR A LA MESA                        
                         //agregaFichasMesa2();
                         //vistaMesa.CargarFichasDelJugador();
                         //vistaMesa.SetNombreUsuario(unUsu.getNomCompleto());
@@ -230,6 +230,11 @@ public class ControladorJuego implements ActionListener, Observer {
     
     //ACTUALIZA LAS FICHAS DE LA MESA DE LOS JUGADORES
     public void agregaFichasMesa(Partida p, String nombreJug ){        
+        
+        if(nombreJug == null || nombreJug == ""){
+            nombreJug = this.usu.getNombre();
+        }
+        
         //si el nombre es igual
         if (nombreJug.equalsIgnoreCase(p.getJugador1().getNombre())){
             ArrayList<Ficha> lfichas = p.TraeUltimaMano().getFichasJ1();
@@ -248,19 +253,39 @@ public class ControladorJuego implements ActionListener, Observer {
                 vistaMesa.CargarFichasDelJugador(val1, val2, this);
             }
         }
+        
+        //OCULTA Y MUESTRA LOS PANELES DE LOS 2 JUGADORES
+        vistaMesa.deshabilitarPanelJugador(partida.getTurnoActualJugador(), this.usu);
     }
     
-    public void BotonFicha(Partida p, String nombreficha){
-        vistaMesa.removeAllTablero();            
-        //AGREGO FUCHAS A LA MESA DE JUEGO
-        agregaFichasTablero();                
-        //ACTUALIZO
-        //vistaMesa.deshabilitarPanelJugador(partida.getTurnoActual());
+    public void BotonFicha(Partida p, String nombreficha){        
+        //ELIMINA LAS FICHAS DEL DE JUEGO
+        vistaMesa.removeAllTablero();
+        //ELIMINA FICHAS DEL JUGADOR
         vistaMesa.removeAllMesa();
-        //AGREGA LAS FICHAS A LA MESA
-        this.partida.NotificarAccion("AgregarFichasMesa",this.usu.getNombre());
+        agregaFichasMesa(p,this.usu.getNombre());
         
+        //AGREGO FUCHAS A LA MESA DE JUEGO        
+        //ACTUALIZO        
+        //AGREGA LAS FICHAS A LA MESA
+              
     }
+    
+    //CARGA AL USUARIO DEL CONTROLADOR EL TURNO ACTUAL
+//    public void CargarTurnoActual(){
+//        int turnoactual = this.partida.getTurnoActual();        
+//        if(turnoactual == 1){
+//            this.usu = this.partida.getJugador1();
+//        }else if(turnoactual == 2){
+//            this.usu = this.partida.getJugador1();
+//       }
+//   }
+    
+    public void manejaTurno(){
+        //HABILITA PANELES DEL TURNO ACTUAL Y CONTROLA
+        
+    
+    }   
 
     @Override
     public void update(Observable o, Object arg) {        
@@ -274,6 +299,7 @@ public class ControladorJuego implements ActionListener, Observer {
         }
         //BOTON FICHA
         else if(msg.getAccion().equalsIgnoreCase("BotonFicha")){
+            //
             BotonFicha((Partida) o, msg.getValor());
         }
         //SUBIR APUESTA

@@ -34,12 +34,10 @@ public interface IMesa {
     
     //REMOVE ALL MESA
     public void removeAllMesa();
-//    public void removeAllMesa2();
-    
-    public void removeAllTablero();
-    
+//    public void removeAllMesa2();    
+    public void removeAllTablero();    
     public void CargarFichasAlTablero(int val1, int val2, ControladorJuego c);
-    
+    public void deshabilitarPanelJugador(Usuario UsuarioTurnoActual, Usuario unUsu);
 //    public void deshabilitarPanelJugador (int turno);
 
 //    public void ocultarPanelesGanador(String jugador);
