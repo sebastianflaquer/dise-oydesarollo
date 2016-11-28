@@ -199,12 +199,24 @@ public class Partida extends Observable{
     }
     
     //ROBAR UNA FICHA DEL MAZO
-    public void AddFichaJugador(Mano m){        
-        if(m.getFichasJ1().size() + m.getFichasJ2().size() + m.getFichasJugadas().size() < 28)
-        {
-            Ficha nueva = m.ObtenerFichaRandom();
-            m.getFichasJ1().add(nueva);
+    public boolean AddFichaJugador(Mano m){
+        boolean retorno = false;
+        if(this.turnoActualJugador == this.jugador1){
+            if(m.getFichasJ1().size() + m.getFichasJ2().size() + m.getFichasJugadas().size() < 28)
+            {
+                Ficha nueva = m.ObtenerFichaRandom();
+                m.getFichasJ1().add(nueva);
+                retorno = true;
+            }
+        }else if(this.turnoActualJugador == this.jugador2){
+            if(m.getFichasJ1().size() + m.getFichasJ2().size() + m.getFichasJugadas().size() < 28)
+            {
+                Ficha nueva = m.ObtenerFichaRandom();
+                m.getFichasJ2().add(nueva);
+                retorno = true;
+            }
         }
+        return retorno;
     }
     
     //AGREGA FICHAS A LA LISTA DE FICHAS
@@ -307,15 +319,15 @@ public class Partida extends Observable{
     public String chequeaGanador(Ficha unaF){
         String ganador = "no";
         Mano m = TraeUltimaMano();    
-        if(this.turnoActual == 2){
-            if(m.getFichasJ1().size() == 0){
+        if(this.turnoActualJugador == this.jugador1){
+            if(m.getFichasJ1().isEmpty()){
                 ganador = "Jugador 1";
             }
-        }else{
-            if(m.getFichasJ2().size() == 0){
+        }else if(this.turnoActualJugador == this.jugador2){
+            if(m.getFichasJ2().isEmpty()){
                 ganador = "Jugador 2";
             }
-        } 
+        }
         return ganador;
     }
     

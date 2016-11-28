@@ -379,8 +379,9 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         validate();
     }
         
-    //SEGUN EL TURNO, DESHABILITO EL PANEL DEL JUGADOR
+    
     @Override
+    //SEGUN EL TURNO, DESHABILITO EL PANEL DEL JUGADOR
     public void deshabilitarPanelJugador (Usuario UsuarioTurnoActual, Usuario unUsu){
         if(UsuarioTurnoActual == unUsu){
             this.jPanel4.setVisible(true);
@@ -391,16 +392,17 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     }
 
     @Override
+    //INCREMENTA LA APUESTA ACTUAL
     public void SetApuestaActual(String mensaje) {
         this.lblApuestaActual.setText(mensaje);
+    
     }
     
-//    @Override
-//    public void ocultarPanelesGanador(String jugador){
-//        this.fichasJuegoPanel.setVisible(false);
-//        this.fichasJugador2Panel.setVisible(false);
-//        this.lblGanador.setText(jugador);
-//    }
-    
+    @Override
+    //OCULTA PANEL JUGADOR Y MUESTRA CARTEL
+    public void ocultarPanelesGanador(String jugador){
+        this.fichasJuegoPanel.setVisible(false);
+        this.lblGanador.setText(jugador);
+    }
     
 }

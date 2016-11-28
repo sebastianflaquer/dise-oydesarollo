@@ -156,19 +156,24 @@ public class ControladorJuego implements ActionListener, Observer {
             mesaAdmin.CargarManosDePartida();
         }
         
-        //ADDFICHA
+        //ADDFICHA - FUNCIONA
         else if(e.getActionCommand().equals("ADDFICHA")){            
-            partida.AddFichaJugador(partida.TraeUltimaMano());
-            vistaMesa.removeAllMesa();
-            
-            //ME GUARDO LA ULTIMA MANO, CREO UNA NUEVA Y LA AGREGO A LA LISTA SETEANDOLE EL TIPO DE MOVIMIENTO
-            Mano nueva = partida.GetUltimaMano();
-            nueva.setMovimiento(new Movimiento(new RecogerFicha(),new Jugador(200)));   //DEBO CARGAR EL JUGADOR DEL TURNO
-
-            partida.getManos().add(nueva);
-            
-            //AGREGO FICHAS A LA MESA JUGADOR 1
-            //agregaFichasMesa(partida, this);
+            boolean agrego = partida.AddFichaJugador(partida.TraeUltimaMano());
+            if(agrego){
+                vistaMesa.removeAllMesa();
+                //ME GUARDO LA ULTIMA MANO, CREO UNA NUEVA Y LA AGREGO A LA LISTA SETEANDOLE EL TIPO DE MOVIMIENTO
+                Mano nueva = partida.GetUltimaMano();
+                nueva.setMovimiento(new Movimiento(new RecogerFicha(),new Jugador(200)));   //DEBO CARGAR EL JUGADOR DEL TURNO
+                partida.getManos().add(nueva);            
+                //AGREGO FICHAS A LA MESA JUGADOR 1
+                agregaFichasMesa(partida,this.usu.getNombre());                
+            }else{
+                if(partida.getTurnoActualJugador() == partida.getJugador1()){
+                    this.partida.NotificarAccion("GanaJugador","Gana Jugador 2");
+                }else if(partida.getTurnoActualJugador() == partida.getJugador1()){
+                    this.partida.NotificarAccion("GanaJugador","Gana Jugador 1");
+                }
+            }
         }
         
         //SUBIR APUESTA
@@ -209,9 +214,11 @@ public class ControladorJuego implements ActionListener, Observer {
             //SI HAY UN GANADOR
             else{
                 if(aux == "jugador1"){
-    //              vistaMesa.ocultarPanelesGanador("Gana Jugador 1");
+                    this.partida.NotificarAccion("GanaJugador","Gana Jugador 1");
+                    //vistaMesa.ocultarPanelesGanador("");
                 }else if(aux == "jugador2"){
-    //              vistaMesa.ocultarPanelesGanador("Gana Jugador 2");
+                    this.partida.NotificarAccion("GanaJugador","Gana Jugador 2");
+                    //vistaMesa.ocultarPanelesGanador("");
                 }
             }
             
@@ -276,17 +283,6 @@ public class ControladorJuego implements ActionListener, Observer {
               
     }
     
-    //CARGA AL USUARIO DEL CONTROLADOR EL TURNO ACTUAL
-//    public void CargarTurnoActual(){
-//        int turnoactual = this.partida.getTurnoActual();        
-//        if(turnoactual == 1){
-    
-//            this.usu = this.partida.getJugador1();
-//        }else if(turnoactual == 2){
-//            this.usu = this.partida.getJugador1();
-//       }
-//  }  
-
     @Override
     public void update(Observable o, Object arg) {        
         //esto lo hace 2 veces, 1 para cada controlador
@@ -306,17 +302,13 @@ public class ControladorJuego implements ActionListener, Observer {
         else if(msg.getAccion().equalsIgnoreCase("SubirApuesta")){
             //SubirApuesta((Partida) o, msg.getValor());
         }
-        //ADD FICHA
-        else if(msg.getAccion().equalsIgnoreCase("AddFicha")){
-            //AddFicha((Partida) o, msg.getValor());
+        //GANA JUGADOR
+        else if(msg.getAccion().equalsIgnoreCase("GanaJugador")){
+            vistaMesa.ocultarPanelesGanador(msg.getValor());
         }
         else{
             System.out.print("Ultimo Else.");
         }
-        
-        //Actualizar fichas del mazo
-        //actualizar fichas de cada jugador
-        //actualizar fichas del tablero
         
     }
     
