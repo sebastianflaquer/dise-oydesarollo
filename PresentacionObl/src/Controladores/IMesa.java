@@ -5,6 +5,7 @@
  */
 package Controladores;
 
+import Juegos.Partida;
 import Usuarios.Usuario;
 import javax.swing.JPanel;
 
@@ -36,9 +37,12 @@ public interface IMesa {
     public void CargarFichasAlTablero(int val1, int val2, ControladorJuego c);
     public void deshabilitarPanelJugador(Usuario UsuarioTurnoActual, Usuario unUsu);
     public void ocultarPanelesGanador(String jugador);
+    public void ocultarPanelApuesta();
+    public void mostrarPanelApuesta(Partida partida, Usuario turnoActualJugador);
     
     
-//    public void deshabilitarPanelJugador (int turno);
+
+    
 
     
     

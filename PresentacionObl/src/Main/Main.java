@@ -91,7 +91,7 @@ public class Main {
         Partida unaP = new Partida();
         ArrayList<Mano> nueva = new ArrayList<Mano>();
         Mano m = new Mano();
-        m.setMovimiento(new Movimiento(new Apuesta(1500),new Jugador(200)));
+        m.setMovimiento(new Movimiento(new Apuesta(1500),unaP.getTurnoActualJugador()));
         nueva.add(m);
         nueva.add(m);
         unaP.setManos(nueva);

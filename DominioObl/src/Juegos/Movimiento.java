@@ -7,6 +7,7 @@ package Juegos;
 
 import java.util.Calendar;
 import Usuarios.Jugador;
+import Usuarios.Usuario;
 
 
 public class Movimiento {
@@ -17,7 +18,7 @@ public class Movimiento {
     private int id;
     private ITipoMovimiento tipoMov;
     private Calendar fechaHora;  //REVISAR
-    private Jugador jugador;
+    private Usuario jugador;
     
     //SETTERS
     public static void setUltId(int ultId) {
@@ -35,7 +36,7 @@ public class Movimiento {
         this.fechaHora = fechaHora;
     }
 
-    public void setJugador(Jugador jugador) {
+    public void setJugador(Usuario jugador) {
         this.jugador = jugador;
     }
     
@@ -55,13 +56,13 @@ public class Movimiento {
         return fechaHora;
     }
 
-    public Jugador getJugador() {
+    public Usuario getJugador() {
         return jugador;
     }
     
     
     //CONSTRUCOTR
-    public Movimiento(ITipoMovimiento m, Jugador j) {
+    public Movimiento(ITipoMovimiento m, Usuario j) {
         this.id = ++Movimiento.ultId;
         this.tipoMov = m;
         this.fechaHora = Calendar.getInstance();

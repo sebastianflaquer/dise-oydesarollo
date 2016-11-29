@@ -83,10 +83,11 @@ public class ControladorJuego implements ActionListener, Observer {
                         //partida.setJugador1(unUsu);                        
                         this.vistaLogin.setVisible(false);
                         this.vistaMesa = new Mesa();
-                        
                         vistaMesa.setVisible(true);
                         ControladorJuego contU = new ControladorJuego(vistaMesa);
                         vistaMesa.setControlador(contU);
+                        vistaMesa.ocultarPanelApuesta();
+                        vistaMesa.SetApuestaActual(Double.toString(P.getApuestaActual()));
                         contU.usu = unUsu;    
                         
                         Sistema s = Sistema.GetInstancia();
@@ -149,13 +150,23 @@ public class ControladorJuego implements ActionListener, Observer {
         //VER MANOS DE LA PARTIDA (MODO ADMIN) //MODO ADMINISTRADOR
         else if(e.getActionCommand().equals("SALIR")){
             mesaAdmin.CargarManosDePartida();
-        }
-        
+        }        
         //VER MANOS DE LA PARTIDA (MODO ADMIN) //MODO ADMINISTRADOR
         else if(e.getActionCommand().equals("VERMANOS")){
             mesaAdmin.CargarManosDePartida();
         }
-        
+        //SI ACEPTA LA APUESTA
+        else if(e.getActionCommand().equals("ACEPTARAPUESTA")){            
+            //si el otro jugador acepta            
+            this.partida.setApuestaActual(vistaMesa.GettxtSubirApuesta());
+            vistaMesa.SetApuestaActual(Double.toString(vistaMesa.GettxtSubirApuesta()));
+            this.partida.NotificarAccion("SubirApuesta","");
+            
+        }
+        //SI CANCELA LA APUESTA
+        else if(e.getActionCommand().equals("CANCELARAPUESTA")){
+            
+        }
         //ADDFICHA - FUNCIONA
         else if(e.getActionCommand().equals("ADDFICHA")){            
             boolean agrego = partida.AddFichaJugador(partida.TraeUltimaMano());
@@ -163,7 +174,7 @@ public class ControladorJuego implements ActionListener, Observer {
                 vistaMesa.removeAllMesa();
                 //ME GUARDO LA ULTIMA MANO, CREO UNA NUEVA Y LA AGREGO A LA LISTA SETEANDOLE EL TIPO DE MOVIMIENTO
                 Mano nueva = partida.GetUltimaMano();
-                nueva.setMovimiento(new Movimiento(new RecogerFicha(),new Jugador(200)));   //DEBO CARGAR EL JUGADOR DEL TURNO
+                nueva.setMovimiento(new Movimiento(new RecogerFicha(),this.partida.getTurnoActualJugador()));   //DEBO CARGAR EL JUGADOR DEL TURNO
                 partida.getManos().add(nueva);            
                 //AGREGO FICHAS A LA MESA JUGADOR 1
                 agregaFichasMesa(partida,this.usu.getNombre());                
@@ -178,19 +189,20 @@ public class ControladorJuego implements ActionListener, Observer {
         
         //SUBIR APUESTA
         else if(e.getActionCommand().equals("SubirApuesta")){
-            
-            if (vistaMesa.GettxtSubirApuesta() != 0){
-                if(this.partida.getJugador1().getTipo().getSaldo() > vistaMesa.GettxtSubirApuesta() && 
-                   this.partida.getJugador2().getTipo().getSaldo() > vistaMesa.GettxtSubirApuesta()){
-                    
-                    //ME GUARDO LA ULTIMA MANO, CREO UNA NUEVA Y LA AGREGO A LA LISTA SETEANDOLE EL TIPO DE MOVIMIENTO
-                    Mano nueva = partida.GetUltimaMano();
-                    nueva.setMovimiento(new Movimiento(new Apuesta(vistaMesa.GettxtSubirApuesta()),new Jugador(200)));   //DEBO CARGAR EL JUGADOR DEL TURNO
-
-                    partida.getManos().add(nueva);
-                    //SETEO EL NUEVO VALOR EN LA MESA
-                    this.partida.setApuestaActual(vistaMesa.GettxtSubirApuesta());
-                    vistaMesa.SetApuestaActual(Double.toString(vistaMesa.GettxtSubirApuesta()));
+            //SI EL VALOR ES VALIDO
+            if(vistaMesa.GettxtSubirApuesta() != -1){
+                if (vistaMesa.GettxtSubirApuesta() != 0){
+                    if(this.partida.getJugador1().getTipo().getSaldo() > vistaMesa.GettxtSubirApuesta() && 
+                    this.partida.getJugador2().getTipo().getSaldo() > vistaMesa.GettxtSubirApuesta() &&
+                    vistaMesa.GettxtSubirApuesta() > this.partida.getApuestaActual()){
+                        //ME GUARDO LA ULTIMA MANO, CREO UNA NUEVA Y LA AGREGO A LA LISTA SETEANDOLE EL TIPO DE MOVIMIENTO
+                        Mano nueva = partida.GetUltimaMano();
+                        nueva.setMovimiento(new Movimiento(new Apuesta(vistaMesa.GettxtSubirApuesta()),this.partida.getTurnoActualJugador()));   //DEBO CARGAR EL JUGADOR DEL TURNO
+                        partida.getManos().add(nueva);
+                        //muestra el panel a el otro jugador
+                        this.partida.NotificarAccion("MostrasApuesta","");
+                        
+                    }
                 }
             }
         }
@@ -203,7 +215,7 @@ public class ControladorJuego implements ActionListener, Observer {
             
             //ME GUARDO LA ULTIMA MANO, CREO UNA NUEVA Y LA AGREGO A LA LISTA SETEANDOLE EL TIPO DE MOVIMIENTO
             Mano nueva = this.partida.GetUltimaMano();
-            nueva.setMovimiento(new Movimiento(new ColocarFicha(),new Jugador(200)));  //DEBO CARGAR EL JUGADOR DEL TURNO
+            nueva.setMovimiento(new Movimiento(new ColocarFicha(),this.partida.getTurnoActualJugador()));  //DEBO CARGAR EL JUGADOR DEL TURNO
             this.partida.getManos().add(nueva);
             
             String aux = this.partida.agregarFichaAJugada(nombreficha);
@@ -283,6 +295,9 @@ public class ControladorJuego implements ActionListener, Observer {
               
     }
     
+    
+    
+    
     @Override
     public void update(Observable o, Object arg) {        
         //esto lo hace 2 veces, 1 para cada controlador
@@ -300,7 +315,11 @@ public class ControladorJuego implements ActionListener, Observer {
         }
         //SUBIR APUESTA
         else if(msg.getAccion().equalsIgnoreCase("SubirApuesta")){
-            //SubirApuesta((Partida) o, msg.getValor());
+            vistaMesa.SetApuestaActual(Double.toString(this.partida.getApuestaActual()));
+        }
+        //MOSTRAR PANEL APUESTA
+        else if(msg.getAccion().equalsIgnoreCase("MostrasApuesta")){
+            vistaMesa.mostrarPanelApuesta((Partida) o, this.partida.getTurnoActualJugador());
         }
         //GANA JUGADOR
         else if(msg.getAccion().equalsIgnoreCase("GanaJugador")){
