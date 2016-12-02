@@ -116,7 +116,12 @@ public class ControladorJuego implements ActionListener, Observer {
                                 P2.InicialPartida();                                
                                 //CARGA LA APUESTA ACTUAL
                                 vistaMesa.SetApuestaActual(Double.toString(P2.getApuestaActual()));
-                                //ACA NO VA PORQUE ES UN EVENTO PARA LOS 3 CONTOLADORES                                
+                                //ACA NO VA PORQUE ES UN EVENTO PARA LOS 3 CONTOLADORES
+                                
+                                
+                                //PRUEBA HILOS
+                                this.partida.Iniciar();
+
                             }
                         }
                         
@@ -302,8 +307,11 @@ public class ControladorJuego implements ActionListener, Observer {
     public void update(Observable o, Object arg) {        
         //esto lo hace 2 veces, 1 para cada controlador
         Mensaje msg = (Mensaje)arg;
-        
         this.partida = (Partida) o;
+        
+        //CUENTA REGRESIVA
+        System.out.println(Integer.toString(this.partida.getRegrasivaTurno()));
+        
         //AGREGAR FICHA MESA
         if(msg.getAccion().equalsIgnoreCase("AgregarFichasMesa")){
             agregaFichasMesa((Partida) o, msg.getValor());

@@ -14,7 +14,7 @@ import java.util.Observable;
 
 
 
-public class Partida extends Observable{
+public class Partida extends Observable implements Runnable{
     
     //================================================================================
     //ATRIBUTOS
@@ -29,18 +29,70 @@ public class Partida extends Observable{
     private int turnoActual;
     private double apuestaActual;
     private Usuario turnoActualJugador;
+    
+    //HILOS
+    private Boolean onTurno;
+    private Boolean onApuesta;
+    private int regresivaTurno;
+    private int regresivaApuesta;
+    private Thread hilo;
+    
+    
+    // GETTERS HILOS
+    public int getRegrasivaTurno() {
+        return regresivaTurno;
+    }
+
+    public int getRegrasivaApuesta() {
+        return regresivaApuesta;
+    }
+      
+    
+    
+    public void Iniciar(){
+        this.onTurno = true;
+        //this.onApuesta = true;
+        this.hilo = new Thread(this);
+        this.hilo.start();
+    }
+    
+    public void PausarPorApuesta(){
+        this.onApuesta = false;
+        Avisar();
+    }
+    
+    public void Detener(){
+        this.onTurno = false;
+        this.onApuesta = false;
+        Avisar();
+    }
+    
+    public void Avisar(){
+        setChanged();
+        notifyObservers();
+    }
+
+    @Override
+    public void run() {
+        while(this.onTurno){
+            if(this.regresivaTurno == 0)
+            {
+                // fin de la partida
+                this.estado = "Finalizado1"; // o "Finalizado2" depende el Turno
+                Avisar();
+            }
+            this.regresivaTurno --;
+            try {
+            
+                    Thread.sleep(1000);
+                } 
+            catch (InterruptedException ex) {}
+            //Avisar();
+        }
+    }
 
     
-    
-    private static Partida instancia;
-    
-    public static Partida GetInstancia()
-    {
-        if (instancia == null) 
-            instancia = new Partida();       
-        
-        return instancia;
-    }
+
 
     //================================================================================
     //SETTERS
@@ -123,6 +175,8 @@ public class Partida extends Observable{
         this.manos = new ArrayList<Mano>();
         this.turnoActual = 0;
         this.apuestaActual = Partida.apuestaInicial;
+        this.regresivaTurno = 40;
+        this.regresivaApuesta = 20;
     }
     
     //================================================================================
@@ -414,9 +468,9 @@ public class Partida extends Observable{
         this.setChanged();
         this.notifyObservers(aux);
     }
+
     
-    
-    
+
     
     
 }
