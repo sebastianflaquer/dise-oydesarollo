@@ -38,12 +38,10 @@ public interface IMesa {
     public void deshabilitarPanelJugador(Usuario UsuarioTurnoActual, Usuario unUsu);
     public void ocultarPanelesGanador(String jugador);
     public void ocultarPanelApuesta();
-    public void mostrarPanelApuesta(Partida partida, Usuario turnoActualJugador);
-    
-    
+    public void mostrarPanelApuesta(double valorApuesta);
+    public void mostrarPanelEspera();
 
-    
-
+    public void ErrorMensajeApuesta(String msg);
     
     
     

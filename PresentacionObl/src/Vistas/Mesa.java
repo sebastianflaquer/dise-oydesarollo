@@ -20,6 +20,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JDialog;
 
 /**
  *
@@ -46,6 +47,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
 
         jOptionPane1 = new javax.swing.JOptionPane();
         jPanel5 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         LblNombre = new javax.swing.JLabel();
@@ -59,6 +61,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         jButtonCancelarApuesta = new javax.swing.JButton();
         jLabelApuesta = new javax.swing.JLabel();
         jButtonAceptarApuesta1 = new javax.swing.JButton();
+        lblnuevaApuesta = new javax.swing.JLabel();
         lblErrorApuesta = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         btnMasFicha = new javax.swing.JButton();
@@ -81,6 +84,17 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -100,7 +114,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jButtonCancelarApuesta, org.jdesktop.beansbinding.ELProperty.create("CANCELARAPUESTA"), jButtonCancelarApuesta, org.jdesktop.beansbinding.BeanProperty.create("actionCommand"));
         bindingGroup.addBinding(binding);
 
-        jLabelApuesta.setText("Se Aumento la Apuesta");
+        jLabelApuesta.setText("Se Aumento la Apuesta a: ");
 
         jButtonAceptarApuesta1.setText("Aceptar");
 
@@ -117,25 +131,26 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
                         .addContainerGap()
                         .addComponent(jLabelApuesta))
                     .addGroup(jPanelAceptarApuestaLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanelAceptarApuestaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonCancelarApuesta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonAceptarApuesta1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(17, Short.MAX_VALUE))
+                        .addGap(37, 37, 37)
+                        .addGroup(jPanelAceptarApuestaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblnuevaApuesta)
+                            .addGroup(jPanelAceptarApuestaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButtonAceptarApuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonCancelarApuesta)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelAceptarApuestaLayout.setVerticalGroup(
             jPanelAceptarApuestaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAceptarApuestaLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabelApuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(lblnuevaApuesta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonAceptarApuesta1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonCancelarApuesta)
-                .addContainerGap())
+                .addGap(6, 6, 6))
         );
-
-        lblErrorApuesta.setText("jLabel5");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -158,7 +173,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblApuestaActual, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jPanelAceptarApuesta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelAceptarApuesta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(41, 41, 41)
@@ -350,6 +365,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelApuesta;
     private javax.swing.JOptionPane jOptionPane1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -361,6 +377,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     private javax.swing.JLabel lblErrorApuesta;
     private javax.swing.JLabel lblGanador;
     private javax.swing.JLabel lblSaldo;
+    private javax.swing.JLabel lblnuevaApuesta;
     private javax.swing.JTextField txtAumentarApuesta;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
@@ -376,9 +393,9 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     @Override
     public double GettxtSubirApuesta(){
         if(this.txtAumentarApuesta.getText().isEmpty()){
-            this.lblErrorApuesta.setText("Debe Ingresar un monto > 0");
+            ErrorMensajeApuesta("Debe Ingresar un monto > 0");
         }else if(!this.txtAumentarApuesta.getText().matches("[0-9]+")){
-            this.lblErrorApuesta.setText("Debe Ingresar un Numero");
+            ErrorMensajeApuesta("Debe Ingresar un Numero");
         }
         else{
             return Double.parseDouble(this.txtAumentarApuesta.getText());
@@ -416,11 +433,6 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     public void removeAllMesa(){
         this.fichasJugadorPanel.removeAll();
     }
-//    @Override
-//    //ELIMINA LOS BOTONES DE LA MESA 2
-//    public void removeAllMesa2(){
-//        this.fichasJugador2Panel.removeAll();
-//    }
     
     @Override
     //ELIMINA LOS BOTONES DEL TABLERO
@@ -491,10 +503,21 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     public void ocultarPanelApuesta() {
         this.jPanelAceptarApuesta.setVisible(false);
     }
-
     @Override
-    public void mostrarPanelApuesta(Partida partida, Usuario turnoActualJugador) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void mostrarPanelApuesta( double valorApuesta) {
+        this.lblnuevaApuesta.setText(Double.toString(valorApuesta));
+        this.jPanelAceptarApuesta.setVisible(true);
     }
+    @Override
+    public void mostrarPanelEspera(){
+        //this..setVisible(true);
+    }
+    
+    @Override
+    public void ErrorMensajeApuesta(String msg){
+        this.lblErrorApuesta.setText(msg);
+    }
+    
+    
 
 }
