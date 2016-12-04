@@ -73,8 +73,10 @@ public class Sistema {
     //CHEQUEA LUGAR LIBRE
     public Partida chequeaLugarEnPartida(Usuario unUsu){
         boolean ret = false;
+        
         Partida p = null;
         int i = 0;
+        
         while(i < this.partidas.size() && ret == false){
             if(this.partidas.get(i).getJugador1() == null){
                 ret = true;
