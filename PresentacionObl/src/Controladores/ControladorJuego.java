@@ -233,30 +233,30 @@ public class ControladorJuego implements ActionListener, Observer {
         else if(e.getActionCommand().equals(e.getActionCommand())){
             
             //AGREGAR FICHA A FICHAS JUGADAS
-            //partida.ingresarMovimiento(e);
             String nombreficha = e.getActionCommand();
-            
-            //ME GUARDO LA ULTIMA MANO, CREO UNA NUEVA Y LA AGREGO A LA LISTA SETEANDOLE EL TIPO DE MOVIMIENTO
-            Mano nueva = this.partida.GetUltimaMano();
-            nueva.setMovimiento(new Movimiento(new ColocarFicha(),this.partida.getTurnoActualJugador()));  //DEBO CARGAR EL JUGADOR DEL TURNO
-            this.partida.getManos().add(nueva);
             
             String aux = this.partida.agregarFichaAJugada(nombreficha);
             //SI NO HAY UN GANADOR
-            if(aux == "no"){
-                this.partida.NotificarAccion("BotonFicha",nombreficha);
-            }
-            //SI HAY UN GANADOR
-            else{
-                if(aux == "jugador1"){
-                    this.partida.NotificarAccion("GanaJugador","Gana Jugador 1");
-                    //vistaMesa.ocultarPanelesGanador("");
-                }else if(aux == "jugador2"){
-                    this.partida.NotificarAccion("GanaJugador","Gana Jugador 2");
-                    //vistaMesa.ocultarPanelesGanador("");
+            if(aux != "noagrego"){
+                //ME GUARDO LA ULTIMA MANO, CREO UNA NUEVA Y LA AGREGO A LA LISTA SETEANDOLE EL TIPO DE MOVIMIENTO
+                Mano nueva = this.partida.GetUltimaMano();
+                nueva.setMovimiento(new Movimiento(new ColocarFicha(),this.partida.getTurnoActualJugador()));  //DEBO CARGAR EL JUGADOR DEL TURNO
+                this.partida.getManos().add(nueva);
+                
+                if(aux == "no"){
+                    this.partida.NotificarAccion("BotonFicha",nombreficha);
+                }
+                //SI HAY UN GANADOR
+                else{
+                    if(aux == "jugador1"){
+                        this.partida.NotificarAccion("GanaJugador","Gana Jugador 1");
+                        //vistaMesa.ocultarPanelesGanador("");
+                    }else if(aux == "jugador2"){
+                        this.partida.NotificarAccion("GanaJugador","Gana Jugador 2");
+                        //vistaMesa.ocultarPanelesGanador("");
+                    }
                 }
             }
-            
         }
     }
 

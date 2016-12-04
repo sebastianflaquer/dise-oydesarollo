@@ -328,6 +328,8 @@ public class Partida extends Observable implements Runnable{
             else{
                 retorno = "no";
             }
+        }else{
+            retorno = "noagrego";
         }
         return retorno;
     }
