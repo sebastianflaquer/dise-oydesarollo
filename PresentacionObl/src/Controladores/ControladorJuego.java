@@ -91,7 +91,9 @@ public class ControladorJuego implements ActionListener, Observer {
                         contU.usu = unUsu;    
                         
                         Sistema s = Sistema.GetInstancia();
-                        Partida P2 = s.chequeaLugarEnPartida(unUsu);                      
+                        Partida P2 = s.chequeaLugarEnPartida(unUsu);
+                        
+                        //SI ES UNA PARTIDA VACIA
                         if(P2 == null){
                             P.setJugador1(unUsu);
                             P.setTurnoActualJugador(unUsu);
@@ -101,7 +103,7 @@ public class ControladorJuego implements ActionListener, Observer {
                             this.partida = P;
                             s.agregarPartida(P);
                             vistaMesa.CargarDatosDelJugador(unUsu);
-                        }else{
+                        }else{ //SI YA TIENE UN JUGADOR
                             if(P2.getJugador2() == null){
                                 P2.setEstado("Esperando Jugador");
                                 vistaMesa.CargarDatosDelJugador(unUsu);
