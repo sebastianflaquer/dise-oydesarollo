@@ -58,19 +58,15 @@ public class Partida extends Observable implements Runnable{
     
     public void PausarPorApuesta(){
         this.onApuesta = false;
-        Avisar();
+        NotificarAccion("PausarPorApuesta", "");
     }
     
     public void Detener(){
         this.onTurno = false;
         this.onApuesta = false;
-        Avisar();
+        NotificarAccion("DetenerRegresiva", "");
     }
-    
-    public void Avisar(){
-        setChanged();
-        notifyObservers();
-    }
+   
 
     @Override
     public void run() {
@@ -79,15 +75,19 @@ public class Partida extends Observable implements Runnable{
             {
                 // fin de la partida
                 this.estado = "Finalizado1"; // o "Finalizado2" depende el Turno
-                Avisar();
+                NotificarAccion("FinDelTiempo", this.getTurnoActualJugador().getNombre());
+                this.onTurno = false;
             }
-            this.regresivaTurno --;
-            try {
+            else
+            {
+                try {
+                        this.regresivaTurno --;
+                        NotificarAccion("RegresivaTurno", Integer.toString(this.regresivaTurno));
+                        Thread.sleep(1000);
+                    } 
+                catch (InterruptedException ex) {}
+            }
             
-                    Thread.sleep(1000);
-                } 
-            catch (InterruptedException ex) {}
-            //Avisar();
         }
     }
 

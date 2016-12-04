@@ -13,9 +13,7 @@ import Juegos.Mano;
 import Juegos.Movimiento;
 import Juegos.Partida;
 import Juegos.RecogerFicha;
-import Juegos.ITipoMovimiento;
 import Juegos.Mensaje;
-import Usuarios.Jugador;
 import Usuarios.Usuario;
 import Vistas.Login;
 import Vistas.Mesa;
@@ -326,8 +324,6 @@ public class ControladorJuego implements ActionListener, Observer {
         Mensaje msg = (Mensaje)arg;
         this.partida = (Partida) o;
         
-        //CUENTA REGRESIVA
-        System.out.println(Integer.toString(this.partida.getRegrasivaTurno()));
         
         //AGREGAR FICHA MESA
         if(msg.getAccion().equalsIgnoreCase("AgregarFichasMesa")){
@@ -350,6 +346,14 @@ public class ControladorJuego implements ActionListener, Observer {
         //GANA JUGADOR
         else if(msg.getAccion().equalsIgnoreCase("GanaJugador")){
             vistaMesa.ocultarPanelesGanador(msg.getValor());
+        }
+        //CUENTA REGRESIVA
+        else if(msg.getAccion().equalsIgnoreCase("RegresivaTurno")){
+            this.vistaMesa.SetRegresiva(Integer.toString(this.partida.getRegrasivaTurno()));
+            //System.out.println(Integer.toString(this.partida.getRegrasivaTurno()));
+        }
+        else if(msg.getAccion().equalsIgnoreCase("FinDelTiempo")){
+            System.out.println("Pierde " + msg.getValor());
         }
         else{
             System.out.print("Ultimo Else.");
