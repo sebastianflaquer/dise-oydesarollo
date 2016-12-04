@@ -73,8 +73,7 @@ public class ControladorJuego implements ActionListener, Observer {
             //SI EXISTE EL USUARIO
             if(unUsu.getNombre() != null ){
                 //SI ES JUGADOR
-                if (unUsu.getTipo().puedoJugar())
-                {
+                if (unUsu.getTipo().puedoJugar()){
                     Partida P = new Partida();
                     if(unUsu.ValidarSaldo(unUsu.getTipo().getSaldo(), P.getApuestaActual())){
                         
@@ -118,7 +117,6 @@ public class ControladorJuego implements ActionListener, Observer {
                                 vistaMesa.SetApuestaActual(Double.toString(P2.getApuestaActual()));
                                 //ACA NO VA PORQUE ES UN EVENTO PARA LOS 3 CONTOLADORES
                                 
-                                
                                 //PRUEBA HILOS
                                 this.partida.Iniciar();
 
@@ -131,14 +129,12 @@ public class ControladorJuego implements ActionListener, Observer {
                         //vistaMesa.CargarFichasDelJugador();
                         //vistaMesa.SetNombreUsuario(unUsu.getNomCompleto());
                     }
-                    else
-                    {
+                    else{
                         vistaLogin.SetErrorMsj("Saldo Insuficiente");
                     }
                 }
                 //SI ES ADMINISTRADOR
-                else
-                {
+                else{
                     this.vistaLogin.setVisible(false);
                     this.mesaAdmin = new MesaAdmin();
                     this.mesaAdmin.inicializar();
@@ -170,6 +166,7 @@ public class ControladorJuego implements ActionListener, Observer {
             this.partida.setApuestaActual(NApuesta);
             vistaMesa.SetApuestaActual(Double.toString(NApuesta));
             this.partida.NotificarAccion("SubirApuesta","");
+            this.partida.acepaApuesta();
         }
         //SI CANCELA LA APUESTA
         else if(e.getActionCommand().equals("CANCELARAPUESTA")){
@@ -231,7 +228,8 @@ public class ControladorJuego implements ActionListener, Observer {
         
         //BOTONFICHA
         else if(e.getActionCommand().equals(e.getActionCommand())){
-            
+            //RESET DE TIEMPO
+            this.partida.resetTurno();
             //AGREGAR FICHA A FICHAS JUGADAS
             String nombreficha = e.getActionCommand();
             
@@ -339,10 +337,12 @@ public class ControladorJuego implements ActionListener, Observer {
         //SUBIR APUESTA
         else if(msg.getAccion().equalsIgnoreCase("SubirApuesta")){
             vistaMesa.SetApuestaActual(Double.toString(this.partida.getApuestaActual()));
+            this.vistaMesa.SetRegresivaApuesta(Integer.toString(this.partida.getRegrasivaApuesta()));
         }
         //MOSTRAR PANEL APUESTA
         else if(msg.getAccion().equalsIgnoreCase("MostrasApuesta")){
             mostrarPanelApuesta(Double.parseDouble(msg.getValor()));
+            this.partida.setOnApuesta(Boolean.TRUE);
             //vistaMesa.mostrarPanelApuesta((Partida) o, this.partida.getTurnoActualJugador());
         }
         //GANA JUGADOR
@@ -352,10 +352,15 @@ public class ControladorJuego implements ActionListener, Observer {
         //CUENTA REGRESIVA
         else if(msg.getAccion().equalsIgnoreCase("RegresivaTurno")){
             this.vistaMesa.SetRegresiva(Integer.toString(this.partida.getRegrasivaTurno()));
-            //System.out.println(Integer.toString(this.partida.getRegrasivaTurno()));
         }
         else if(msg.getAccion().equalsIgnoreCase("FinDelTiempo")){
-            System.out.println("Pierde " + msg.getValor());
+            this.partida.NotificarAccion("GanaJugador", msg.getValor());
+        }
+        else if(msg.getAccion().equalsIgnoreCase("RegresivaApuesta")){
+            this.vistaMesa.SetRegresivaApuesta(Integer.toString(this.partida.getRegrasivaApuesta()));
+        }
+        else if(msg.getAccion().equalsIgnoreCase("FinTiempoApuesta")){
+            this.partida.NotificarAccion("GanaJugador", msg.getValor());
         }
         else{
             System.out.print("Ultimo Else.");

@@ -64,6 +64,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
         lblnuevaApuesta = new javax.swing.JLabel();
         lblErrorApuesta = new javax.swing.JLabel();
         lblRegresiva = new javax.swing.JLabel();
+        lblRegresivaApuesta = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         btnMasFicha = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -182,14 +183,20 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
                 .addComponent(jPanelAceptarApuesta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(txtAumentarApuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAumentarApuesta))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addComponent(txtAumentarApuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAumentarApuesta))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblErrorApuesta)))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblErrorApuesta)))
-                .addContainerGap())
+                        .addComponent(lblRegresivaApuesta)
+                        .addGap(39, 39, 39))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,7 +205,11 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
                 .addComponent(jPanelAceptarApuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 32, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(lblRegresiva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblRegresiva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblRegresivaApuesta)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -382,6 +393,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     private javax.swing.JLabel lblErrorApuesta;
     private javax.swing.JLabel lblGanador;
     private javax.swing.JLabel lblRegresiva;
+    private javax.swing.JLabel lblRegresivaApuesta;
     private javax.swing.JLabel lblSaldo;
     private javax.swing.JLabel lblnuevaApuesta;
     private javax.swing.JTextField txtAumentarApuesta;
@@ -527,6 +539,11 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     @Override
     public void SetRegresiva(String numero) {
         this.lblRegresiva.setText(numero);
+    }
+
+    @Override
+    public void SetRegresivaApuesta(String numero) {
+       this.lblRegresivaApuesta.setText(numero);
     }
     
     

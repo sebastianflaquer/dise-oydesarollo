@@ -15,6 +15,10 @@ import java.util.Observable;
 
 
 public class Partida extends Observable implements Runnable{
+
+    
+
+    
     
     //================================================================================
     //ATRIBUTOS
@@ -37,18 +41,7 @@ public class Partida extends Observable implements Runnable{
     private int regresivaApuesta;
     private Thread hilo;
     
-    
-    // GETTERS HILOS
-    public int getRegrasivaTurno() {
-        return regresivaTurno;
-    }
 
-    public int getRegrasivaApuesta() {
-        return regresivaApuesta;
-    }
-      
-    
-    
     public void Iniciar(){
         this.onTurno = true;
         //this.onApuesta = true;
@@ -56,17 +49,26 @@ public class Partida extends Observable implements Runnable{
         this.hilo.start();
     }
     
-    public void PausarPorApuesta(){
+    public void acepaApuesta()
+    {
         this.onApuesta = false;
-        NotificarAccion("PausarPorApuesta", "");
+        resetApuesta();
     }
     
+    public void resetTurno()
+    {
+        this.regresivaTurno = 30;
+    }
+    public void resetApuesta()
+    {
+        this.regresivaApuesta = 15;
+    }
+        
     public void Detener(){
         this.onTurno = false;
         this.onApuesta = false;
-        NotificarAccion("DetenerRegresiva", "");
-    }
-   
+        //NotificarAccion("DetenerRegresiva", "");
+    }   
 
     @Override
     public void run() {
@@ -75,7 +77,13 @@ public class Partida extends Observable implements Runnable{
             {
                 // fin de la partida
                 this.estado = "Finalizado1"; // o "Finalizado2" depende el Turno
-                NotificarAccion("FinDelTiempo", this.getTurnoActualJugador().getNombre());
+                String JugGanador = "";
+                if(this.getTurnoActualJugador() == this.getJugador1()){
+                    JugGanador = "Gana Jugador 2";
+                }else{
+                    JugGanador = "Gana Jugador 1";
+                }
+                NotificarAccion("FinDelTiempo", JugGanador);
                 this.onTurno = false;
             }
             else
@@ -86,6 +94,33 @@ public class Partida extends Observable implements Runnable{
                         Thread.sleep(1000);
                     } 
                 catch (InterruptedException ex) {}
+            }
+            
+            while(onApuesta)
+            {
+                if(this.regresivaApuesta == 0)
+                {
+                    String JugGanador = "";
+                    if(this.getTurnoActualJugador() == this.getJugador1()){
+                        JugGanador = "Gana Jugador 1";
+                    }else{
+                        JugGanador = "Gana Jugador 2";
+                    }
+                    NotificarAccion("FinTiempoApuesta", JugGanador);
+                    this.onApuesta = false;
+                    Detener();
+                }
+                else
+                {
+                    try {
+                        this.regresivaApuesta --;
+                        NotificarAccion("RegresivaApuesta", "");
+                        Thread.sleep(1000);
+                    } 
+                    catch (InterruptedException ex) {}
+                }
+                
+                
             }
             
         }
@@ -128,6 +163,13 @@ public class Partida extends Observable implements Runnable{
     public void setTurnoActualJugador(Usuario turnoActualJugador) {
         this.turnoActualJugador = turnoActualJugador;
     }   
+    public void setOnTurno(Boolean onTurno) {
+        this.onTurno = onTurno;
+    }
+
+    public void setOnApuesta(Boolean onApuesta) {
+        this.onApuesta = onApuesta;
+    }
 
     //================================================================================
     //GETTERS
@@ -163,6 +205,20 @@ public class Partida extends Observable implements Runnable{
     public Usuario getTurnoActualJugador() {
         return turnoActualJugador;
     }
+    public int getRegrasivaTurno() {
+        return regresivaTurno;
+    }
+
+    public int getRegrasivaApuesta() {
+        return regresivaApuesta;
+    }
+    public Boolean getOnTurno() {
+        return onTurno;
+    }
+
+    public Boolean getOnApuesta() {
+        return onApuesta;
+    }
 
     //================================================================================
     //CONSTRUCTOR
@@ -175,8 +231,9 @@ public class Partida extends Observable implements Runnable{
         this.manos = new ArrayList<Mano>();
         this.turnoActual = 0;
         this.apuestaActual = Partida.apuestaInicial;
-        this.regresivaTurno = 40;
-        this.regresivaApuesta = 20;
+        this.regresivaTurno = 30;
+        this.regresivaApuesta = 15;
+        this.onApuesta = false;
     }
     
     //================================================================================

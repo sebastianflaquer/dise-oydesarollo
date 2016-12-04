@@ -25,6 +25,7 @@ public interface IMesa {
     public void SetNombreUsuario(String nombreUsuario);
     public double GettxtSubirApuesta();
     public void SetRegresiva(String numero);
+    public void SetRegresivaApuesta(String numero);
     
     public void setVisible(boolean b);  
     
