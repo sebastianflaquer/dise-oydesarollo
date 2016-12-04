@@ -14,6 +14,8 @@ import Juegos.Movimiento;
 import Juegos.Partida;
 import Juegos.RecogerFicha;
 import Juegos.Mensaje;
+import ModeloPersistente.PartidaPersistente;
+import PersistenciaCont.ManejadorBD;
 import Usuarios.Usuario;
 import Vistas.Login;
 import Vistas.Mesa;
@@ -361,6 +363,21 @@ public class ControladorJuego implements ActionListener, Observer {
         }
         else if(msg.getAccion().equalsIgnoreCase("FinTiempoApuesta")){
             this.partida.NotificarAccion("GanaJugador", msg.getValor());
+            
+            //prueba bd
+            
+            ManejadorBD bd = ManejadorBD.getInstancia();
+                    bd.conectar("jdbc:mysql://localhost/dominoschema?user=root&password=root");
+            PartidaPersistente s3 = new PartidaPersistente(this.partida);
+            
+            String listString = "";
+
+            for (String s : s3.getInsertSql())
+            {
+                listString += s + "\t";
+            }
+             bd.ejecutar(listString);
+            System.out.print("ee");
         }
         else{
             System.out.print("Ultimo Else.");

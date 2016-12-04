@@ -42,93 +42,6 @@ public class Partida extends Observable implements Runnable{
     private Thread hilo;
     
 
-    public void Iniciar(){
-        this.onTurno = true;
-        //this.onApuesta = true;
-        this.hilo = new Thread(this);
-        this.hilo.start();
-    }
-    
-    public void acepaApuesta()
-    {
-        this.onApuesta = false;
-        resetApuesta();
-    }
-    
-    public void resetTurno()
-    {
-        this.regresivaTurno = 30;
-    }
-    public void resetApuesta()
-    {
-        this.regresivaApuesta = 15;
-    }
-        
-    public void Detener(){
-        this.onTurno = false;
-        this.onApuesta = false;
-        //NotificarAccion("DetenerRegresiva", "");
-    }   
-
-    @Override
-    public void run() {
-        while(this.onTurno){
-            if(this.regresivaTurno == 0)
-            {
-                // fin de la partida
-                this.estado = "Finalizado1"; // o "Finalizado2" depende el Turno
-                String JugGanador = "";
-                if(this.getTurnoActualJugador() == this.getJugador1()){
-                    JugGanador = "Gana Jugador 2";
-                }else{
-                    JugGanador = "Gana Jugador 1";
-                }
-                NotificarAccion("FinDelTiempo", JugGanador);
-                this.onTurno = false;
-            }
-            else
-            {
-                try {
-                        this.regresivaTurno --;
-                        NotificarAccion("RegresivaTurno", Integer.toString(this.regresivaTurno));
-                        Thread.sleep(1000);
-                    } 
-                catch (InterruptedException ex) {}
-            }
-            
-            while(onApuesta)
-            {
-                if(this.regresivaApuesta == 0)
-                {
-                    String JugGanador = "";
-                    if(this.getTurnoActualJugador() == this.getJugador1()){
-                        JugGanador = "Gana Jugador 1";
-                    }else{
-                        JugGanador = "Gana Jugador 2";
-                    }
-                    NotificarAccion("FinTiempoApuesta", JugGanador);
-                    this.onApuesta = false;
-                    Detener();
-                }
-                else
-                {
-                    try {
-                        this.regresivaApuesta --;
-                        NotificarAccion("RegresivaApuesta", "");
-                        Thread.sleep(1000);
-                    } 
-                    catch (InterruptedException ex) {}
-                }
-                
-                
-            }
-            
-        }
-    }
-
-    
-
-
     //================================================================================
     //SETTERS
     //================================================================================
@@ -232,13 +145,97 @@ public class Partida extends Observable implements Runnable{
         this.turnoActual = 0;
         this.apuestaActual = Partida.apuestaInicial;
         this.regresivaTurno = 30;
-        this.regresivaApuesta = 15;
+        this.regresivaApuesta = 5;
         this.onApuesta = false;
     }
     
     //================================================================================
     //METODOS
     //================================================================================
+    
+    public void Iniciar(){
+        this.onTurno = true;
+        //this.onApuesta = true;
+        this.hilo = new Thread(this);
+        this.hilo.start();
+    }
+    
+    public void acepaApuesta()
+    {
+        this.onApuesta = false;
+        resetApuesta();
+    }
+    
+    public void resetTurno()
+    {
+        this.regresivaTurno = 30;
+    }
+    public void resetApuesta()
+    {
+        this.regresivaApuesta = 15;
+    }
+        
+    public void Detener(){
+        this.onTurno = false;
+        this.onApuesta = false;
+        //NotificarAccion("DetenerRegresiva", "");
+    }   
+
+    @Override
+    public void run() {
+        while(this.onTurno){
+            if(this.regresivaTurno == 0)
+            {
+                // fin de la partida
+                this.estado = "Finalizado1"; // o "Finalizado2" depende el Turno
+                String JugGanador = "";
+                if(this.getTurnoActualJugador() == this.getJugador1()){
+                    JugGanador = "Gana Jugador 2";
+                }else{
+                    JugGanador = "Gana Jugador 1";
+                }
+                NotificarAccion("FinDelTiempo", JugGanador);
+                this.onTurno = false;
+            }
+            else
+            {
+                try {
+                        this.regresivaTurno --;
+                        NotificarAccion("RegresivaTurno", Integer.toString(this.regresivaTurno));
+                        Thread.sleep(1000);
+                    } 
+                catch (InterruptedException ex) {}
+            }
+            
+            while(onApuesta)
+            {
+                if(this.regresivaApuesta == 0)
+                {
+                    String JugGanador = "";
+                    if(this.getTurnoActualJugador() == this.getJugador1()){
+                        JugGanador = "Gana Jugador 1";
+                    }else{
+                        JugGanador = "Gana Jugador 2";
+                    }
+                    NotificarAccion("FinTiempoApuesta", JugGanador);
+                    this.onApuesta = false;
+                    Detener();
+                }
+                else
+                {
+                    try {
+                        this.regresivaApuesta --;
+                        NotificarAccion("RegresivaApuesta", "");
+                        Thread.sleep(1000);
+                    } 
+                    catch (InterruptedException ex) {}
+                }
+                
+                
+            }
+            
+        }
+    }
     
     //AGREGAR MANO
     public void agregarMano(Mano m){

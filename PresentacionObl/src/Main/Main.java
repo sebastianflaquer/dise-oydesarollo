@@ -15,6 +15,7 @@ import Juegos.Mano;
 import Juegos.Movimiento;
 import Juegos.Partida;
 import Juegos.RecogerFicha;
+import PersistenciaCont.ManejadorBD;
 import Usuarios.Admin;
 import Usuarios.ITipo;
 import Usuarios.Jugador;
@@ -33,6 +34,15 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        // TODO code application logic here
+        //ManejadorBD.getInstancia().conectar("jdbc:mysql://localhost/dominoschema?user=root&password=root");
+        //System.out.println("OK");
+        //int oid = ManejadorBD.getInstancia().proximoOid();
+        //ManejadorBD.getInstancia().ejecutar("insert into usuario values(" + oid + ",'pepe','pepe')");
+        //System.out.println("oid:" + oid);
+        //ManejadorBD.getInstancia().ejecutar("insert into usuario values( NULL, 'Juan','Jugador','pass','Juan Perez', 1000)");
+        //ManejadorBD.getInstancia().desconectar();        
         
         cargarUsuarios();
         //cargarPartidasDePrueba();
@@ -58,8 +68,6 @@ public class Main {
         s.agregar(new Usuario("ana", (ITipo) new Jugador(90), "pass","Ana Gonzalez"));
         s.agregar(new Usuario("luis", (ITipo) new Jugador(900), "pass","Luis Rivero"));
         s.agregar(new Usuario("admin", (ITipo) new Admin(), "pass","Pedro Hernandez"));
-        s.agregar(new Usuario("j3", (ITipo) new Jugador(900), "pass","j3"));
-        s.agregar(new Usuario("j4", (ITipo) new Jugador(900), "pass","j4"));
     }
     
     //CARGA LAS FICHAS A LA PARTIDA
