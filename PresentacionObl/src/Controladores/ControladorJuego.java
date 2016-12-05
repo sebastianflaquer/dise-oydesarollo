@@ -357,6 +357,9 @@ public class ControladorJuego implements ActionListener, Observer {
         }
         else if(msg.getAccion().equalsIgnoreCase("FinDelTiempo")){
             this.partida.NotificarAccion("GanaJugador", msg.getValor());
+            // Persistir la Partida
+            PartidaPersistente pp = new PartidaPersistente(this.partida);
+            pp.ImpactarDatos();
         }
         else if(msg.getAccion().equalsIgnoreCase("RegresivaApuesta")){
             this.vistaMesa.SetRegresivaApuesta(Integer.toString(this.partida.getRegrasivaApuesta()));
@@ -364,20 +367,9 @@ public class ControladorJuego implements ActionListener, Observer {
         else if(msg.getAccion().equalsIgnoreCase("FinTiempoApuesta")){
             this.partida.NotificarAccion("GanaJugador", msg.getValor());
             
-            //prueba bd
-            
-            ManejadorBD bd = ManejadorBD.getInstancia();
-                    bd.conectar("jdbc:mysql://localhost/dominoschema?user=root&password=root");
-            PartidaPersistente s3 = new PartidaPersistente(this.partida);
-            
-            String listString = "";
-
-            for (String s : s3.getInsertSql())
-            {
-                listString += s + "\t";
-            }
-             bd.ejecutar(listString);
-            System.out.print("ee");
+            // Persistir la Partida
+            PartidaPersistente pp = new PartidaPersistente(this.partida);
+            pp.ImpactarDatos();  
         }
         else{
             System.out.print("Ultimo Else.");

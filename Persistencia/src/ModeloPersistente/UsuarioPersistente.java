@@ -43,7 +43,22 @@ public class UsuarioPersistente implements Persistente{
 
     @Override
     public ArrayList<String> getInsertSql() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList r = new ArrayList();
+        r.add("INSERT INTO usuario(idUsuario,Nombre,TipoJug,Password,nomCompleto,saldo)"
+                + "VALUES( null, " + usu.getNombre() + "," + verTipoUsu() + " ,'"
+                + usu.getPassword() + "'," + usu.getTipo().getSaldo() + ")");
+        return r;
+    }
+    
+    private String verTipoUsu()
+    {
+        String ret = "Admin";
+        double num = this.usu.getTipo().getSaldo();
+        if(num != -1)
+        {
+            ret = "Jugador";
+        }
+        return ret;
     }
 
     @Override

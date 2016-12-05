@@ -37,10 +37,16 @@ public class ManoPersistente implements Persistente{
     public Persistente crearNuevo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    
+    //FALTA IDPARTIDA
     @Override
     public ArrayList<String> getInsertSql() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList r = new ArrayList();
+        r.add("INSERT INTO mano(idMano,cantFichasj1,cantFichasj2,canfichasMazo,cantFichasJugadas, idPartida)"
+                + "VALUES( null, " + mano.getFichasJ1().size() + "," + mano.getFichasJ2().size() + " ,'"
+                + mano.getFichasMazo().size() + "'," + mano.getFichasJugadas().size() + ")");
+        return r;
     }
 
     @Override

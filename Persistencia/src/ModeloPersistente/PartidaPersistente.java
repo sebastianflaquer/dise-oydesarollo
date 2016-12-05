@@ -6,6 +6,7 @@
 package ModeloPersistente;
 
 import Juegos.Partida;
+import PersistenciaCont.ManejadorBD;
 import PersistenciaCont.Persistente;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,16 +16,14 @@ import java.util.ArrayList;
  *
  * @author Mauro
  */
-public class PartidaPersistente implements Persistente{
+public class PartidaPersistente implements Persistente {
+
     private Partida partida;
-    
-    
+
     public PartidaPersistente(Partida p) {
         this.partida = p;
     }
-    
-    
-    
+
     @Override
     public Persistente crearNuevo() {
         return new PartidaPersistente(new Partida());
@@ -34,20 +33,16 @@ public class PartidaPersistente implements Persistente{
     public Object getObjeto() {
         return partida;
     }
-    
+
     @Override
     public ArrayList<String> getInsertSql() {
         ArrayList r = new ArrayList();
-        r.add( "INSERT INTO partida(idPartida,jug1,jug2,estado,apuestaInicial,ApuestaActual)"
-                +"VALUES( null, "+ 3 +","+ 3 +" ,'"
-                +partida.getEstado()+"',"+partida.getApuestaActual()+","+ partida.getApuestaActual()+ ")");
-        
-        //INSERT INTO partida(idPartida,jug1,jug2,estado,apuestaInicial,ApuestaActual)VALUES( null, 3,3,'En Juego',100.0,100.0)
+        r.add("INSERT INTO partida(idPartida,jug1,jug2,estado,apuestaInicial,ApuestaActual)"
+                + "VALUES( null, " + partida.getJugador1().getId() + "," + partida.getJugador2().getId() + " ,'"
+                + partida.getEstado() + "'," + Partida.getApuestaInicial() + "," + partida.getApuestaActual() + ")");
         return r;
     }
 
-
-    
     @Override
     public String getUpdateSql() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -62,9 +57,6 @@ public class PartidaPersistente implements Persistente{
     public String getSelectSql() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-
-    
 
     @Override
     public void setOid(int oid) {
@@ -81,9 +73,18 @@ public class PartidaPersistente implements Persistente{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-
     @Override
     public void limpiar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void ImpactarDatos() {
+        ManejadorBD bd = ManejadorBD.getInstancia();
+        bd.conectar("jdbc:mysql://localhost/dominoschema?user=root&password=root");
+        String listString = "";
+        for (String s : this.getInsertSql()) {
+            listString += s + "\t";
+        }
+        bd.ejecutar(listString);
     }
 }
