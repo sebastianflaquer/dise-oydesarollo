@@ -21,7 +21,7 @@ create table PARTIDAS(
 );
 
 create table MANOS(
-	idMano int primary key, 
+	idMano int primary key AUTO_INCREMENT, 
 	cantFichasJ1 numeric(2,0), 
 	cantFichasJ2 numeric(2,0), 
 	cantFichasMazo numeric(2,0), 
