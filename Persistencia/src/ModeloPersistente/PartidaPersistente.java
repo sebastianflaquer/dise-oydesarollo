@@ -59,7 +59,7 @@ public class PartidaPersistente implements Persistente {
         ManejadorBD bd = ManejadorBD.getInstancia();
         //int oid = ManejadorBD.getInstancia().proximoOid();
         
-        bd.conectar("jdbc:mysql://localhost/domino_schema?user=root&password=root");
+        bd.conectar("jdbc:mysql://localhost/domino2?user=root&password=root");
         String listString = "";
         for (String s : this.getInsertSql()) {
             listString += s + "\t";

@@ -56,7 +56,7 @@ public class ManoPersistente implements Persistente{
     public ArrayList<String> getInsertSqlPrueba(int idPartida) {
         ArrayList r = new ArrayList();
         r.add("INSERT INTO manos(idMano,cantFichasJ1,cantFichasJ2,cantFichasMazo,cantFichasJugadas, idPartida)"
-                + "VALUES("+ mano.getId()+"," + mano.getFichasJ1().size() + "," + mano.getFichasJ2().size() + " ,"
+                + "VALUES(null, " + mano.getFichasJ1().size() + "," + mano.getFichasJ2().size() + " ,"
                 + mano.getFichasMazo().size() + "," + mano.getFichasJugadas().size() + "," + idPartida + ")");
         return r;
     }
