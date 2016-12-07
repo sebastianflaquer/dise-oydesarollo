@@ -255,7 +255,7 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
         DefaultListModel<String> model = new DefaultListModel<>();
         for(int i = 0; i < Sistema.GetInstancia().getPartidas().size(); i++)
             {
-                int id = Sistema.GetInstancia().getPartidas().get(i).getId();
+                int id = Sistema.GetInstancia().getPartidas().get(i).getOid();
                 String str = Integer.toString(id); 
                 model.addElement("Partida ID: " + str);
             }          

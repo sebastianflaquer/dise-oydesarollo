@@ -15,7 +15,6 @@ import Juegos.Partida;
 import Juegos.RecogerFicha;
 import Juegos.Mensaje;
 import ModeloPersistente.PartidaPersistente;
-import PersistenciaCont.ManejadorBD;
 import Usuarios.Usuario;
 import Vistas.Login;
 import Vistas.Mesa;

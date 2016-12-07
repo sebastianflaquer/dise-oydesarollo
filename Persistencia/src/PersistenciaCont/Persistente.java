@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public interface Persistente {
     
-    public ArrayList<String> getInsertSql();
+    public ArrayList<String> getInsertSql(int oid);
     public void setOid(int oid);
     public String getUpdateSql();
     public String getDeleteSql();

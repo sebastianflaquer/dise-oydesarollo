@@ -15,16 +15,12 @@ import java.util.Observable;
 
 
 public class Partida extends Observable implements Runnable{
-
-    
-
-    
     
     //================================================================================
     //ATRIBUTOS
     //================================================================================
     private static int ultId=0;
-    private int id;
+    private int oid;
     private Usuario jugador1;
     private Usuario jugador2;
     private String estado;    // "En Juego", "Finalizado" o "Sin Iniciar" o "Esperando Jugador"
@@ -49,8 +45,8 @@ public class Partida extends Observable implements Runnable{
     public static void setUltId(int ultId) {
         Partida.ultId = ultId;
     }
-    public void setId(int id) {
-        this.id = id;
+    public void setOid(int oid) {
+        this.oid = oid;
     }
     public void setJugador1(Usuario jugador1) {
         this.jugador1 = jugador1;
@@ -91,8 +87,8 @@ public class Partida extends Observable implements Runnable{
     public static int getUltId() {
         return ultId;
     }
-    public int getId() {
-        return id;
+    public int getOid() {
+        return oid;
     }
     public Usuario getJugador1() {
         return jugador1;
@@ -137,7 +133,7 @@ public class Partida extends Observable implements Runnable{
     //CONSTRUCTOR
     //================================================================================
     public Partida() {
-        this.id=++Partida.ultId;
+        this.oid = -1;
         this.jugador1 = null;
         this.jugador2 = null;
         this.estado = "Sin Iniciar";
@@ -523,10 +519,6 @@ public class Partida extends Observable implements Runnable{
         
         this.setChanged();
         this.notifyObservers(aux);
-    }
-
-    
-
-    
+    }    
     
 }

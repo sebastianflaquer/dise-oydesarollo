@@ -18,10 +18,10 @@ import java.util.ArrayList;
  */
 public class PartidaPersistente implements Persistente {
 
-    private Partida partida;
+    private Partida p;
 
     public PartidaPersistente(Partida p) {
-        this.partida = p;
+        this.p = p;
     }
 
     @Override
@@ -31,17 +31,62 @@ public class PartidaPersistente implements Persistente {
 
     @Override
     public Object getObjeto() {
-        return partida;
+        return p;
+    }
+    
+    @Override
+    public void setOid(int oid) {
+        p.setOid(oid);
+    }
+    
+    @Override
+    public int getOid() {
+        if(this==null){
+            return 0;
+        }else{
+            return this.getOid();
+        } 
     }
 
     @Override
-    public ArrayList<String> getInsertSql() {
+    public ArrayList<String> getInsertSql(int oid) {
+        
         ArrayList r = new ArrayList();
         r.add("INSERT INTO partida(idPartida,jug1,jug2,estado,apuestaInicial,ApuestaActual)"
-                + "VALUES( null, " + partida.getJugador1().getId() + "," + partida.getJugador2().getId() + " ,'"
-                + partida.getEstado() + "'," + Partida.getApuestaInicial() + "," + partida.getApuestaActual() + ")");
+                + "VALUES("+ oid +"," + p.getJugador1().getId() + "," + p.getJugador2().getId() + " ,'"
+                + p.getEstado() + "'," + Partida.getApuestaInicial() + "," + p.getApuestaActual() + ")");
         return r;
     }
+    
+    public void ImpactarDatos() {
+        ManejadorBD bd = ManejadorBD.getInstancia();
+        int oid = ManejadorBD.getInstancia().proximoOid();
+        
+        bd.conectar("jdbc:mysql://localhost/domino?user=root&password=root");
+        String listString = "";
+        for (String s : this.getInsertSql(oid)) {
+            listString += s + "\t";
+        }
+        //IMPACTA EN TABLA PARTIDA
+        bd.ejecutar(listString);
+
+        //IMPACTA EN TABLA MANOS
+        for (int i = 0; i < this.p.getManos().size(); i++) {
+            ManoPersistente mp = new ManoPersistente(this.p.getManos().get(i));
+            String listString2 = "";
+            for (String s : mp.getInsertSqlConParametro(2)) {
+                listString2 += s + "\t";
+            }
+            bd.ejecutar(listString2);
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
 
     @Override
     public String getUpdateSql() {
@@ -58,15 +103,7 @@ public class PartidaPersistente implements Persistente {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void setOid(int oid) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int getOid() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     @Override
     public void leer(ResultSet rs) throws SQLException {
@@ -77,14 +114,6 @@ public class PartidaPersistente implements Persistente {
     public void limpiar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    public void ImpactarDatos() {
-        ManejadorBD bd = ManejadorBD.getInstancia();
-        bd.conectar("jdbc:mysql://localhost/dominoschema?user=root&password=root");
-        String listString = "";
-        for (String s : this.getInsertSql()) {
-            listString += s + "\t";
-        }
-        bd.ejecutar(listString);
-    }
+    
+    
 }

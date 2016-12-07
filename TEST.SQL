@@ -1,65 +1,55 @@
+use Domino;
 
-
-create table USUARIO(
-	idUsuario int primary AUTO_INCREMENT, 
-	Nombre varchar(30), 
-	TipoJug varchar(30), 
-	Password varchar(30), 
+create table USUARIOS(
+	idUsuario int primary key, 
+	nombre varchar(30), 
+	tipoJug varchar(30), 
+	password varchar(30), 
 	nomCompleto varchar(120), 
-	saldo numeric
-)
+	saldo double
+);
 
-create table FICHA(
-	idFicha int primary key AUTO_INCREMENT, 
+create table FICHAS(
+	idFicha int primary key, 
 	valor1 numeric(1,0), 
 	valor2 numeric(1,0)
-)
+);
 
 create table TIPOMOVIMIENTO(
-	idTipoMov int primary key AUTO_INCREMENT, 
+	idTipoMov int primary key, 
 	nombreTipo varchar(30),
 	idFicha int, 
 	lado varchar(30), 
-	monto numeric,
-	FOREIGN KEY (idFicha) REFERENCES FICHA(idFicha)
-)
+	monto double,
+	FOREIGN KEY (idFicha) REFERENCES FICHAS(idFicha)
+);
 
-create table PARTIDA(
-	idPartida int primary key AUTO_INCREMENT,  
+create table PARTIDAS(
+	idPartida int primary key,  
 	jug1 int, 
 	jug2 int, 
-	estado varchar(30) CHECK ( estado in("En Juego","Finalizado","Sin Iniciar","Esperando Jugador")),
-	apuestaInicial numeric, 
-	apuestaActual numeric,
-	FOREIGN KEY (jug1) REFERENCES USUARIO(idUsuario),
-	FOREIGN KEY (jug2) REFERENCES USUARIO(idUsuario)
-)
+	estado varchar(30) CHECK (estado in("En Juego","Finalizado","Sin Iniciar","Esperando Jugador")),
+	apuestaInicial double, 
+	apuestaActual double,
+	FOREIGN KEY (jug1) REFERENCES USUARIOS(idUsuario),
+	FOREIGN KEY (jug2) REFERENCES USUARIOS(idUsuario)
+);
+
+create table MANOS(
+	idMano int primary key, 
+	cantFichasJ1 numeric(2,0), 
+	cantFichasJ2 numeric(2,0), 
+	cantFichasMazo numeric(2,0), 
+	cantFichasJugadas numeric(2,0),
+	idPartida int,
+	FOREIGN KEY (idPartida) REFERENCES PARTIDAS(idPartida)
+);
 
 create table MOVIMIENTO(
-	idMovimiento int primary key AUTO_INCREMENT,
-	FechaHora date,
-	idTipoMov int, 
-	idUsuario int, 
+	idMovimiento int primary key,
+	fechaHora date,
+	idTipoMov int REFERENCES TIPOMOVIMIENTO, 
+	idUsuario int REFERENCES USUARIOS, 
 	idMano int,
-	FOREIGN KEY (idMano) REFERENCES MANO(idMano)
-)
-
-create table MANO(
-	idMano int primary key AUTO_INCREMENT, 
-	cantFichasj1 numeric(2,0), 
-	cantFichasj2 numeric(2,0), 
-	canfichasMazo numeric(2,0), 
-	cantFichasJugadas numeric(2,0)
-	idPartida int
-	FOREIGN KEY (idPartida) REFERENCES PARTIDA(idPartida)
-)
-
-
-
-
-USUARIO(idUsuario, Nombre, TipoJug, Password, nomCompleto, saldo)
-PARTIDA( idPartida, jug1, jug2, estado, apuestaInicial, manos, turnoActual, apuestaActual)
-MANO(idMano, cantFichasj1, cantFichasj2, canfichasMazo, cantFichasJugadas)
-MOVIMIENTO(idMovimiento,FechaHora ,idTipoMov, idUsuario, idMano)
-FICHA(idFicha, valor1, valor2)
-TIPOMOVIMIENTO(idTipoMov, idFicha, lado, monto)
+	FOREIGN KEY (idMano) REFERENCES MANOS(idMano)
+);

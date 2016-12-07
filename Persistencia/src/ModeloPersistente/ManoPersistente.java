@@ -17,6 +17,10 @@ import java.util.ArrayList;
  */
 public class ManoPersistente implements Persistente{
     private Mano mano;
+    
+    public ManoPersistente(Mano m) {
+        this.mano = m;
+    }
 
     @Override
     public String getUpdateSql() {
@@ -72,5 +76,13 @@ public class ManoPersistente implements Persistente{
     @Override
     public void limpiar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public ArrayList<String> getInsertSqlConParametro(int idPartida) {
+        ArrayList r = new ArrayList();
+        r.add("INSERT INTO mano(idMano,cantFichasj1,cantFichasj2,canfichasMazo,cantFichasJugadas, idPartida)"
+                + "VALUES( null, " + mano.getFichasJ1().size() + "," + mano.getFichasJ2().size() + " ,'"
+                + mano.getFichasMazo().size() + "'," + mano.getFichasJugadas().size() + idPartida + ")");
+        return r;
     }
 }
