@@ -368,7 +368,8 @@ public class ControladorJuego implements ActionListener, Observer {
             
             // Persistir la Partida
             PartidaPersistente pp = new PartidaPersistente(this.partida);
-            pp.ImpactarDatos();  
+            pp.ImpactarDatos();
+            System.out.print("Listorti");
         }
         else{
             System.out.print("Ultimo Else.");

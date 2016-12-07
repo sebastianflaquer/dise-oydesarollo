@@ -9,21 +9,6 @@ create table USUARIOS(
 	saldo double
 );
 
-create table FICHAS(
-	idFicha int primary key, 
-	valor1 numeric(1,0), 
-	valor2 numeric(1,0)
-);
-
-create table TIPOMOVIMIENTO(
-	idTipoMov int primary key, 
-	nombreTipo varchar(30),
-	idFicha int, 
-	lado varchar(30), 
-	monto double,
-	FOREIGN KEY (idFicha) REFERENCES FICHAS(idFicha)
-);
-
 create table PARTIDAS(
 	idPartida int primary key,  
 	jug1 int, 
@@ -48,8 +33,13 @@ create table MANOS(
 create table MOVIMIENTO(
 	idMovimiento int primary key,
 	fechaHora date,
-	idTipoMov int REFERENCES TIPOMOVIMIENTO, 
+	tipoMov varchar(30) check (tipoMov in("Apuesta","ColocarFicha", "RecogerFicha")), 
 	idUsuario int REFERENCES USUARIOS, 
 	idMano int,
 	FOREIGN KEY (idMano) REFERENCES MANOS(idMano)
 );
+
+create table PARAMETRO(
+	nombre varchar(30) primary key,
+	valor int(50)
+)

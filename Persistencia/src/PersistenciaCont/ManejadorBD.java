@@ -63,16 +63,16 @@ public class ManejadorBD {
 
     
     public int proximoOid() {
-        int oid=-1;
+        int oid=0;
         try {
-            String sql = "SELECT valor FROM Parametros WHERE nombre='oid'";
+            String sql = "SELECT valor FROM parametro WHERE nombre='oid'";
             ResultSet rs = this.obtenerResultSet(sql);
             if (rs.next()) {
                 oid=rs.getInt("valor");
             }
             rs.close();
             oid++;
-            this.ejecutar("UPDATE Parametros set valor=" + oid + " WHERE nombre='oid'");
+            this.ejecutar("UPDATE parametro set valor=" + oid + " WHERE nombre='oid'");
         } catch (SQLException e) {
                 System.out.println("Error al obtener el proximo oid." + e.getMessage());
         }

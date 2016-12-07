@@ -133,7 +133,7 @@ public class Partida extends Observable implements Runnable{
     //CONSTRUCTOR
     //================================================================================
     public Partida() {
-        this.oid = -1;
+        this.oid = 1;
         this.jugador1 = null;
         this.jugador2 = null;
         this.estado = "Sin Iniciar";

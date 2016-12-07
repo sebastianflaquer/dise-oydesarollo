@@ -41,30 +41,27 @@ public class PartidaPersistente implements Persistente {
     
     @Override
     public int getOid() {
-        if(this==null){
-            return 0;
-        }else{
-            return this.getOid();
-        } 
+        if(this.p==null) return 0;
+        return p.getOid();
     }
 
     @Override
-    public ArrayList<String> getInsertSql(int oid) {
+    public ArrayList<String> getInsertSql() {
         
         ArrayList r = new ArrayList();
-        r.add("INSERT INTO partida(idPartida,jug1,jug2,estado,apuestaInicial,ApuestaActual)"
-                + "VALUES("+ oid +"," + p.getJugador1().getId() + "," + p.getJugador2().getId() + " ,'"
+        r.add("INSERT INTO partidas(idPartida,jug1,jug2,estado,apuestaInicial,ApuestaActual)"
+                + "VALUES("+ getOid() +"," + 1 + "," + 2 + " ,'"
                 + p.getEstado() + "'," + Partida.getApuestaInicial() + "," + p.getApuestaActual() + ")");
         return r;
     }
     
     public void ImpactarDatos() {
         ManejadorBD bd = ManejadorBD.getInstancia();
-        int oid = ManejadorBD.getInstancia().proximoOid();
+        //int oid = ManejadorBD.getInstancia().proximoOid();
         
-        bd.conectar("jdbc:mysql://localhost/domino?user=root&password=root");
+        bd.conectar("jdbc:mysql://localhost/domino_schema?user=root&password=root");
         String listString = "";
-        for (String s : this.getInsertSql(oid)) {
+        for (String s : this.getInsertSql()) {
             listString += s + "\t";
         }
         //IMPACTA EN TABLA PARTIDA
@@ -74,7 +71,7 @@ public class PartidaPersistente implements Persistente {
         for (int i = 0; i < this.p.getManos().size(); i++) {
             ManoPersistente mp = new ManoPersistente(this.p.getManos().get(i));
             String listString2 = "";
-            for (String s : mp.getInsertSqlConParametro(2)) {
+            for (String s : mp.getInsertSqlPrueba(getOid())) {
                 listString2 += s + "\t";
             }
             bd.ejecutar(listString2);

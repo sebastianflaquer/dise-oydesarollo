@@ -47,9 +47,17 @@ public class ManoPersistente implements Persistente{
     @Override
     public ArrayList<String> getInsertSql() {
         ArrayList r = new ArrayList();
-        r.add("INSERT INTO mano(idMano,cantFichasj1,cantFichasj2,canfichasMazo,cantFichasJugadas, idPartida)"
-                + "VALUES( null, " + mano.getFichasJ1().size() + "," + mano.getFichasJ2().size() + " ,'"
-                + mano.getFichasMazo().size() + "'," + mano.getFichasJugadas().size() + ")");
+        r.add("INSERT INTO manos(idMano,cantFichasj1,cantFichasj2,canfichasMazo,cantFichasJugadas, idPartida)"
+                + "VALUES( null, " + mano.getFichasJ1().size() + "," + mano.getFichasJ2().size() + " ,"
+                + mano.getFichasMazo().size() + "," + mano.getFichasJugadas().size() + ")");
+        return r;
+    }
+    
+    public ArrayList<String> getInsertSqlPrueba(int idPartida) {
+        ArrayList r = new ArrayList();
+        r.add("INSERT INTO manos(idMano,cantFichasJ1,cantFichasJ2,cantFichasMazo,cantFichasJugadas, idPartida)"
+                + "VALUES("+ mano.getId()+"," + mano.getFichasJ1().size() + "," + mano.getFichasJ2().size() + " ,"
+                + mano.getFichasMazo().size() + "," + mano.getFichasJugadas().size() + "," + idPartida + ")");
         return r;
     }
 
@@ -78,11 +86,4 @@ public class ManoPersistente implements Persistente{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public ArrayList<String> getInsertSqlConParametro(int idPartida) {
-        ArrayList r = new ArrayList();
-        r.add("INSERT INTO mano(idMano,cantFichasj1,cantFichasj2,canfichasMazo,cantFichasJugadas, idPartida)"
-                + "VALUES( null, " + mano.getFichasJ1().size() + "," + mano.getFichasJ2().size() + " ,'"
-                + mano.getFichasMazo().size() + "'," + mano.getFichasJugadas().size() + idPartida + ")");
-        return r;
-    }
 }
