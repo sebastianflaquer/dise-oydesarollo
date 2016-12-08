@@ -45,8 +45,10 @@ create table PARAMETRO(
 );
 
 
-insert into USUARIOS Values (1,"juan", "Jugador", "pass", "Juan Perez", 1000), (2,"luis", "Jugador", "pass", "Luis Rivero", 900),
-						(3,"ana", "Jugador", "pass", "Ana Rodriguez", 90), (4,"admin", "Admin", "pass", "Marcos Gomez", -1);
+insert into USUARIOS Values (1,"juan", "Jugador", "pass", "Juan Perez", 1000),
+							(2,"luis", "Jugador", "pass", "Luis Rivero", 900),
+							(3,"ana", "Jugador", "pass", "Ana Rodriguez", 90),
+							(4,"admin", "Admin", "pass", "Marcos Gomez", -1);
 insert into parametro values("oid",1);						
 
 
