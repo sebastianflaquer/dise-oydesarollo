@@ -356,20 +356,12 @@ public class ControladorJuego implements ActionListener, Observer {
         }
         else if(msg.getAccion().equalsIgnoreCase("FinDelTiempo")){
             this.partida.NotificarAccion("GanaJugador", msg.getValor());
-            // Persistir la Partida
-            PartidaPersistente pp = new PartidaPersistente(this.partida);
-            pp.ImpactarDatos();
         }
         else if(msg.getAccion().equalsIgnoreCase("RegresivaApuesta")){
             this.vistaMesa.SetRegresivaApuesta(Integer.toString(this.partida.getRegrasivaApuesta()));
         }
         else if(msg.getAccion().equalsIgnoreCase("FinTiempoApuesta")){
             this.partida.NotificarAccion("GanaJugador", msg.getValor());
-            
-            // Persistir la Partida
-            PartidaPersistente pp = new PartidaPersistente(this.partida);
-            pp.ImpactarDatos();
-            System.out.print("Listorti");
         }
         else{
             System.out.print("Ultimo Else.");

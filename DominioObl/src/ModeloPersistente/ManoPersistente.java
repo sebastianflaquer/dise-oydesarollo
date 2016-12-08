@@ -63,12 +63,13 @@ public class ManoPersistente implements Persistente{
 
     @Override
     public void setOid(int oid) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        mano.setId(oid);
     }
 
     @Override
     public int getOid() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(this.mano==null) return 0;
+        return mano.getId();
     }
 
     @Override

@@ -43,6 +43,8 @@ public class PartidaPersistente implements Persistente {
     public int getOid() {
         if(this.p==null) return 0;
         return p.getOid();
+//        ManejadorBD bd = ManejadorBD.getInstancia();
+//        return bd.proximoOid();
     }
 
     @Override
@@ -57,14 +59,17 @@ public class PartidaPersistente implements Persistente {
     
     public void ImpactarDatos() {
         ManejadorBD bd = ManejadorBD.getInstancia();
-        //int oid = ManejadorBD.getInstancia().proximoOid();
-        
-        bd.conectar("jdbc:mysql://localhost/domino2?user=root&password=root");
+        bd.conectar("jdbc:mysql://localhost/domino?user=root&password=root");
         String listString = "";
+        
+        int oid = bd.proximoOid();
+        this.setOid(oid);
+        
         for (String s : this.getInsertSql()) {
             listString += s + "\t";
         }
         //IMPACTA EN TABLA PARTIDA
+        
         bd.ejecutar(listString);
 
         //IMPACTA EN TABLA MANOS

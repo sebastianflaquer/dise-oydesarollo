@@ -6,6 +6,7 @@
 package Juegos;
 
 import Fachada.Sistema;
+import ModeloPersistente.PartidaPersistente;
 import Usuarios.Jugador;
 import Usuarios.Usuario;
 import java.awt.event.ActionEvent;
@@ -192,6 +193,8 @@ public class Partida extends Observable implements Runnable{
                 }
                 NotificarAccion("FinDelTiempo", JugGanador);
                 this.onTurno = false;
+                //PERSISTE LOS DATOS DE LA PARTIDA
+                this.guardarEnBD();
             }
             else
             {
@@ -215,6 +218,8 @@ public class Partida extends Observable implements Runnable{
                     }
                     NotificarAccion("FinTiempoApuesta", JugGanador);
                     this.onApuesta = false;
+                    //PERSISTE LOS DATOS DE LA PARTIDA
+                    this.guardarEnBD();
                     Detener();
                 }
                 else
@@ -231,6 +236,12 @@ public class Partida extends Observable implements Runnable{
             }
             
         }
+    }
+    
+    private void guardarEnBD()
+    {
+        PartidaPersistente pp = new PartidaPersistente(this);
+        pp.ImpactarDatos();
     }
     
     //AGREGAR MANO
@@ -258,13 +269,7 @@ public class Partida extends Observable implements Runnable{
         Mano primeraMano = TraeUltimaMano();
         //Agrega las fichas a cada jugajor
         primeraMano.repartirFichasAJugadores();
-        
-        NotificarAccion("AgregarFichasMesa","");
-        
-        //agregaFichasMesa();
-        //cargar jugadores
-        //cambiarestado
-        //repartir ficha a los jugadores        
+        NotificarAccion("AgregarFichasMesa","");     
     }
     
     
@@ -274,7 +279,7 @@ public class Partida extends Observable implements Runnable{
         //CREA LA PRIMER MANO Y LA AGREGA EN LA LISTA
         Mano m = new Mano();
         //SE TOMA COMO QUE EL PRIMER MOVIMIENTO ES "RECOGER FICHA" 
-        m.setMovimiento(new Movimiento(new RecogerFicha(),this.turnoActualJugador));
+        m.setMovimiento(new Movimiento(new Apuesta(this.getApuestaActual()),this.turnoActualJugador));
         agregarMano(m);
         
         //AGREGA LAS FICHAS AL MAZO
@@ -402,23 +407,6 @@ public class Partida extends Observable implements Runnable{
             }
             this.setTurnoActualJugador(this.jugador1);
         }
-//        if (this.turnoActual == 1 || this.turnoActual == 0){
-//            //ArrayList listaFichasJ1            
-//            for(int i = 0; i< m.getFichasJ1().size(); i++){
-//                if(m.getFichasJ1().get(i).getId() == f.getId()){
-//                    m.getFichasJ1().remove(i);
-//                }
-//            }
-//            this.turnoActual = 2;
-//        }else{
-//            //ArrayList listaFichasJ1            
-//            for(int i = 0; i< m.getFichasJ2().size(); i++){
-//                if(m.getFichasJ2().get(i).getId() == f.getId()){
-//                    m.getFichasJ2().remove(i);
-//                }
-//            }
-//            this.turnoActual = 1;
-//        }
     }
     
     //CHEQUEA GANADOR

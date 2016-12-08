@@ -79,28 +79,6 @@ public class ManejadorBD {
         return oid;
     }
     
-    //PROXIMO ID PARTIDA
-    public int proximoOidPartida() {
-        int oid=-1;
-        try {
-            String sqlUltimaPartida = "SELECT idPartida FROM partidas ORDER BY idPartida DESC LIMIT 1";
-            //String sql = "SELECT idPartida FROM Partidas WHERE idPartida='oid'";
-            ResultSet rs = this.obtenerResultSet(sqlUltimaPartida);
-            if (rs.next()) {
-                oid=rs.getInt("idPartida");
-            }
-            rs.close();
-            oid++;
-            this.ejecutar("UPDATE Parametros set valor=" + oid + " WHERE nombre='oid'");
-        } catch (SQLException e) {
-                System.out.println("Error al obtener el proximo oid." + e.getMessage());
-        }
-        return oid;
-    }
-    
-    
-    
-    
 
     public void agregar(Persistente p) {
         int oid = this.proximoOid();
