@@ -10,6 +10,7 @@ import PersistenciaCont.Persistente;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  *
@@ -40,17 +41,26 @@ public class MovimientoPersistente implements Persistente {
 
     @Override
     public ArrayList<String> getInsertSql() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
+    public ArrayList<String> getInsertSqlPrueba(int idMano) {
+        ArrayList r = new ArrayList();
+        r.add("INSERT INTO partidas(idMovimiento,fechaHora,tipoMov,idUsuario,idMano)"
+                + "VALUES("+ getOid() +"," + mov.getFechaHora() + "," + mov.getTipoMov().nombreTipo() + " ,"
+                + 1 + "," + idMano + ")");
+        return r;
     }
 
     @Override
     public void setOid(int oid) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.mov.setId(oid);
     }
-
+    
     @Override
     public int getOid() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(this.mov==null) return 0;
+        return mov.getId();
     }
 
     @Override
