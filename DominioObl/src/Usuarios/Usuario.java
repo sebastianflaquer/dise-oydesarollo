@@ -6,6 +6,10 @@
 package Usuarios;
 
 import Fachada.Sistema;
+import ModeloPersistente.UsuarioPersistente;
+import PersistenciaCont.ManejadorBD;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Usuario {
 
@@ -103,7 +107,6 @@ public class Usuario {
         Usuario unUsu = new Usuario();
         boolean ret = false;
         int i = 0;
-
         while (i < Sistema.GetInstancia().getUsuarios().size() && ret == false) {
             if (Sistema.GetInstancia().getUsuarios().get(i).nombre.equals(nombre) && Sistema.GetInstancia().getUsuarios().get(i).password.equals(password) && Sistema.GetInstancia().getUsuarios().get(i).isLogeado() == false) {
                 ret = true;
@@ -123,5 +126,18 @@ public class Usuario {
         Jugador unJugador = new Jugador(0);
         unJugador.setSaldo(u.getTipo().getSaldo());
         return unJugador;
+    }
+    
+    public Usuario ValidarUsuEnBD(String nombre, String password) throws SQLException
+    {
+        UsuarioPersistente u = new UsuarioPersistente(this);
+        this.setNombre(nombre);
+        this.setPassword(password);
+        String query = u.getSelectSqlValidar();
+        ManejadorBD bd = new ManejadorBD();
+        bd.conectar("jdbc:mysql://localhost/domino?user=root&password=root");
+        ResultSet rs = bd.obtenerResultSet(query);
+        u.leer(rs);
+        return this;
     }
 }

@@ -2,7 +2,7 @@ use Domino;
 
 create table USUARIOS(
 	idUsuario int primary key, 
-	nombre varchar(30), 
+	nombre varchar(30) UNIQUE, 
 	tipoJug varchar(30), 
 	password varchar(30), 
 	nomCompleto varchar(120), 

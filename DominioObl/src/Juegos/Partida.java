@@ -184,7 +184,7 @@ public class Partida extends Observable implements Runnable{
             if(this.regresivaTurno == 0)
             {
                 // fin de la partida
-                this.estado = "Finalizado1"; // o "Finalizado2" depende el Turno
+                this.estado = "Finalizado"; // o "Finalizado2" depende el Turno
                 String JugGanador = "";
                 if(this.getTurnoActualJugador() == this.getJugador1()){
                     JugGanador = "Gana Jugador 2";
@@ -210,6 +210,7 @@ public class Partida extends Observable implements Runnable{
             {
                 if(this.regresivaApuesta == 0)
                 {
+                    this.estado = "Finalizado";
                     String JugGanador = "";
                     if(this.getTurnoActualJugador() == this.getJugador1()){
                         JugGanador = "Gana Jugador 1";

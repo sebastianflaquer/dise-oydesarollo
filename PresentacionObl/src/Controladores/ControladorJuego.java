@@ -14,16 +14,18 @@ import Juegos.Movimiento;
 import Juegos.Partida;
 import Juegos.RecogerFicha;
 import Juegos.Mensaje;
-import ModeloPersistente.PartidaPersistente;
 import Usuarios.Usuario;
 import Vistas.Login;
 import Vistas.Mesa;
 import Vistas.MesaAdmin;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -69,8 +71,14 @@ public class ControladorJuego implements ActionListener, Observer {
         else if(e.getActionCommand().equals("LOGIN")){
             //VALIDAR Y CARGAR USUARIO            
             Usuario unUsu = new Usuario();
-            unUsu = unUsu.ValidarUsuario(vistaLogin.getUsuario(), vistaLogin.getContrasena());
             
+            try {
+                //unUsu = unUsu.ValidarUsuario(vistaLogin.getUsuario(), vistaLogin.getContrasena());
+                unUsu = unUsu.ValidarUsuEnBD(vistaLogin.getUsuario(), vistaLogin.getContrasena());
+            } catch (SQLException ex) {
+                //Logger.getLogger(ControladorJuego.class.getName()).log(Level.SEVERE, null, ex);
+                vistaLogin.SetErrorMsj("Error!!!");
+            }
             //SI EXISTE EL USUARIO
             if(unUsu.getNombre() != null ){
                 //SI ES JUGADOR
@@ -324,7 +332,6 @@ public class ControladorJuego implements ActionListener, Observer {
         //esto lo hace 2 veces, 1 para cada controlador
         Mensaje msg = (Mensaje)arg;
         this.partida = (Partida) o;
-        
         
         //AGREGAR FICHA MESA
         if(msg.getAccion().equalsIgnoreCase("AgregarFichasMesa")){

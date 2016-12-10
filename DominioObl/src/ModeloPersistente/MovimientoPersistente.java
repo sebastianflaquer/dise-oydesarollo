@@ -52,7 +52,7 @@ public class MovimientoPersistente implements Persistente {
         ArrayList r = new ArrayList();
         r.add("INSERT INTO movimiento(idMovimiento,fechaHora,tipoMov,idUsuario,idMano)"
                 + "VALUES(null, " + mov.getFechaHora() + ",'" + mov.getTipoMov().nombreTipo() + " ',"
-                + 1 + "," + idMano + ")");
+                + mov.getJugador().getId() + "," + idMano + ")");
         return r;
     }
 

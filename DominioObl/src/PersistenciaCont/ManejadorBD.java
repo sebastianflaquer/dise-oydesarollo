@@ -132,6 +132,7 @@ public class ManejadorBD {
                 System.out.println("Error al obtener usuario.\n" + e.getMessage());
             }
     }
+    
 
     public ArrayList obtenerTodos(Persistente p) {
         ArrayList ret = new ArrayList();

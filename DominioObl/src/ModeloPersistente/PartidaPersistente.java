@@ -49,7 +49,7 @@ public class PartidaPersistente implements Persistente {
     public ArrayList<String> getInsertSql() {
         ArrayList r = new ArrayList();
         r.add("INSERT INTO partidas(idPartida,jug1,jug2,estado,apuestaInicial,ApuestaActual)"
-                + "VALUES("+ getOid() +"," + 1 + "," + 2 + " ,'"
+                + "VALUES("+ getOid() +"," + p.getJugador1().getId() + "," + p.getJugador2().getId() + " ,'"
                 + p.getEstado() + "'," + Partida.getApuestaInicial() + "," + p.getApuestaActual() + ")");
         return r;
     }
