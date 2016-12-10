@@ -31,8 +31,7 @@ public class RecogerFicha implements ITipoMovimiento{
     
     @Override
     public String nombreTipo(){
-        String retorno = "Recoger Ficha";
-        return retorno;
+        return "RecogerFicha";
     };
     
     @Override

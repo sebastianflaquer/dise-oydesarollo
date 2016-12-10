@@ -6,8 +6,9 @@
 package Juegos;
 
 import java.util.Calendar;
-import Usuarios.Jugador;
 import Usuarios.Usuario;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 
 
 public class Movimiento {
@@ -17,7 +18,7 @@ public class Movimiento {
     private static int ultId=0;
     private int id;
     private ITipoMovimiento tipoMov;
-    private Calendar fechaHora;  //REVISAR
+    private String fechaHora; 
     private Usuario jugador;
     
     //SETTERS
@@ -32,7 +33,7 @@ public class Movimiento {
         this.tipoMov = tipoMov;
     }
 
-    public void setFechaHora(Calendar fechaHora) {
+    public void setFechaHora(String fechaHora) {
         this.fechaHora = fechaHora;
     }
 
@@ -52,7 +53,7 @@ public class Movimiento {
         return tipoMov;
     }
 
-    public Calendar getFechaHora() {
+    public String getFechaHora() {
         return fechaHora;
     }
 
@@ -65,9 +66,18 @@ public class Movimiento {
     public Movimiento(ITipoMovimiento m, Usuario j) {
         this.id = ++Movimiento.ultId;
         this.tipoMov = m;
-        this.fechaHora = Calendar.getInstance();
+        this.fechaHora = this.convertirFecha();
         this.jugador = j;
     }
+    
+    public String convertirFecha()
+    {
+        Calendar c1 = GregorianCalendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+        return sdf.format(c1.getTime());
+    }
+    
+
     
     
 }

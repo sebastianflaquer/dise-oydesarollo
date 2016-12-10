@@ -32,8 +32,7 @@ public class Apuesta implements ITipoMovimiento {
     
     @Override
     public String nombreTipo(){
-        String retorno = "Apuesta";
-        return retorno;
+        return "Apuesta";
     };
     
     @Override

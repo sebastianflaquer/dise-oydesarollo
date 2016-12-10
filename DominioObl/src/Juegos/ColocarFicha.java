@@ -40,9 +40,9 @@ public class ColocarFicha implements ITipoMovimiento{
     
     @Override
     public String nombreTipo(){
-        String retorno = "Colocar Ficha";
-        return retorno;
-    };
+        return "ColocarFicha";
+    }
+
     
     @Override
     public double montoApuesta(){

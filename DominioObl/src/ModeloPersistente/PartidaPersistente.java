@@ -43,8 +43,6 @@ public class PartidaPersistente implements Persistente {
     public int getOid() {
         if(this.p==null) return 0;
         return p.getOid();
-//        ManejadorBD bd = ManejadorBD.getInstancia();
-//        return bd.proximoOid();
     }
 
     @Override
@@ -60,25 +58,30 @@ public class PartidaPersistente implements Persistente {
         ManejadorBD bd = ManejadorBD.getInstancia();
         bd.conectar("jdbc:mysql://localhost/domino?user=root&password=root");
         String listString = "";
-        
         int oid = bd.proximoOid();
         this.setOid(oid);
-        
         for (String s : this.getInsertSql()) {
             listString += s + "\t";
         }
         //IMPACTA EN TABLA PARTIDA
-        
         bd.ejecutar(listString);
-
-        //IMPACTA EN TABLA MANOS
+        //IMPACTA EN TABLA MANOS Y MOVIMIENTO
         for (int i = 0; i < this.p.getManos().size(); i++) {
             ManoPersistente mp = new ManoPersistente(this.p.getManos().get(i));
-            String listString2 = "";
+            String listStringManos = "";
             for (String s : mp.getInsertSqlPrueba(getOid())) {
-                listString2 += s + "\t";
+                listStringManos += s + "\t";
             }
-            bd.ejecutar(listString2);
+            bd.ejecutar(listStringManos);
+            
+            MovimientoPersistente movP = new MovimientoPersistente(this.p.getManos().get(i).getMovimiento());
+            int mid = bd.proximoIdMano();
+            this.p.getManos().get(i).setId(mid);
+            String listStringMov = "";
+            for (String s : movP.getInsertSqlPrueba(this.p.getManos().get(i).getId())) {
+                listStringMov += s + "\t";
+            }
+            bd.ejecutar(listStringMov);
         }
     }
     

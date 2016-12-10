@@ -79,6 +79,23 @@ public class ManejadorBD {
         return oid;
     }
     
+    public int proximoIdMano() {
+        int mid=0;
+        try {
+            String sql = "SELECT valor FROM parametro WHERE nombre='mid'";
+            ResultSet rs = this.obtenerResultSet(sql);
+            if (rs.next()) {
+                mid=rs.getInt("valor");
+            }
+            rs.close();
+            mid++;
+            this.ejecutar("UPDATE parametro set valor=" + mid + " WHERE nombre='mid'");
+        } catch (SQLException e) {
+                System.out.println("Error al obtener el proximo mid." + e.getMessage());
+        }
+        return mid;
+    }
+    
 
     public void agregar(Persistente p) {
         int oid = this.proximoOid();

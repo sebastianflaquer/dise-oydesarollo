@@ -78,7 +78,8 @@ public class Mano {
     //CONSTRUCTOR
     //================================================================================
     public Mano() {
-      this.id = ++Mano.ultId;
+      //this.id = ++Mano.ultId;
+      this.id = 0;
       this.fichasJ1 = new ArrayList<Ficha>();
       this.fichasJ2 = new ArrayList<Ficha>();
       this.fichasMazo = new ArrayList<Ficha>();

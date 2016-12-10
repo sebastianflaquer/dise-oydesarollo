@@ -10,7 +10,6 @@ import PersistenciaCont.Persistente;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  *
@@ -18,6 +17,11 @@ import java.util.Calendar;
  */
 public class MovimientoPersistente implements Persistente {
     private Movimiento mov;
+    
+    public MovimientoPersistente(Movimiento m)
+    {
+        this.mov = m;
+    }
 
     @Override
     public String getUpdateSql() {
@@ -46,8 +50,8 @@ public class MovimientoPersistente implements Persistente {
     
     public ArrayList<String> getInsertSqlPrueba(int idMano) {
         ArrayList r = new ArrayList();
-        r.add("INSERT INTO partidas(idMovimiento,fechaHora,tipoMov,idUsuario,idMano)"
-                + "VALUES("+ getOid() +"," + mov.getFechaHora() + "," + mov.getTipoMov().nombreTipo() + " ,"
+        r.add("INSERT INTO movimiento(idMovimiento,fechaHora,tipoMov,idUsuario,idMano)"
+                + "VALUES(null, " + mov.getFechaHora() + ",'" + mov.getTipoMov().nombreTipo() + " ',"
                 + 1 + "," + idMano + ")");
         return r;
     }
