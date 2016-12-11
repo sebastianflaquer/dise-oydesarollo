@@ -134,18 +134,18 @@ public class Sistema {
 //            p.setJugador1();
                 p.setEstado(rs.getString(4));
                 ResultSet rsManos = bd.obtenerResultSet("Select * from manos where idPartida=" + rs.getInt(1));
+                ArrayList<Mano> manos = new ArrayList<Mano>();
                 while (rsManos.next()) {
                     Mano m = new Mano();
-                    ArrayList<Mano> manos = new ArrayList<Mano>();
                     m.setId(rsManos.getInt(1));
                     //FALTA CARGAR LA CANTIDAD DE FICHAS DE LOS JUGADORES
                     ResultSet rsMov = bd.obtenerResultSet("Select * from movimiento where idMano=" + rsManos.getInt(1));
                     boolean ok2 = false;
                     ITipoMovimiento tMov = null;
                     while (rsMov.first() && !ok2) {
-                        if (rsMov.getString(3).equalsIgnoreCase("Apuesta")) {
+                        if (rsMov.getString(3).equalsIgnoreCase("Apuesta ")) {
                             tMov = new Apuesta(-1);
-                        } else if (rsMov.getString(3).equalsIgnoreCase("ColocarFicha")) {
+                        } else if (rsMov.getString(3).equalsIgnoreCase("ColocarFicha ")) {
                             tMov = new ColocarFicha();
                         } else {
                             tMov = new RecogerFicha();
@@ -156,13 +156,33 @@ public class Sistema {
                     Movimiento mov = new Movimiento(tMov, new Usuario());
                     m.setMovimiento(mov);
                     manos.add(m);
-                    p.setManos(manos);
                 }
+                p.setManos(manos);
                 //PARA SALIR DEL WHILE
                 ok = true;
             }
             return p;
         } catch (Exception e) {
+            throw e;
+        } finally {
+            ManejadorBD.getInstancia().desconectar();
+        }
+
+    }
+
+    public int getCantFichasPorMano(int idMano, String columna) throws SQLException {
+        try {
+            ManejadorBD bd = ManejadorBD.getInstancia();
+            bd.conectar("jdbc:mysql://localhost/domino?user=root&password=root");
+            boolean ok = false;
+            int ret = -1;
+            ResultSet rs = bd.obtenerResultSet("Select * from manos where idMano=" + idMano);
+            while (rs.first() && !ok) {
+                ret = Integer.parseInt(rs.getString(columna));
+                ok = true;
+            }
+            return ret;
+        } catch (SQLException | NumberFormatException e) {
             throw e;
         } finally {
             ManejadorBD.getInstancia().desconectar();

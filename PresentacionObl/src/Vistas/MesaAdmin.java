@@ -288,19 +288,19 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
 
     //MODELO LISTA DE MANOS
     private DefaultTableModel modelListManos() throws SQLException {
-        int idPartidaSel = this.listPartidas.getSelectedIndex();
+        int idPartidaSel = this.listPartidas.getSelectedIndex() + 1;
         DefaultTableModel modelTable = modelTableManos();
 
         for (int i = 0; i < Sistema.GetInstancia().getPartidaPorId(idPartidaSel).getManos().size(); i++) {
             int id = Sistema.GetInstancia().getPartidaPorId(idPartidaSel).getManos().get(i).getId();
-            int fj1 = -1;
-            int fj2 = -1;
-            int fm = -1;
-            int fj = -1;
+            int fj1 = Sistema.GetInstancia().getCantFichasPorMano(id, "cantFichasJ1");
+            int fj2 = Sistema.GetInstancia().getCantFichasPorMano(id, "cantFichasJ2");;
+            int fm = Sistema.GetInstancia().getCantFichasPorMano(id, "cantFichasMazo");;
+            int fj = Sistema.GetInstancia().getCantFichasPorMano(id, "cantFichasJugadas");;
             String TipoMano = Sistema.GetInstancia().getPartidaPorId(idPartidaSel).getManos().get(i).getMovimiento().getTipoMov().nombreTipo();
             if (TipoMano.equalsIgnoreCase("Apuesta")) {
                 double apuesta = Sistema.GetInstancia().getPartidaPorId(idPartidaSel).getManos().get(i).getMovimiento().getTipoMov().montoApuesta();
-                TipoMano += ": $" + Double.toString(apuesta);
+                //TipoMano += ": $" + Double.toString(apuesta);
             }
             //AGREGA LA ROW A LA TABLA
             modelTable.addRow(
@@ -314,16 +314,6 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
             );
         }
         return modelTable;
-
-        //for(int i = 0; i < Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().size(); i++)
-        //{
-        //int id = Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getId();
-//                int fj1= Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getFichasJ1().size();
-//                int fj2= Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getFichasJ2().size();
-//                int fm = Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getFichasMazo().size();
-//                int fj = Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getFichasJugadas().size();
-        //String TipoMano = Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getMovimiento().getTipoMov().nombreTipo();
-        //SI ES APUESTA TAMBIEN MUESTRA EL MONTO DE ELLA
     }
 
 }
