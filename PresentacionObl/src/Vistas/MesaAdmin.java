@@ -298,10 +298,10 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
             int fm = Sistema.GetInstancia().getCantFichasPorMano(id, "cantFichasMazo");;
             int fj = Sistema.GetInstancia().getCantFichasPorMano(id, "cantFichasJugadas");;
             String TipoMano = Sistema.GetInstancia().getPartidaPorId(idPartidaSel).getManos().get(i).getMovimiento().getTipoMov().nombreTipo();
-            if (TipoMano.equalsIgnoreCase("Apuesta")) {
-                double apuesta = Sistema.GetInstancia().getPartidaPorId(idPartidaSel).getManos().get(i).getMovimiento().getTipoMov().montoApuesta();
+            //if (TipoMano.equalsIgnoreCase("Apuesta")) {
+                //double apuesta = Sistema.GetInstancia().getPartidaPorId(idPartidaSel).getManos().get(i).getMovimiento().getTipoMov().montoApuesta();
                 //TipoMano += ": $" + Double.toString(apuesta);
-            }
+            //}
             //AGREGA LA ROW A LA TABLA
             modelTable.addRow(
                     new Object[]{

@@ -7,20 +7,11 @@ package Vistas;
 
 import Controladores.ControladorJuego;
 import Controladores.IMesa;
-import Juegos.Mano;
-import Juegos.Partida;
-import Usuarios.Jugador;
 import Usuarios.Usuario;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.event.ActionListener;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JDialog;
 
 /**
  *
@@ -461,9 +452,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     @Override
     //CARGA LAS FICHAS DEL JUGAROR
     public void CargarFichasDelJugador(int val1, int val2, ControladorJuego c){       
-        
         ImageIcon image = new ImageIcon("D:/resources/"+val1+"-"+val2+".jpg");
-        
         JButton btn = new JButton(image);
         btn.setPreferredSize( new Dimension(74, 38));
         btn.setBackground(Color.white);
@@ -478,7 +467,6 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     //CARGA FICHAS DEL TABLERO
     public void CargarFichasAlTablero(int val1, int val2, ControladorJuego c){
         ImageIcon image = new ImageIcon("D:/resources/"+val1+"-"+val2+".jpg");
-      
         JButton btn = new JButton(image);
         btn.setPreferredSize( new Dimension(74, 38));
         btn.setBackground(Color.white);
@@ -514,6 +502,9 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     //OCULTA PANEL JUGADOR Y MUESTRA CARTEL
     public void ocultarPanelesGanador(String jugador){
         this.fichasJuegoPanel.setVisible(false);
+        this.fichasJugadorPanel.setVisible(false);
+        this.btnAumentarApuesta.setVisible(false);
+        this.btnMasFicha.setVisible(false);
         this.lblGanador.setText(jugador);
     }
 

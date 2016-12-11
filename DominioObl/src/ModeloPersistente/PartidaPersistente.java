@@ -86,6 +86,11 @@ public class PartidaPersistente implements Persistente {
                 }
                 bd.ejecutar(listStringMov);
             }
+            //ACTUALIZA LOS SALDOS DE LOS JUEGADORES
+            String updateSaldoJ1 = "update usuarios set saldo =" + p.getJugador1().getTipo().getSaldo() + " where idUsuario=" + p.getJugador1().getId();
+            String updateSaldoJ2 = "update usuarios set saldo =" + p.getJugador2().getTipo().getSaldo() + " where idUsuario=" + p.getJugador2().getId();
+            bd.ejecutar(updateSaldoJ1);
+            bd.ejecutar(updateSaldoJ2);
 
         } catch (Exception e) {
             throw e;

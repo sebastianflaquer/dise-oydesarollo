@@ -14,6 +14,7 @@ public interface ITipo {
     public boolean puedoJugar();
     
     public double getSaldo();
+    public void setSaldo(double saldo);
     public int getNumeroJug();
     public void setNumeroJug(int numeroJug);
     
