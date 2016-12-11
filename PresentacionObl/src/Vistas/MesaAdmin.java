@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Vistas;
 
 import Controladores.ControladorJuego;
@@ -11,6 +10,9 @@ import Controladores.IMesaAdmin;
 import Fachada.Sistema;
 import Juegos.Partida;
 import Usuarios.Usuario;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JTable;
@@ -224,52 +226,56 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
     @Override
     public void inicializar() {
         setVisible(true);
-        cargarPartidas();
+        try {
+            cargarPartidas();
+        } catch (SQLException ex) {
+            Logger.getLogger(MesaAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
+
     @Override
     public void terminar() {
         setVisible(false);
     }
-    
+
     @Override
     public void setControlador(ControladorJuego c) {
         this.btnVerManos.addActionListener(c);
     }
-    
+
     @Override
-    public void cargarDatosAdmin(Usuario admin)
-    {
+    public void cargarDatosAdmin(Usuario admin) {
         this.NomAdmin.setText(admin.getNomCompleto());
     }
-    
-    public void cargarPartidas()
-    {
-        this.listPartidas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION );
-        this.listPartidas.setModel(modelList());
+
+    public void cargarPartidas() throws SQLException {
+        this.listPartidas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.listPartidas.setModel(Sistema.GetInstancia().modelList());
         this.jTable1.setModel(modelTableManos());
     }
-    
+
     //LISTA DE PARTIDAS
-    private DefaultListModel modelList(){
+    private DefaultListModel modelList() {
         DefaultListModel<String> model = new DefaultListModel<>();
-        for(int i = 0; i < Sistema.GetInstancia().getPartidas().size(); i++)
-            {
-                int id = Sistema.GetInstancia().getPartidas().get(i).getOid();
-                String str = Integer.toString(id); 
-                model.addElement("Partida ID: " + str);
-            }          
+        for (int i = 0; i < Sistema.GetInstancia().getPartidas().size(); i++) {
+            int id = Sistema.GetInstancia().getPartidas().get(i).getOid();
+            String str = Integer.toString(id);
+            model.addElement("Partida ID: " + str);
+        }
         return model;
     }
-    
+
     //AGREGA A LA LISTA EL MODELO
     @Override
-    public void CargarManosDePartida()
-    {
-        this.jTable1.setModel(modelListManos());        
+    public void CargarManosDePartida() {
+        try {
+            this.jTable1.setModel(modelListManos());
+        } catch (SQLException ex) {
+            Logger.getLogger(MesaAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
-    private DefaultTableModel modelTableManos(){
+
+    private DefaultTableModel modelTableManos() {
         DefaultTableModel modelTable = new DefaultTableModel();
         modelTable.addColumn("Id");
         modelTable.addColumn("F J1");
@@ -279,39 +285,45 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
         modelTable.addColumn("Tipo Mov");
         return modelTable;
     }
-    
+
     //MODELO LISTA DE MANOS
-    private DefaultTableModel modelListManos(){
+    private DefaultTableModel modelListManos() throws SQLException {
         int idPartidaSel = this.listPartidas.getSelectedIndex();
         DefaultTableModel modelTable = modelTableManos();
-        for(int i = 0; i < Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().size(); i++)
-            {
-                int id = Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getId();
-                int fj1= Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getFichasJ1().size();
-                int fj2= Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getFichasJ2().size();
-                int fm = Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getFichasMazo().size();
-                int fj = Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getFichasJugadas().size();
-                String TipoMano = Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getMovimiento().getTipoMov().nombreTipo();
-                //SI ES APUESTA TAMBIEN MUESTRA EL MONTO DE ELLA
-                if(TipoMano == "Apuesta"){
-                    double apuesta = Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getMovimiento().getTipoMov().montoApuesta();
-                    TipoMano += ": $" +Double.toString(apuesta);
-                }
-                
-                //AGREGA LA ROW A LA TABLA
-                modelTable.addRow(
+
+        for (int i = 0; i < Sistema.GetInstancia().getPartidaPorId(idPartidaSel).getManos().size(); i++) {
+            int id = Sistema.GetInstancia().getPartidaPorId(idPartidaSel).getManos().get(i).getId();
+            int fj1 = -1;
+            int fj2 = -1;
+            int fm = -1;
+            int fj = -1;
+            String TipoMano = Sistema.GetInstancia().getPartidaPorId(idPartidaSel).getManos().get(i).getMovimiento().getTipoMov().nombreTipo();
+            if (TipoMano.equalsIgnoreCase("Apuesta")) {
+                double apuesta = Sistema.GetInstancia().getPartidaPorId(idPartidaSel).getManos().get(i).getMovimiento().getTipoMov().montoApuesta();
+                TipoMano += ": $" + Double.toString(apuesta);
+            }
+            //AGREGA LA ROW A LA TABLA
+            modelTable.addRow(
                     new Object[]{
-                        Integer.toString(id), 
-                        Integer.toString(fj1), 
-                        Integer.toString(fj2), 
-                        Integer.toString(fm), 
+                        Integer.toString(id),
+                        Integer.toString(fj1),
+                        Integer.toString(fj2),
+                        Integer.toString(fm),
                         Integer.toString(fj),
-                        TipoMano,
-                    }
-                );
-            }          
+                        TipoMano,}
+            );
+        }
         return modelTable;
+
+        //for(int i = 0; i < Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().size(); i++)
+        //{
+        //int id = Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getId();
+//                int fj1= Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getFichasJ1().size();
+//                int fj2= Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getFichasJ2().size();
+//                int fm = Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getFichasMazo().size();
+//                int fj = Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getFichasJugadas().size();
+        //String TipoMano = Sistema.GetInstancia().getPartidas().get(idPartidaSel).getManos().get(i).getMovimiento().getTipoMov().nombreTipo();
+        //SI ES APUESTA TAMBIEN MUESTRA EL MONTO DE ELLA
     }
 
 }
-

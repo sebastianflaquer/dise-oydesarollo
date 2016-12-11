@@ -33,15 +33,17 @@ public class PartidaPersistente implements Persistente {
     public Object getObjeto() {
         return p;
     }
-    
+
     @Override
     public void setOid(int oid) {
         p.setOid(oid);
     }
-    
+
     @Override
     public int getOid() {
-        if(this.p==null) return 0;
+        if (this.p == null) {
+            return 0;
+        }
         return p.getOid();
     }
 
@@ -49,48 +51,49 @@ public class PartidaPersistente implements Persistente {
     public ArrayList<String> getInsertSql() {
         ArrayList r = new ArrayList();
         r.add("INSERT INTO partidas(idPartida,jug1,jug2,estado,apuestaInicial,ApuestaActual)"
-                + "VALUES("+ getOid() +"," + p.getJugador1().getId() + "," + p.getJugador2().getId() + " ,'"
+                + "VALUES(" + getOid() + "," + p.getJugador1().getId() + "," + p.getJugador2().getId() + " ,'"
                 + p.getEstado() + "'," + Partida.getApuestaInicial() + "," + p.getApuestaActual() + ")");
         return r;
     }
-    
+
     public void ImpactarDatos() {
-        ManejadorBD bd = ManejadorBD.getInstancia();
-        bd.conectar("jdbc:mysql://localhost/domino?user=root&password=root");
-        String listString = "";
-        int oid = bd.proximoOid();
-        this.setOid(oid);
-        for (String s : this.getInsertSql()) {
-            listString += s + "\t";
-        }
-        //IMPACTA EN TABLA PARTIDA
-        bd.ejecutar(listString);
-        //IMPACTA EN TABLA MANOS Y MOVIMIENTO
-        for (int i = 0; i < this.p.getManos().size(); i++) {
-            ManoPersistente mp = new ManoPersistente(this.p.getManos().get(i));
-            String listStringManos = "";
-            for (String s : mp.getInsertSqlPrueba(getOid())) {
-                listStringManos += s + "\t";
+        try {
+            ManejadorBD bd = ManejadorBD.getInstancia();
+            bd.conectar("jdbc:mysql://localhost/domino?user=root&password=root");
+            String listString = "";
+            int oid = bd.proximoOid();
+            this.setOid(oid);
+            for (String s : this.getInsertSql()) {
+                listString += s + "\t";
             }
-            bd.ejecutar(listStringManos);
-            
-            MovimientoPersistente movP = new MovimientoPersistente(this.p.getManos().get(i).getMovimiento());
-            int mid = bd.proximoIdMano();
-            this.p.getManos().get(i).setId(mid);
-            String listStringMov = "";
-            for (String s : movP.getInsertSqlPrueba(this.p.getManos().get(i).getId())) {
-                listStringMov += s + "\t";
+            //IMPACTA EN TABLA PARTIDA
+            bd.ejecutar(listString);
+            //IMPACTA EN TABLA MANOS Y MOVIMIENTO
+            for (int i = 0; i < this.p.getManos().size(); i++) {
+                ManoPersistente mp = new ManoPersistente(this.p.getManos().get(i));
+                String listStringManos = "";
+                for (String s : mp.getInsertSqlPrueba(getOid())) {
+                    listStringManos += s + "\t";
+                }
+                bd.ejecutar(listStringManos);
+
+                MovimientoPersistente movP = new MovimientoPersistente(this.p.getManos().get(i).getMovimiento());
+                int mid = bd.proximoIdMano();
+                this.p.getManos().get(i).setId(mid);
+                String listStringMov = "";
+                for (String s : movP.getInsertSqlPrueba(this.p.getManos().get(i).getId())) {
+                    listStringMov += s + "\t";
+                }
+                bd.ejecutar(listStringMov);
             }
-            bd.ejecutar(listStringMov);
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            ManejadorBD.getInstancia().desconectar();
         }
+
     }
-    
-    
-    
-    
-    
-    
-    
 
     @Override
     public String getUpdateSql() {
@@ -107,8 +110,6 @@ public class PartidaPersistente implements Persistente {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
-
     @Override
     public void leer(ResultSet rs) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -118,6 +119,5 @@ public class PartidaPersistente implements Persistente {
     public void limpiar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
 }
