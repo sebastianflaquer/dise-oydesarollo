@@ -13,12 +13,10 @@ import Juegos.Movimiento;
 import Juegos.Partida;
 import Juegos.RecogerFicha;
 import PersistenciaCont.ManejadorBD;
-import Usuarios.Jugador;
 import Usuarios.Usuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.DefaultListModel;
 
 public class Sistema {
@@ -65,7 +63,7 @@ public class Sistema {
     //METODOS
     //================================================================================
     //ARGEGA UN USUARIO
-    public void agregar(Usuario u) {
+    public void agregarUsuario(Usuario u) {
         if (u != null) {
             usuarios.add(u);
         }
@@ -113,12 +111,25 @@ public class Sistema {
             model.addElement("Partida ID: " + str);
         }
         return model;
-//        for (int i = 0; i < Sistema.GetInstancia().getPartidas().size(); i++) {
-//            int id = Sistema.GetInstancia().getPartidas().get(i).getOid();
-//            String str = Integer.toString(id);
-//            model.addElement("Partida ID: " + str);
-//        }
-//        return model;
+    }
+
+    public ArrayList<Integer> GetIDsPartidas() throws SQLException {
+        try {
+        ManejadorBD bd = ManejadorBD.getInstancia();
+        bd.conectar("jdbc:mysql://localhost/domino?user=root&password=root");
+        ResultSet rs = bd.obtenerResultSet("Select * from partidas");
+        ArrayList<Integer> IDs = new ArrayList<Integer>();
+        while (rs.next()) {
+            int id = rs.getInt(1);
+            IDs.add(id);
+        }
+        return IDs;
+        }
+        catch (Exception e) {
+            throw e;
+        } finally {
+            ManejadorBD.getInstancia().desconectar();
+        }
     }
 
     public Partida getPartidaPorId(int id) throws SQLException {
@@ -189,6 +200,5 @@ public class Sistema {
         }
 
     }
-
 
 }

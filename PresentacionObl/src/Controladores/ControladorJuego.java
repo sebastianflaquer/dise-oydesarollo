@@ -109,13 +109,13 @@ public class ControladorJuego implements ActionListener, Observer {
                             P2.addObserver(contU);
                             contU.partida = this.partida;
                             int d = P2.countObservers();
-                            P2.InicialPartida();
+                            P2.IniciarPartida();
                             //CARGA LA APUESTA ACTUAL
                             vistaMesa.SetApuestaActual(Double.toString(P2.getApuestaActual()));
                             //ACA NO VA PORQUE ES UN EVENTO PARA LOS 3 CONTOLADORES
 
                             //PRUEBA HILOS
-                            this.partida.Iniciar();
+                            this.partida.IniciarContador();
 
                         }
 
@@ -248,7 +248,6 @@ public class ControladorJuego implements ActionListener, Observer {
         if (nombreJug == null || nombreJug == "") {
             nombreJug = this.usu.getNombre();
         }
-
         //si el nombre es igual
         if (nombreJug.equalsIgnoreCase(p.getJugador1().getNombre())) {
             ArrayList<Ficha> lfichas = p.TraeUltimaMano().getFichasJ1();

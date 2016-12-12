@@ -121,12 +121,6 @@ public class Usuario {
         }
         return unUsu;
     }
-
-    public Jugador getJugador(Usuario u) {
-        Jugador unJugador = new Jugador(0);
-        unJugador.setSaldo(u.getTipo().getSaldo());
-        return unJugador;
-    }
     
     public Usuario ValidarUsuEnBD(String nombre, String password) throws SQLException
     {

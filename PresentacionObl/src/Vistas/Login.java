@@ -171,14 +171,6 @@ public class Login extends javax.swing.JFrame implements ILogin  {
         this.jbtnLogin.addActionListener(c);
     }
     
-//    @Override
-//    public void setControlador(ControladorJuego c) {
-//        // this.jbtnLogin.addActionListener(c);
-//        this.btnMasFicha.addActionListener(c);
-//    }
-    
-    
-
     @Override
     public void inicializar() {        
         setVisible(true);

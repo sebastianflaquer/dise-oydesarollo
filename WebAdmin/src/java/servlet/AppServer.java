@@ -6,6 +6,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import javax.servlet.AsyncContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,7 +40,7 @@ public class AppServer extends HttpServlet{
      */
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
        
         String accion = request.getParameter("accion");
         if(accion==null) return; //Tengo que saber si en este request estoy creando una vista o conectando con una existente
@@ -80,7 +81,9 @@ public class AppServer extends HttpServlet{
                  return;
             }
             switch(accion){
-                case "conectar"    : vista.conectar();break;
+                case "conectar"       : vista.conectar();break;
+                case "cargarPartidas" : vista.CargarPartidas();break;
+                case "enviar"      : vista.enviarDato(request.getParameter("dato"));
 //                case "desconectar" : vista.desconectar();break;
 //                case "enviar"      : vista.enviarDato(request.getParameter("dato"));
             }

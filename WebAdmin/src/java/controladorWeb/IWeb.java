@@ -5,12 +5,16 @@
  */
 package controladorWeb;
 
+import java.util.ArrayList;
+
 
 /**
  *
  * @author Mauro
  */
 public interface IWeb {
+
+    public void mostrarIds(ArrayList<Integer> iDsPartidas);
     
     
 }

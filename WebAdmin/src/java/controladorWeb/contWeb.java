@@ -19,7 +19,6 @@ import java.util.Observer;
 public class contWeb implements Observer {
 
     private IWeb vista;
-    //private Sistema fachada = Sistema.GetInstancia();
     private Partida partida;
 
     public contWeb(IWeb vista) {
@@ -42,12 +41,21 @@ public class contWeb implements Observer {
 
         //AGREGAR FICHA MESA
         if (msg.getAccion().equalsIgnoreCase("ManosCargadas")) {
-            
+
             //ACA DEBERIA CARGAR LAS MANOS
+            System.out.print("va");
+        } else if (msg.getAccion().equalsIgnoreCase("ListaDeIDs")) {
             
+            this.vista.mostrarIds(partida.getIDsPartidas());
+            
+
         } else {
             System.out.print("Ultimo Else.");
         }
+    }
+
+    public void cargarPartida() throws SQLException {
+        partida.cargarPartida();
     }
 
 }

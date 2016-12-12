@@ -61,7 +61,7 @@ public class PartidaPersistente implements Persistente {
             for (int i = 0; i < this.p.getManos().size(); i++) {
                 ManoPersistente mp = new ManoPersistente(this.p.getManos().get(i));
                 String listStringManos = "";
-                for (String s : mp.getInsertSqlPrueba(getOid())) {
+                for (String s : mp.getInsertSqlConId(getOid())) {
                     listStringManos += s + "\t";
                 }
                 bd.ejecutar(listStringManos);
@@ -70,7 +70,7 @@ public class PartidaPersistente implements Persistente {
                 int mid = bd.proximoIdMano();
                 this.p.getManos().get(i).setId(mid);
                 String listStringMov = "";
-                for (String s : movP.getInsertSqlPrueba(this.p.getManos().get(i).getId())) {
+                for (String s : movP.getInsertSqlConId(this.p.getManos().get(i).getId())) {
                     listStringMov += s + "\t";
                 }
                 bd.ejecutar(listStringMov);

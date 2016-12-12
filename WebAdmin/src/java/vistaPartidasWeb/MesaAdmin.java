@@ -10,6 +10,7 @@ import Usuarios.Usuario;
 import controladorWeb.IWeb;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.AsyncContext;
@@ -312,6 +313,11 @@ public class MesaAdmin extends javax.swing.JFrame implements IWeb {
             );
         }
         return modelTable;
+    }
+
+    @Override
+    public void mostrarIds(ArrayList<Integer> iDsPartidas) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

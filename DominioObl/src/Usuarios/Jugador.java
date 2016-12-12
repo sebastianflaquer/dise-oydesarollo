@@ -14,6 +14,7 @@ public class Jugador implements ITipo {
     private int numeroJug;    
     
     //SETTERS
+    @Override
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }

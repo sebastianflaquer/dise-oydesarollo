@@ -7,7 +7,6 @@ package Juegos;
 
 import Fachada.Sistema;
 import ModeloPersistente.PartidaPersistente;
-import PersistenciaCont.ManejadorBD;
 import Usuarios.Jugador;
 import Usuarios.Usuario;
 import java.sql.SQLException;
@@ -23,13 +22,12 @@ public class Partida extends Observable implements Runnable {
     private int oid;
     private Usuario jugador1;
     private Usuario jugador2;
-    private String estado;    // "En Juego", "Finalizado" o "Sin Iniciar" o "Esperando Jugador"
+    private String estado;    // "En Juego", "Finalizado" o "Sin IniciarContador" o "Esperando Jugador"
     private static double apuestaInicial = 100; //apuesta inicial 100
     private ArrayList<Mano> manos = new ArrayList<Mano>();
-    private int turnoActual;
     private double apuestaActual;
     private Usuario turnoActualJugador;
-
+    private ArrayList<Integer> IDsPartidas;
     //HILOS
     private Boolean onTurno;
     private Boolean onApuesta;
@@ -66,10 +64,6 @@ public class Partida extends Observable implements Runnable {
 
     public void setManos(ArrayList<Mano> manos) {
         this.manos = manos;
-    }
-
-    public void setTurnoActual(int turnoActual) {
-        this.turnoActual = turnoActual;
     }
 
     public void setApuestaActual(double apuestaActual) {
@@ -119,10 +113,6 @@ public class Partida extends Observable implements Runnable {
         return manos;
     }
 
-    public int getTurnoActual() {
-        return turnoActual;
-    }
-
     public double getApuestaActual() {
         return apuestaActual;
     }
@@ -147,6 +137,10 @@ public class Partida extends Observable implements Runnable {
         return onApuesta;
     }
 
+    public ArrayList<Integer> getIDsPartidas() {
+        return IDsPartidas;
+    }
+
     //================================================================================
     //CONSTRUCTOR
     //================================================================================
@@ -156,7 +150,6 @@ public class Partida extends Observable implements Runnable {
         this.jugador2 = null;
         this.estado = "Sin Iniciar";
         this.manos = new ArrayList<Mano>();
-        this.turnoActual = 0;
         this.apuestaActual = Partida.apuestaInicial;
         this.regresivaTurno = 30;
         this.regresivaApuesta = 15;
@@ -166,26 +159,33 @@ public class Partida extends Observable implements Runnable {
     //================================================================================
     //METODOS
     //================================================================================
-    public void Iniciar() {
+    public void IniciarContador() {
         this.onTurno = true;
         this.hilo = new Thread(this);
         this.hilo.start();
     }
-    
-    public void nuevoDato(String dato) throws SQLException
-    {
+
+    public void nuevoDato(String dato) throws SQLException {
         int idPartida = Integer.parseInt(dato);
         this.CargarManosDesdeBD(idPartida);
-        this.NotificarAccion("ManosCargadas", dato); 
+        this.NotificarAccion("ManosCargadas", dato);
     }
-    
-    public void CargarManosDesdeBD(int id) throws SQLException
-    {
+
+    public void CargarManosDesdeBD(int id) throws SQLException {
         Partida p = Sistema.GetInstancia().getPartidaPorId(id);
-        if(p != null)
-        {
+        if (p != null) {
             this.setManos(p.getManos());
         }
+    }
+
+    public void cargarPartida() throws SQLException {
+        this.setIDsPartidas(Sistema.GetInstancia().GetIDsPartidas());
+        this.NotificarAccion("ListaDeIDs", "IDsPartidas");
+
+    }
+
+    public void setIDsPartidas(ArrayList<Integer> ids) {
+        this.IDsPartidas = ids;
     }
 
     public void acepaApuesta() {
@@ -201,7 +201,7 @@ public class Partida extends Observable implements Runnable {
         this.regresivaApuesta = 15;
     }
 
-    public void Detener() {
+    public void DetenerContador() {
         this.onTurno = false;
         this.onApuesta = false;
     }
@@ -251,7 +251,7 @@ public class Partida extends Observable implements Runnable {
                     this.SumarSaldos(winner);
                     //PERSISTE LOS DATOS DE LA PARTIDA
                     this.guardarEnBD();
-                    Detener();
+                    DetenerContador();
                 } else {
                     try {
                         this.regresivaApuesta--;
@@ -268,23 +268,20 @@ public class Partida extends Observable implements Runnable {
         PartidaPersistente pp = new PartidaPersistente(this);
         pp.ImpactarDatos();
     }
-    
-        public void SumarSaldos(String jugador) {
-            if(jugador.equalsIgnoreCase("Jugador 1"))
-            {
-                double nuevoSaldo = this.getApuestaActual() + this.getJugador1().getTipo().getSaldo();
-                this.getJugador1().getTipo().setSaldo(nuevoSaldo); 
-                double nuevoSaldoJ2 =  this.getJugador2().getTipo().getSaldo() - this.getApuestaActual();
-                this.getJugador2().getTipo().setSaldo(nuevoSaldoJ2);
-            }
-            else
-            {
-                double nuevoSaldoJ2 = this.getApuestaActual() + this.getJugador2().getTipo().getSaldo();
-                this.getJugador2().getTipo().setSaldo(nuevoSaldoJ2); 
-                double nuevoSaldo = this.getJugador1().getTipo().getSaldo() - this.getApuestaActual();
-                this.getJugador1().getTipo().setSaldo(nuevoSaldo);
-            }
-            
+
+    public void SumarSaldos(String jugador) {
+        if (jugador.equalsIgnoreCase("Jugador 1")) {
+            double nuevoSaldo = this.getApuestaActual() + this.getJugador1().getTipo().getSaldo();
+            this.getJugador1().getTipo().setSaldo(nuevoSaldo);
+            double nuevoSaldoJ2 = this.getJugador2().getTipo().getSaldo() - this.getApuestaActual();
+            this.getJugador2().getTipo().setSaldo(nuevoSaldoJ2);
+        } else {
+            double nuevoSaldoJ2 = this.getApuestaActual() + this.getJugador2().getTipo().getSaldo();
+            this.getJugador2().getTipo().setSaldo(nuevoSaldoJ2);
+            double nuevoSaldo = this.getJugador1().getTipo().getSaldo() - this.getApuestaActual();
+            this.getJugador1().getTipo().setSaldo(nuevoSaldo);
+        }
+
     }
 
     //AGREGAR MANO
@@ -304,11 +301,11 @@ public class Partida extends Observable implements Runnable {
     }
 
     //INICIAR PARTIDA
-    public void InicialPartida() {
+    public void IniciarPartida() {
 
         //CARGA LAS FICHAS
         cargarFichas();
-        //crear mano y agregar a la lista
+        //crear mano y agregarUsuario a la lista
         Mano primeraMano = TraeUltimaMano();
         //Agrega las fichas a cada jugajor
         primeraMano.repartirFichasAJugadores();
@@ -333,6 +330,7 @@ public class Partida extends Observable implements Runnable {
             }
         }
     }
+
     //VALIDAR SALDO
     public boolean ValidarSaldo(Jugador jugador) {
         boolean ret = false;
@@ -444,7 +442,7 @@ public class Partida extends Observable implements Runnable {
             if (m.getFichasJ1().isEmpty()) {
                 ganador = "Jugador 1";
                 this.estado = "Finalizado";
-                this.Detener();
+                this.DetenerContador();
                 this.SumarSaldos(ganador);
                 this.guardarEnBD();
             }
@@ -452,7 +450,7 @@ public class Partida extends Observable implements Runnable {
             if (m.getFichasJ2().isEmpty()) {
                 ganador = "Jugador 2";
                 this.estado = "Finalizado";
-                this.Detener();
+                this.DetenerContador();
                 this.SumarSaldos(ganador);
                 this.guardarEnBD();
             }

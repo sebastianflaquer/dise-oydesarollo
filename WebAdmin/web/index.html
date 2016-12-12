@@ -22,26 +22,16 @@ and open the template in the editor.
 
             //Abro conexion SSE indicando al servlet crear una nueva vista
             var vistaWeb = new EventSource("AppServer?accion=new");
-            var vistaWeb = new EventSource("AppServer?accion=conectar");
+            var vistaWeb2 = new EventSource("AppServer?accion=conectar");
+            var vistaWeb3 = new EventSource("AppServer?accion=cargarPartidas");
+            
 
-            vistaWeb.onerror = function (evento) {
-                alert("Sin conexion con el servidor");
-                vistaWeb.close();
-            };
-            //Registro SSE para eventos de tipo "dato"
-            vistaWeb.addEventListener("dato", function (evento) {
-                var mensajes = document.getElementById("mensajes");
-                var contenido = mensajes.innerHTML + evento.data;
-                mensajes.innerHTML = contenido;
-            }, false);
-            //Registro SSE para eventos de tipo "conectados"
-            vistaWeb.addEventListener("conectados", function (evento) {
-                document.getElementById("conectados").innerHTML = evento.data;
-            }, false);
-            //Capturo evento de cierre de la ventana o tab
-            window.addEventListener("beforeunload", function (e) {
-                desconectar();
-            });
+            function verManos() {
+                var dato = document.getElementById("idPartida").value;
+                var vistaWeb4 = new EventSource("AppServer?accion=enviar" + dato);
+            }
+            
+            
 
             //Funciones jquery para enviar peticiones al objeto VistaDatoWeb via el servlet
             //El resultado del get (que se obtiene con d.data dentro de la funcion) 
@@ -90,6 +80,8 @@ and open the template in the editor.
         <div class="container">
             <div class="page-header">
                 <h1>Partidas</h1>
+                <input type="text" id="idPartida">
+                <button id="btnCargarManos" onClick="verManos()">Ver</button> 
             </div>
             <p class="lead">Seleccione una de las partidas para ver du detalle.</p>
             <!--<p>Back to <a href="../sticky-footer">the default sticky footer</a> minus the navbar.</p>-->

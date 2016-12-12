@@ -52,10 +52,10 @@ public class Main {
         Sistema s = Sistema.GetInstancia();
         
         
-        s.agregar(new Usuario("juan", (ITipo) new Jugador(1000), "pass" ,"Juan Perez"));
-        s.agregar(new Usuario("ana", (ITipo) new Jugador(90), "pass","Ana Gonzalez"));
-        s.agregar(new Usuario("luis", (ITipo) new Jugador(900), "pass","Luis Rivero"));
-        s.agregar(new Usuario("admin", (ITipo) new Admin(), "pass","Pedro Hernandez"));
+        s.agregarUsuario(new Usuario("juan", (ITipo) new Jugador(1000), "pass" ,"Juan Perez"));
+        s.agregarUsuario(new Usuario("ana", (ITipo) new Jugador(90), "pass","Ana Gonzalez"));
+        s.agregarUsuario(new Usuario("luis", (ITipo) new Jugador(900), "pass","Luis Rivero"));
+        s.agregarUsuario(new Usuario("admin", (ITipo) new Admin(), "pass","Pedro Hernandez"));
     }
 
 

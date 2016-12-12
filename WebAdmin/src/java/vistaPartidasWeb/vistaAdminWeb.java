@@ -9,6 +9,8 @@ import controladorWeb.IWeb;
 import controladorWeb.contWeb;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.servlet.AsyncContext;
 
 /**
@@ -33,18 +35,30 @@ public class vistaAdminWeb implements IWeb {
     }
 
     private void enviar(String evento, String dato) {
-
         out.write("event: " + evento + "\n");
         dato = dato.replace("\n", "");
         out.write("data: " + dato + "\n\n");
+    }
+    
+    @Override
+    public void mostrarIds(ArrayList<Integer> iDsPartidas) {
+        for(int i = 0; i < iDsPartidas.size(); i++){
+            enviar(iDsPartidas.get(i).toString(), "");
+        }
     }
 
     public void conectar() {
         controlador.conectar();
     }
 
-    public void enviarDato(String dato) {
+    public void enviarDato(String dato) throws SQLException {
         controlador.enviar(dato);
     }
+
+    public void CargarPartidas() throws SQLException {
+        controlador.cargarPartida();
+    }
+
+    
 
 }

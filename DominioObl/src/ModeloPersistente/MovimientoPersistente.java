@@ -33,7 +33,7 @@ public class MovimientoPersistente implements Persistente {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    public ArrayList<String> getInsertSqlPrueba(int idMano) {
+    public ArrayList<String> getInsertSqlConId(int idMano) {
         ArrayList r = new ArrayList();
         r.add("INSERT INTO movimiento(idMovimiento,fechaHora,tipoMov,idUsuario,idMano)"
                 + "VALUES(null, " + mov.getFechaHora() + ",'" + mov.getTipoMov().nombreTipo() + " ',"
