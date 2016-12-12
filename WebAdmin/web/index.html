@@ -6,11 +6,134 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Admin Domino - Partidas</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Bootstrap -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/sticky-footer-navbar.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <div>TODO write content</div>
+        <script src="http://code.jquery.com/jquery-latest.min.js">
+            //Biblioteca jquery para enviar peticiones a la vista en el servidor
+        </script>
+        <script type="text/javascript">
+
+            //Abro conexion SSE indicando al servlet crear una nueva vista
+            var vistaWeb = new EventSource("AppServer?accion=new");
+            var vistaWeb = new EventSource("AppServer?accion=conectar");
+
+            vistaWeb.onerror = function (evento) {
+                alert("Sin conexion con el servidor");
+                vistaWeb.close();
+            };
+            //Registro SSE para eventos de tipo "dato"
+            vistaWeb.addEventListener("dato", function (evento) {
+                var mensajes = document.getElementById("mensajes");
+                var contenido = mensajes.innerHTML + evento.data;
+                mensajes.innerHTML = contenido;
+            }, false);
+            //Registro SSE para eventos de tipo "conectados"
+            vistaWeb.addEventListener("conectados", function (evento) {
+                document.getElementById("conectados").innerHTML = evento.data;
+            }, false);
+            //Capturo evento de cierre de la ventana o tab
+            window.addEventListener("beforeunload", function (e) {
+                desconectar();
+            });
+
+            //Funciones jquery para enviar peticiones al objeto VistaDatoWeb via el servlet
+            //El resultado del get (que se obtiene con d.data dentro de la funcion) 
+            //es vacio por que el resultado de la peticion se envia por SSE
+            //No uso forms html por que sino tendrñia que volver a generar toda la pagina en lugar de solo generar lo que quiero actualizar
+            function conectar() {
+                $.get("VistaDatoServlet?accion=conectar", function (d) {
+
+                });
+            }
+            ;
+            function desconectar() {
+                $.get("VistaDatoServlet?accion=desconectar", function (d) {
+                });
+            }
+            ;
+            function enviar() {
+                var dato = document.getElementById("contenido").value;
+                $.get("VistaDatoServlet?accion=enviar&dato=" + dato, function (d) {
+                });
+            };
+
+        </script>
+
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">ADMIN DOMINO</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Home</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+
+        <!-- Begin page content -->
+        <div class="container">
+            <div class="page-header">
+                <h1>Partidas</h1>
+            </div>
+            <p class="lead">Seleccione una de las partidas para ver du detalle.</p>
+            <!--<p>Back to <a href="../sticky-footer">the default sticky footer</a> minus the navbar.</p>-->
+
+
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th width="100px">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td><button type="button" class="btn btn-primary">Ver Partida</button></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td><button type="button" class="btn btn-primary">Ver Partida</button></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td><button type="button" class="btn btn-primary">Ver Partida</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <p class="text-muted">Este es el Footer</p>
+            </div>
+        </footer>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+
     </body>
 </html>

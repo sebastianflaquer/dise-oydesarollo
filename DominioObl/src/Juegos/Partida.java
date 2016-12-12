@@ -5,9 +5,12 @@
  */
 package Juegos;
 
+import Fachada.Sistema;
 import ModeloPersistente.PartidaPersistente;
+import PersistenciaCont.ManejadorBD;
 import Usuarios.Jugador;
 import Usuarios.Usuario;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -167,6 +170,22 @@ public class Partida extends Observable implements Runnable {
         this.onTurno = true;
         this.hilo = new Thread(this);
         this.hilo.start();
+    }
+    
+    public void nuevoDato(String dato) throws SQLException
+    {
+        int idPartida = Integer.parseInt(dato);
+        this.CargarManosDesdeBD(idPartida);
+        this.NotificarAccion("ManosCargadas", dato); 
+    }
+    
+    public void CargarManosDesdeBD(int id) throws SQLException
+    {
+        Partida p = Sistema.GetInstancia().getPartidaPorId(id);
+        if(p != null)
+        {
+            this.setManos(p.getManos());
+        }
     }
 
     public void acepaApuesta() {

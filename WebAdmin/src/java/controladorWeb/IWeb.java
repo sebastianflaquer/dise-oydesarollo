@@ -5,10 +5,12 @@
  */
 package controladorWeb;
 
+
 /**
  *
  * @author Mauro
  */
 public interface IWeb {
+    
     
 }

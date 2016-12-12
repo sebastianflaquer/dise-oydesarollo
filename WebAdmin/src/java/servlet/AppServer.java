@@ -25,7 +25,18 @@ public class AppServer extends HttpServlet{
     public AppServer() {
         //Vistas.MesaAdmin.main(null);
         vistaPartidasWeb.MesaAdmin.main(null);
+        
     }
+    
+        /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -56,20 +67,20 @@ public class AppServer extends HttpServlet{
             la vista del ultimo tab no sobre la propia (ver el else de este if) y va a causar que ningun tab pueda enviar
             datos, aunque seguiran recibiendo actualizaciones... En el ejemplo usuariosWeb esto esta solucionado.
             */
-            sesion.setAttribute("VistaDatoWeb", vista); 
+            sesion.setAttribute("VistaAdminWeb", vista); 
             //Le paso la salida asincronica a la vista
             vista.iniciar(contexto); 
             
         }else{
             
             //Invocacion de metodos a la vista luego de haber sido creada, en este ejemplo se hacen via jquery desde el js...
-            vistaAdminWeb vista = (vistaAdminWeb)sesion.getAttribute("VistaDatoWeb");
+            vistaAdminWeb vista = (vistaAdminWeb)sesion.getAttribute("VistaAdminWeb");
             if(vista==null){
                  System.out.println("Se perdio la sesion?");
                  return;
             }
             switch(accion){
-//                case "conectar"    : vista.conectar();break;
+                case "conectar"    : vista.conectar();break;
 //                case "desconectar" : vista.desconectar();break;
 //                case "enviar"      : vista.enviarDato(request.getParameter("dato"));
             }
