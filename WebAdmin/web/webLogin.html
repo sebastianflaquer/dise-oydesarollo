@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <script src="http://code.jquery.com/jquery-latest.min.js">
+            //Biblioteca jquery para enviar peticiones a la vista en el servidor
+        </script>
+        <script type="text/javascript">
+            
+             //Abro conexion SSE indicando al servlet crear una nueva vista
+            var vistaWeb = new EventSource("AppServer?accion=new");
+            
+            function funcLogin() {
+                var usu = document.getElementById("txtUsu").value;
+                var pass = document.getElementById("txtPass").value;
+                };
+            
+            </script>
+        <div data-role="header">
+            <h1>Login</h1>
+        </div>
+        <div data-role="content">
+            <div style="display:none" id="errorMessage"></div>
+            <div>
+                <label>Usuario: </label>
+                <input type="text" name="name" id="txtUsu"/></br>
+                <label>Password: </label>
+                <input type="text" name="name" id="txtPass"/>
+            </div>
+            <button id="btnLogin" onclick="funcLogin()">Login</button>
+        </div>
+
+    </body>
+</html>

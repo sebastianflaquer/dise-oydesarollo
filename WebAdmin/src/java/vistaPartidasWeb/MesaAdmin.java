@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vistas;
+package vistaPartidasWeb;
 
-import Controladores.ControladorJuego;
-import Controladores.IMesaAdmin;
 import Fachada.Sistema;
 import Usuarios.Usuario;
+import controladorWeb.IWeb;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Sebastian
  */
-public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
+public class MesaAdmin extends javax.swing.JFrame implements IWeb {
 
     /**
      * Creates new form MesaAdmin
@@ -220,7 +219,7 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
-    @Override
+//    @Override
     public void inicializar() {
         setVisible(true);
         try {
@@ -230,20 +229,20 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
         }
     }
 
-    @Override
-    public void terminar() {
-        setVisible(false);
-    }
-
-    @Override
-    public void setControlador(ControladorJuego c) {
-        this.btnVerManos.addActionListener(c);
-    }
-
-    @Override
-    public void cargarDatosAdmin(Usuario admin) {
-        this.NomAdmin.setText(admin.getNomCompleto());
-    }
+//    @Override
+//    public void terminar() {
+//        setVisible(false);
+//    }
+//
+//    @Override
+//    public void setControlador(ControladorJuego c) {
+//        this.btnVerManos.addActionListener(c);
+//    }
+//
+//    @Override
+//    public void cargarDatosAdmin(Usuario admin) {
+//        this.NomAdmin.setText(admin.getNomCompleto());
+//    }
 
     public void cargarPartidas() throws SQLException {
         this.listPartidas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -263,7 +262,7 @@ public class MesaAdmin extends javax.swing.JFrame implements IMesaAdmin {
     }
 
     //AGREGA A LA LISTA EL MODELO
-    @Override
+//    @Override
     public void CargarManosDePartida() {
         try {
             this.jTable1.setModel(modelListManos());

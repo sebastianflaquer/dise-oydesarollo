@@ -78,7 +78,7 @@ public class ControladorJuego implements ActionListener, Observer {
                 vistaLogin.SetErrorMsj("Error!!!");
             }
             //SI EXISTE EL USUARIO
-            if(unUsu.getNombre() != null ){
+            if(unUsu.getTipo() != null ){
                 //SI ES JUGADOR
                 if (unUsu.getTipo().puedoJugar()){
                     Partida P = new Partida();

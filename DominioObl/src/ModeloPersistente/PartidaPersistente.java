@@ -23,17 +23,6 @@ public class PartidaPersistente implements Persistente {
     public PartidaPersistente(Partida p) {
         this.p = p;
     }
-
-    @Override
-    public Persistente crearNuevo() {
-        return new PartidaPersistente(new Partida());
-    }
-
-    @Override
-    public Object getObjeto() {
-        return p;
-    }
-
     @Override
     public void setOid(int oid) {
         p.setOid(oid);
@@ -101,16 +90,6 @@ public class PartidaPersistente implements Persistente {
     }
 
     @Override
-    public String getUpdateSql() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getDeleteSql() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public String getSelectSql() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -119,10 +98,4 @@ public class PartidaPersistente implements Persistente {
     public void leer(ResultSet rs) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    @Override
-    public void limpiar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

@@ -26,21 +26,6 @@ public class UsuarioPersistente implements Persistente {
     }
 
     @Override
-    public Persistente crearNuevo() {
-        return new UsuarioPersistente(new Usuario());
-    }
-
-    @Override
-    public String getUpdateSql() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public String getDeleteSql() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public String getSelectSql() {
         String r = "SELECT * from usuarios";
         if (usu.getNombre() != null) {
@@ -97,15 +82,4 @@ public class UsuarioPersistente implements Persistente {
             ok = true;
         }
     }
-
-    @Override
-    public Object getObjeto() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void limpiar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

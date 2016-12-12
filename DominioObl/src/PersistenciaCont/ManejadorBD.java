@@ -5,7 +5,6 @@
  */
 package PersistenciaCont;
 import java.sql.*;
-import java.util.ArrayList;
 
 /**
  *
@@ -95,70 +94,4 @@ public class ManejadorBD {
         }
         return mid;
     }
-    
-
-    public void agregar(Persistente p) {
-        int oid = this.proximoOid();
-        p.setOid(oid);
-        ArrayList<String> l = p.getInsertSql();
-        for(String sql:l){
-            this.ejecutar(sql);
-        }
-    }
-/*
-        	
-    */
-    public void modificar(Persistente p) {
-        String sql = p.getUpdateSql();
-        this.ejecutar(sql);
-    }
-//"
-    public void eliminar(Persistente p) {
-        String sql = p.getDeleteSql();
-        p.setOid(0);
-        this.ejecutar(sql);
-    }
-
-    public void leerPersistente(Persistente p) {
-            try {
-                String sql = p.getSelectSql();
-                ResultSet rs = this.obtenerResultSet(sql);
-                p.limpiar();
-                while (rs.next()) {
-                        p.leer(rs);
-                }
-                rs.close();
-            } catch (SQLException e) {
-                System.out.println("Error al obtener usuario.\n" + e.getMessage());
-            }
-    }
-    
-
-    public ArrayList obtenerTodos(Persistente p) {
-        ArrayList ret = new ArrayList();
-        try {
-            String sql = p.getSelectSql();
-            System.out.println(sql);
-            ResultSet rs = this.obtenerResultSet(sql);
-            int oidAnt=-1;
-            int oid;
-            Persistente nuevo = null;
-            while (rs.next()) {
-                oid = rs.getInt("oid");
-                if(oid!=oidAnt){
-                    oidAnt=oid;
-                    if(nuevo!=null) ret.add(nuevo.getObjeto());
-                    nuevo= p.crearNuevo();
-                    nuevo.limpiar();
-                    nuevo.setOid(rs.getInt("oid"));
-                }
-                nuevo.leer(rs);    
-            }
-            rs.close();
-        } catch (SQLException e) {
-            System.out.println("Error al obtener usuarios.\n" + e.getMessage());
-        }
-        return ret;
-    }
-    
 }

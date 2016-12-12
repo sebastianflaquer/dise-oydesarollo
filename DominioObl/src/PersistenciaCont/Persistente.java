@@ -17,13 +17,8 @@ public interface Persistente {
     
     public ArrayList<String> getInsertSql();
     public void setOid(int oid);
-    public String getUpdateSql();
-    public String getDeleteSql();
     public String getSelectSql();
     public int getOid();
     public void leer(ResultSet rs) throws SQLException;
-    public Persistente crearNuevo();
-    public Object getObjeto();
-    public void limpiar();
     
 }
