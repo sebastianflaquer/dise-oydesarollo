@@ -452,7 +452,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     @Override
     //CARGA LAS FICHAS DEL JUGAROR
     public void CargarFichasDelJugador(int val1, int val2, ControladorJuego c){       
-        ImageIcon image = new ImageIcon("D:/resources/"+val1+"-"+val2+".jpg");
+        ImageIcon image = new ImageIcon("C:/resources/"+val1+"-"+val2+".jpg");
         JButton btn = new JButton(image);
         btn.setPreferredSize( new Dimension(74, 38));
         btn.setBackground(Color.white);
@@ -466,7 +466,7 @@ public class Mesa extends javax.swing.JFrame implements IMesa {
     @Override
     //CARGA FICHAS DEL TABLERO
     public void CargarFichasAlTablero(int val1, int val2, ControladorJuego c){
-        ImageIcon image = new ImageIcon("D:/resources/"+val1+"-"+val2+".jpg");
+        ImageIcon image = new ImageIcon("C:/resources/"+val1+"-"+val2+".jpg");
         JButton btn = new JButton(image);
         btn.setPreferredSize( new Dimension(74, 38));
         btn.setBackground(Color.white);
